@@ -3,5 +3,5 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return "hi how are you how are youe";
+    return "hi how are you how are you"; // misktec changed
 });
