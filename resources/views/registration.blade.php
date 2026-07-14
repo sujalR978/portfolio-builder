@@ -18,7 +18,7 @@
             <a href="#" class="text-secondary text-decoration-none small">Solutions</a>
             <a href="#" class="text-secondary text-decoration-none small">Pricing</a>
         </nav>
-        <a href="#" class="text-primary text-decoration-none fw-semibold small">Log In</a>
+         <a href="#" class="text-primary text-decoration-none fw-semibold small">Log In</a>
     </div>
 </header>
 
