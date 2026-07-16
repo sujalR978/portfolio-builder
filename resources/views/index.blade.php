@@ -12,7 +12,7 @@
 <!-- Top Navigation Bar -->
 <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top shadow-sm">
     <div class="container">
-        <a class="navbar-brand fw-bold text-primary" href="#">TechSaaS Core</a>
+        <a class="navbar-brand fw-bold text-primary" href="index">Portfolio Builder</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
