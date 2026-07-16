@@ -24,7 +24,8 @@
                 <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
             </ul>
             <div class="d-flex gap-2">
-                <button class="btn btn-link text-decoration-none">Log In</button>
+             <button class="btn btn-link text-decoration-none" type="button" onclick="window.location.href='/login';">Log In</button>
+
                 <button class="btn btn-primary">Get Started</button>
             </div>
         </div>
