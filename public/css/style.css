@@ -1,0 +1,3334 @@
+/* ==========================================
+   GLOBAL THEME VARIABLES
+========================================== */
+:root {
+    --bs-primary: #8B5CF6;
+    --bs-primary-rgb: 139, 92, 246;
+    --bs-secondary: #06B6D4;
+    --bs-dark: #0F172A;
+    --bs-dark-rgb: 15, 23, 42;
+    --bs-body-bg: #F8FAFC;
+    --bs-body-color: #0F172A;
+}
+
+body {
+    font-family: 'Hanken Grotesk', sans-serif;
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Sora', sans-serif;
+}
+
+/* ==========================================
+   FORCE OVERRIDE BOOTSTRAP DEFAULT BLUE
+========================================== */
+.btn-primary {
+    background-color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+    color: #ffffff !important;
+}
+
+.btn-primary:hover, 
+.btn-primary:focus, 
+.btn-primary:active {
+    background-color: #7C3AED !important;
+    border-color: #7C3AED !important;
+    color: #ffffff !important;
+}
+
+.bg-primary {
+    background-color: var(--bs-primary) !important;
+}
+
+.text-primary {
+    color: var(--bs-primary) !important;
+}
+
+/* Ensure text-white stays white across all themes */
+.text-white {
+    color: #ffffff !important;
+}
+
+
+/* ==========================================
+   EXECUTIVE NAVBAR STYLES (Prefix: pb-)
+========================================== */
+.pb-header-wrapper {
+    background-color: transparent;
+    z-index: 1030;
+}
+
+.pb-navbar {
+    background-color: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 100px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.05);
+}
+
+.pb-navbar:hover {
+    box-shadow: 0 15px 35px -10px rgba(var(--bs-primary-rgb), 0.12);
+    border-color: rgba(var(--bs-primary-rgb), 0.2);
+}
+
+.pb-brand-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.15rem;
+    color: var(--bs-dark);
+    letter-spacing: -0.5px;
+}
+
+.pb-brand-icon-bg {
+    width: 36px;
+    height: 36px;
+    background-color: rgba(var(--bs-primary-rgb), 0.08);
+    border-radius: 50%;
+    color: var(--bs-primary);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease;
+}
+
+.pb-brand-svg {
+    transition: transform 0.4s ease;
+}
+
+.pb-brand:hover .pb-brand-icon-bg {
+    background-color: var(--bs-primary);
+    color: #ffffff;
+    transform: scale(1.08);
+}
+
+.pb-brand:hover .pb-brand-svg {
+    transform: rotate(180deg);
+}
+
+.pb-link {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #64748B !important;
+    padding: 0.5rem 1.1rem !important;
+    border-radius: 50px;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.pb-link:hover, .pb-link.active {
+    color: var(--bs-primary) !important;
+    background-color: rgba(var(--bs-primary-rgb), 0.08);
+}
+
+.pb-btn-login {
+    font-family: 'Hanken Grotesk', sans-serif;
+    color: var(--bs-dark);
+    font-size: 0.95rem;
+    padding: 0.5rem 0.75rem;
+    transition: color 0.25s ease;
+}
+
+.pb-btn-login:hover {
+    color: var(--bs-primary);
+}
+
+.pb-btn-cta {
+    font-family: 'Hanken Grotesk', sans-serif;
+    background-color: var(--bs-primary);
+    border: none;
+    border-radius: 50px;
+    padding: 0.65rem 1.6rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.pb-btn-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+    animation: pbShimmerSweep 4s infinite ease-in-out;
+}
+
+@keyframes pbShimmerSweep {
+    0% { left: -100%; }
+    20% { left: 200%; }
+    100% { left: 200%; }
+}
+
+.pb-btn-arrow {
+    transition: transform 0.25s ease;
+}
+
+.pb-btn-cta:hover {
+    background-color: #7C3AED !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(var(--bs-primary-rgb), 0.3) !important;
+}
+
+.pb-btn-cta:hover .pb-btn-arrow {
+    transform: translateX(4px);
+}
+
+@media (max-width: 991.98px) {
+    .pb-navbar { border-radius: 1.5rem; }
+    .pb-cta-group {
+        width: 100%;
+        justify-content: space-between;
+        border-top: 1px solid rgba(15, 23, 42, 0.05);
+        padding-top: 1rem !important;
+    }
+}
+
+
+/* ==========================================
+   LANDING PAGE BODY STYLES (Prefix: pb-land-)
+========================================== */
+.pb-land-bg-soft { background-color: #F8FAFC !important; }
+
+.pb-land-btn-pill {
+    border-radius: 50rem !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease !important;
+}
+
+.pb-land-btn-pill:hover { transform: translateY(-2px) !important; }
+
+.pb-land-hero {
+    background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.05) 0%, var(--bs-body-bg) 100%) !important;
+}
+
+.pb-land-badge { border: 1px solid rgba(var(--bs-primary-rgb), 0.2) !important; }
+
+.pb-land-mockup {
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    animation: pbLandFloat 6s ease-in-out infinite !important;
+}
+
+@keyframes pbLandFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.pb-land-step-num {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 50% !important;
+    box-shadow: 0 8px 16px rgba(var(--bs-primary-rgb), 0.25) !important;
+}
+
+.pb-land-bento {
+    border-radius: 1.5rem !important;
+    border: 1px solid rgba(15, 23, 42, 0.06) !important;
+    box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.04) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.pb-land-bento:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 20px 40px -10px rgba(var(--bs-primary-rgb), 0.12) !important;
+}
+
+.pb-land-bento-primary {
+    background-color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+}
+
+.pb-land-icon-box {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 12px !important;
+    background-color: rgba(var(--bs-primary-rgb), 0.08) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.pb-land-icon-white {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: #ffffff !important;
+}
+
+.pb-land-bento-img-wrapper {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.pb-land-bento-primary:hover .pb-land-bento-img-wrapper {
+    transform: scale(1.02);
+}
+
+.pb-land-faq .accordion-button {
+    font-family: 'Sora', sans-serif !important;
+    color: var(--bs-dark) !important;
+}
+
+.pb-land-faq .accordion-button:not(.collapsed) {
+    background-color: #ffffff !important;
+    color: var(--bs-primary) !important;
+    box-shadow: none !important;
+}
+
+.pb-land-faq .accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.15) !important;
+}
+
+.pb-land-cta-banner { background-color: #0F172A !important; }
+
+.pb-land-fade-up { animation: pbLandFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards !important; }
+.pb-land-fade-right { animation: pbLandFadeRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards !important; }
+
+@keyframes pbLandFadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pbLandFadeRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+
+/* ==========================================
+   EXECUTIVE FOOTER STYLES (Prefix: pb-)
+========================================== */
+.pb-footer-wrapper {
+    background-color: #ffffff;
+    border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.pb-footer-heading {
+    font-family: 'Sora', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: -0.2px;
+}
+
+.pb-footer-cta-card {
+    background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.05) 0%, var(--bs-body-bg) 100%);
+    border: 1px solid rgba(var(--bs-primary-rgb), 0.15);
+}
+
+.pb-newsletter-form-wrapper { max-width: 420px; }
+
+.pb-newsletter-input {
+    border-radius: 50px;
+    padding: 0.65rem 1.25rem;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.95rem;
+}
+
+.pb-newsletter-input:focus {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.15);
+}
+
+.pb-footer-links a {
+    font-family: 'Hanken Grotesk', sans-serif;
+    color: #64748B;
+    font-size: 0.925rem;
+    transition: all 0.2s ease;
+}
+
+.pb-footer-links a:hover {
+    color: var(--bs-primary);
+    padding-left: 4px;
+}
+
+.pb-social-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #F8FAFC;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    color: #64748B;
+    transition: all 0.3s ease;
+}
+
+.pb-social-icon:hover {
+    background-color: var(--bs-primary);
+    color: #ffffff;
+    border-color: var(--bs-primary);
+    transform: translateY(-2px);
+}
+
+.pb-status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #10B981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+
+/* ==========================================
+   FOOTER THEME SWITCHER PILL
+========================================== */
+.pb-theme-switcher-footer {
+    background-color: rgba(15, 23, 42, 0.03);
+    border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+.pb-theme-btn {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #64748B;
+    transition: all 0.2s ease;
+}
+
+.pb-theme-btn:hover {
+    color: var(--bs-primary);
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+
+
+/* ==========================================
+   THEME SWITCHING OVERRIDES
+========================================== */
+
+/* ------------------------------------------
+   1. DARK THEME OVERRIDES
+------------------------------------------ */
+[data-bs-theme="dark"] {
+    --bs-body-bg: #0b0f19;
+    --bs-body-color: #f1f5f9;
+    --bs-dark: #f8fafc;
+    
+    .pb-land-bento,
+    .bg-white,
+    .accordion-item,
+    .pb-navbar,
+    .pb-footer-wrapper,
+    .pb-social-icon {
+        background-color: #151c2c !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+        color: #f1f5f9 !important;
+    }
+
+    .text-dark { color: #f8fafc !important; }
+    .text-muted { color: #94a3b8 !important; }
+
+    .accordion-button {
+        background-color: #151c2c !important;
+        color: #f8fafc !important;
+    }
+    
+    .pb-land-faq .accordion-button:not(.collapsed) {
+        background-color: #151c2c !important; 
+        color: var(--bs-primary) !important;
+    }
+
+    .pb-land-hero,
+    .pb-land-bg-soft,
+    .pb-footer-cta-card {
+        background: #0b0f19 !important;
+    }
+    
+    .pb-newsletter-input, .form-control {
+        background-color: #0b0f19 !important;
+        color: #f1f5f9 !important;
+        border-color: rgba(255,255,255,0.1) !important;
+    }
+
+    .pb-theme-switcher-footer {
+        background-color: #0b0f19 !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .pb-theme-btn { color: #94a3b8; }
+}
+
+/* ------------------------------------------
+   2. PREMIUM THEME OVERRIDES (Charcoal & Gold)
+------------------------------------------ */
+[data-bs-theme="premium"] {
+    --bs-primary: #D4AF37;          /* Gold Primary */
+    --bs-primary-rgb: 212, 175, 55;
+    --bs-body-bg: #050505;          /* Deep Obsidian */
+    --bs-body-color: #e5e5e5;
+    --bs-dark: #ffffff;
+
+    .pb-land-bento,
+    .bg-white,
+    .accordion-item,
+    .pb-navbar,
+    .pb-footer-wrapper,
+    .pb-social-icon {
+        background-color: #121212 !important;
+        border-color: rgba(212, 175, 55, 0.2) !important;
+        color: #e5e5e5 !important;
+    }
+
+    .text-dark { color: #ffffff !important; }
+    .text-muted { color: #a3a3a3 !important; }
+    .text-primary { color: #D4AF37 !important; }
+
+    /* Button and Badge Fixes */
+    .btn-primary,
+    .pb-land-step-num,
+    .pb-btn-cta {
+        background-color: #D4AF37 !important;
+        border-color: #D4AF37 !important;
+        color: #000000 !important;
+    }
+
+    /* Fixed Badge Text in Premium mode */
+    .badge.bg-primary {
+        background-color: #D4AF37 !important;
+    }
+
+    .accordion-button {
+        background-color: #121212 !important;
+        color: #ffffff !important;
+    }
+
+    .pb-land-faq .accordion-button:not(.collapsed) {
+        background-color: #121212 !important;
+        color: #D4AF37 !important;
+    }
+
+    .pb-land-hero,
+    .pb-land-bg-soft,
+    .pb-footer-cta-card {
+        background: #050505 !important;
+    }
+    
+    .pb-land-cta-banner {
+        background-color: #121212 !important;
+        border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    }
+    
+    .pb-newsletter-input, .form-control {
+        background-color: #050505 !important;
+        color: #e5e5e5 !important;
+        border-color: rgba(212, 175, 55, 0.3) !important;
+    }
+
+    .pb-theme-switcher-footer {
+        background-color: #050505 !important;
+        border-color: rgba(212, 175, 55, 0.25) !important;
+    }
+
+    .pb-theme-btn { color: #a3a3a3; }
+
+    .pb-theme-btn:hover {
+        color: #D4AF37;
+        background-color: rgba(212, 175, 55, 0.15);
+    }
+}
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+/* ==========================================
+   HOW IT WORKS PAGE STYLES (Prefix: pb-works-)
+========================================== */
+
+.pb-works-bg-soft {
+    background-color: #F8FAFC !important;
+}
+
+.pb-works-hero {
+    background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.05) 0%, var(--bs-body-bg) 100%) !important;
+}
+
+.pb-works-badge {
+    border: 1px solid rgba(var(--bs-primary-rgb), 0.2) !important;
+}
+
+.pb-works-preview-card {
+    background-color: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.pb-works-play-btn {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: var(--bs-primary);
+    color: #ffffff;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.pb-works-play-btn:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    background-color: #7C3AED;
+    color: #ffffff;
+}
+
+.pb-works-step-pill {
+    width: 42px;
+    height: 42px;
+    font-size: 0.95rem;
+    box-shadow: 0 6px 14px rgba(var(--bs-primary-rgb), 0.25);
+}
+
+.pb-works-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pb-works-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -10px rgba(var(--bs-primary-rgb), 0.12) !important;
+}
+
+.pb-works-cta-banner {
+    background-color: #0F172A !important;
+}
+
+.pb-works-btn-pill {
+    border-radius: 50rem !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.pb-works-btn-pill:hover {
+    transform: translateY(-2px) !important;
+}
+
+.pb-works-fade-up {
+    animation: pbWorksFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+.pb-works-fade-right {
+    animation: pbWorksFadeRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+@keyframes pbWorksFadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pbWorksFadeRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* ------------------------------------------
+   THEME SWITCHING OVERRIDES FOR HOW IT WORKS
+------------------------------------------ */
+[data-bs-theme="dark"] {
+    .pb-works-card,
+    .pb-works-preview-card {
+        background-color: #151c2c !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    .pb-works-bg-soft,
+    .pb-works-hero {
+        background: #0b0f19 !important;
+    }
+}
+
+[data-bs-theme="premium"] {
+    .pb-works-card,
+    .pb-works-preview-card {
+        background-color: #121212 !important;
+        border-color: rgba(212, 175, 55, 0.2) !important;
+    }
+    .pb-works-bg-soft,
+    .pb-works-hero {
+        background: #050505 !important;
+    }
+    .pb-works-step-pill,
+    .pb-works-play-btn {
+        background-color: #D4AF37 !important;
+        color: #000000 !important;
+    }
+    .pb-works-cta-banner {
+        background-color: #121212 !important;
+        border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    }
+}
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+/* about */
+
+/* ==========================================
+   ABOUT US PAGE STYLES (Prefix: pb-about-)
+========================================== */
+
+.pb-about-bg-soft {
+    background-color: #F8FAFC !important;
+}
+
+.pb-about-hero {
+    background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.05) 0%, var(--bs-body-bg) 100%) !important;
+}
+
+.pb-about-badge {
+    border: 1px solid rgba(var(--bs-primary-rgb), 0.2) !important;
+}
+
+.pb-about-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pb-about-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -10px rgba(var(--bs-primary-rgb), 0.12) !important;
+}
+
+.pb-about-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background-color: rgba(var(--bs-primary-rgb), 0.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pb-about-cta-banner {
+    background-color: #0F172A !important;
+}
+
+.pb-about-btn-pill {
+    border-radius: 50rem !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.pb-about-btn-pill:hover {
+    transform: translateY(-2px) !important;
+}
+
+.pb-about-fade-up {
+    animation: pbAboutFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+.pb-about-fade-right {
+    animation: pbAboutFadeRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+@keyframes pbAboutFadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pbAboutFadeRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* ------------------------------------------
+   THEME OVERRIDES FOR ABOUT PAGE
+------------------------------------------ */
+[data-bs-theme="dark"] {
+    .pb-about-card,
+    .pb-about-stat-box {
+        background-color: #151c2c !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    .pb-about-bg-soft,
+    .pb-about-hero {
+        background: #0b0f19 !important;
+    }
+}
+
+[data-bs-theme="premium"] {
+    .pb-about-card,
+    .pb-about-stat-box {
+        background-color: #121212 !important;
+        border-color: rgba(212, 175, 55, 0.2) !important;
+    }
+    .pb-about-bg-soft,
+    .pb-about-hero {
+        background: #050505 !important;
+    }
+    .pb-about-icon-box {
+        background-color: rgba(212, 175, 55, 0.15) !important;
+        color: #D4AF37 !important;
+    }
+    .pb-about-cta-banner {
+        background-color: #121212 !important;
+        border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    }
+}
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+/* contact */
+
+
+
+
+/* ==========================================
+   CONTACT PAGE STYLES (Prefix: pb-contact-)
+========================================== */
+
+.pb-contact-bg-soft {
+    background-color: #F8FAFC !important;
+}
+
+.pb-contact-hero {
+    background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.05) 0%, var(--bs-body-bg) 100%) !important;
+}
+
+.pb-contact-badge {
+    border: 1px solid rgba(var(--bs-primary-rgb), 0.2) !important;
+}
+
+.pb-contact-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pb-contact-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -10px rgba(var(--bs-primary-rgb), 0.12) !important;
+}
+
+.pb-contact-icon-box {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background-color: rgba(var(--bs-primary-rgb), 0.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pb-contact-input {
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.95rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pb-contact-input:focus {
+    border-color: var(--bs-primary) !important;
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.15) !important;
+}
+
+.pb-contact-btn-pill {
+    border-radius: 50rem !important;
+    padding: 0.85rem 1.5rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.pb-contact-btn-pill:hover {
+    transform: translateY(-2px) !important;
+}
+
+.pb-contact-fade-up {
+    animation: pbContactFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+.pb-contact-fade-right {
+    animation: pbContactFadeRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+@keyframes pbContactFadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pbContactFadeRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* ------------------------------------------
+   THEME OVERRIDES FOR CONTACT PAGE
+------------------------------------------ */
+[data-bs-theme="dark"] {
+    .pb-contact-card {
+        background-color: #151c2c !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    .pb-contact-bg-soft,
+    .pb-contact-hero {
+        background: #0b0f19 !important;
+    }
+    .pb-contact-input {
+        background-color: #0b0f19 !important;
+        color: #f1f5f9 !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+}
+
+[data-bs-theme="premium"] {
+    .pb-contact-card {
+        background-color: #121212 !important;
+        border-color: rgba(212, 175, 55, 0.2) !important;
+    }
+    .pb-contact-bg-soft,
+    .pb-contact-hero {
+        background: #050505 !important;
+    }
+    .pb-contact-icon-box {
+        background-color: rgba(212, 175, 55, 0.15) !important;
+        color: #D4AF37 !important;
+    }
+    .pb-contact-input {
+        background-color: #050505 !important;
+        color: #e5e5e5 !important;
+        border-color: rgba(212, 175, 55, 0.25) !important;
+    }
+    .pb-contact-input:focus {
+        border-color: #D4AF37 !important;
+        box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.2) !important;
+    }
+}
+
+/* ==========================================
+   PREMIUM THEME FORM PLACEHOLDER FIXES
+========================================== */
+
+/* Placeholder styling for standard inputs & textareas in Premium mode */
+[data-bs-theme="premium"] .form-control::placeholder,
+[data-bs-theme="premium"] .pb-contact-input::placeholder,
+[data-bs-theme="premium"] .pb-newsletter-input::placeholder {
+    color: #a3a3a3 !important;
+    opacity: 0.8 !important;
+}
+
+/* Fallback for WebKit browsers (Chrome, Safari, Edge) */
+[data-bs-theme="premium"] .form-control::-webkit-input-placeholder,
+[data-bs-theme="premium"] .pb-contact-input::-webkit-input-placeholder,
+[data-bs-theme="premium"] .pb-newsletter-input::-webkit-input-placeholder {
+    color: #a3a3a3 !important;
+    opacity: 0.8 !important;
+}
+
+/* Fallback for Firefox */
+[data-bs-theme="premium"] .form-control::-moz-placeholder,
+[data-bs-theme="premium"] .pb-contact-input::-moz-placeholder,
+[data-bs-theme="premium"] .pb-newsletter-input::-moz-placeholder {
+    color: #a3a3a3 !important;
+    opacity: 0.8 !important;
+}
+
+/* Focus state placeholder color */
+[data-bs-theme="premium"] .form-control:focus::placeholder,
+[data-bs-theme="premium"] .pb-contact-input:focus::placeholder,
+[data-bs-theme="premium"] .pb-newsletter-input:focus::placeholder {
+    color: #d4d4d4 !important;
+    opacity: 1 !important;
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+/* login page */
+
+
+
+/* ==========================================
+   AUTHENTICATION PAGE STYLES (Prefix: pb-auth-)
+========================================== */
+
+.pb-auth-section {
+    background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.03) 0%, var(--bs-body-bg) 100%) !important;
+}
+
+.pb-auth-promo-card {
+    background: linear-gradient(135deg, #F5F3FF 0%, #FFFFFF 100%);
+    border-color: rgba(139, 92, 246, 0.15) !important;
+}
+
+.pb-auth-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pb-auth-card:hover {
+    box-shadow: 0 20px 40px -10px rgba(var(--bs-primary-rgb), 0.12) !important;
+}
+
+.pb-auth-badge {
+    border: 1px solid rgba(var(--bs-primary-rgb), 0.2) !important;
+}
+
+.pb-auth-social-btn {
+    border-radius: 12px !important;
+    background-color: #ffffff;
+    color: var(--bs-dark);
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.9rem;
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.pb-auth-social-btn:hover {
+    background-color: #F8FAFC;
+    border-color: rgba(139, 92, 246, 0.3) !important;
+}
+
+.pb-auth-input {
+    border-radius: 12px !important;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.95rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pb-auth-input:focus {
+    border-color: var(--bs-primary) !important;
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.15) !important;
+}
+
+.pb-auth-btn-pill {
+    border-radius: 50rem !important;
+    padding: 0.85rem 1.5rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.pb-auth-btn-pill:hover {
+    transform: translateY(-2px) !important;
+}
+
+.pb-auth-fade-up {
+    animation: pbAuthFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+.pb-auth-fade-right {
+    animation: pbAuthFadeRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+@keyframes pbAuthFadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pbAuthFadeRight {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* ------------------------------------------
+   THEME OVERRIDES FOR AUTH PAGES
+------------------------------------------ */
+[data-bs-theme="dark"] {
+    .pb-auth-card,
+    .pb-auth-promo-card {
+        background: #151c2c !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    .pb-auth-social-btn {
+        background-color: #0b0f19 !important;
+        color: #f1f5f9 !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    .pb-auth-social-btn:hover {
+        background-color: #1a233a !important;
+    }
+    .pb-auth-input {
+        background-color: #0b0f19 !important;
+        color: #f1f5f9 !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+}
+
+[data-bs-theme="premium"] {
+    .pb-auth-card,
+    .pb-auth-promo-card {
+        background: #121212 !important;
+        border-color: rgba(212, 175, 55, 0.2) !important;
+    }
+    .pb-auth-social-btn {
+        background-color: #050505 !important;
+        color: #e5e5e5 !important;
+        border-color: rgba(212, 175, 55, 0.2) !important;
+    }
+    .pb-auth-social-btn:hover {
+        border-color: #D4AF37 !important;
+        color: #D4AF37 !important;
+    }
+    .pb-auth-input {
+        background-color: #050505 !important;
+        color: #e5e5e5 !important;
+        border-color: rgba(212, 175, 55, 0.25) !important;
+    }
+    .pb-auth-input:focus {
+        border-color: #D4AF37 !important;
+        box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.2) !important;
+    }
+}
+
+/* Premium Mode Form Placeholders */
+[data-bs-theme="premium"] .pb-auth-input::placeholder {
+    color: #a3a3a3 !important;
+    opacity: 0.8 !important;
+}
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+/* ==========================================
+   AUTH ICON BOX (For Reset Password / Forgot Password)
+========================================== */
+.pb-auth-icon-box {
+    width: 48px;
+    height: 48px;
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+}
+
+[data-bs-theme="dark"] .pb-auth-icon-box {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-bs-theme="premium"] .pb-auth-icon-box {
+    background-color: rgba(212, 175, 55, 0.15) !important;
+    color: #D4AF37 !important;
+}
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+/* ==========================================
+   PROFILE PAGE STYLES (Prefix: pb-profile-)
+========================================== */
+
+.pb-profile-bg-soft {
+    background-color: #F8FAFC !important;
+}
+
+.pb-profile-hero {
+    background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.05) 0%, var(--bs-body-bg) 100%) !important;
+}
+
+.pb-profile-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pb-profile-stat-box {
+    background-color: #ffffff;
+    transition: transform 0.25s ease;
+}
+
+.pb-profile-stat-box:hover {
+    transform: translateY(-2px);
+}
+
+.pb-profile-nav-pills .nav-link {
+    color: #64748B;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.pb-profile-nav-pills .nav-link.active {
+    background-color: rgba(var(--bs-primary-rgb), 0.1) !important;
+    color: var(--bs-primary) !important;
+}
+
+.pb-profile-theme-card {
+    cursor: pointer;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.pb-profile-theme-card:hover,
+.pb-profile-theme-card.active {
+    border-color: var(--bs-primary) !important;
+    transform: translateY(-2px);
+}
+
+.pb-profile-input {
+    border-radius: 12px !important;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    font-size: 0.95rem;
+}
+
+.pb-profile-input:focus {
+    border-color: var(--bs-primary) !important;
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.15) !important;
+}
+
+.pb-profile-btn-pill {
+    border-radius: 50rem !important;
+    padding: 0.75rem 1.5rem;
+}
+
+/* ------------------------------------------
+   THEME OVERRIDES FOR PROFILE
+------------------------------------------ */
+[data-bs-theme="dark"] {
+    .pb-profile-card,
+    .pb-profile-stat-box {
+        background-color: #151c2c !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    .pb-profile-bg-soft,
+    .pb-profile-hero {
+        background: #0b0f19 !important;
+    }
+    .pb-profile-input {
+        background-color: #0b0f19 !important;
+        color: #f1f5f9 !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    .pb-profile-nav-pills .nav-link {
+        color: #94a3b8;
+    }
+}
+
+[data-bs-theme="premium"] {
+    .pb-profile-card,
+    .pb-profile-stat-box {
+        background-color: #121212 !important;
+        border-color: rgba(212, 175, 55, 0.2) !important;
+    }
+    .pb-profile-bg-soft,
+    .pb-profile-hero {
+        background: #050505 !important;
+    }
+    .pb-profile-input {
+        background-color: #050505 !important;
+        color: #e5e5e5 !important;
+        border-color: rgba(212, 175, 55, 0.25) !important;
+    }
+    .pb-profile-input::placeholder {
+        color: #a3a3a3 !important;
+    }
+    .pb-profile-nav-pills .nav-link.active {
+        background-color: rgba(212, 175, 55, 0.15) !important;
+        color: #D4AF37 !important;
+    }
+}
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+/* ==========================================
+   FEEDBACK PAGE STYLES (Prefix: pb-feedback-)
+========================================== */
+
+.pb-feedback-bg-soft {
+    background-color: #F8FAFC !important;
+}
+
+.pb-feedback-hero {
+    background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.05) 0%, var(--bs-body-bg) 100%) !important;
+}
+
+.pb-feedback-badge {
+    border: 1px solid rgba(var(--bs-primary-rgb), 0.2) !important;
+}
+
+.pb-feedback-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pb-feedback-card:hover {
+    box-shadow: 0 20px 40px -10px rgba(var(--bs-primary-rgb), 0.12) !important;
+}
+
+.pb-feedback-input {
+    border-radius: 12px !important;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    font-size: 0.95rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pb-feedback-input:focus {
+    border-color: var(--bs-primary) !important;
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.15) !important;
+}
+
+.pb-feedback-btn-pill {
+    border-radius: 50rem !important;
+    padding: 0.85rem 1.5rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.pb-feedback-btn-pill:hover {
+    transform: translateY(-2px) !important;
+}
+
+.pb-feedback-fade-up {
+    animation: pbFeedbackFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+@keyframes pbFeedbackFadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Star Rating Radio Group */
+.pb-feedback-rating {
+    direction: rtl;
+}
+
+.pb-feedback-rating input[type="radio"] {
+    display: none;
+}
+
+.pb-feedback-rating label {
+    font-size: 2rem;
+    color: #CBD5E1;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.pb-feedback-rating input[type="radio"]:checked ~ label,
+.pb-feedback-rating label:hover,
+.pb-feedback-rating label:hover ~ label {
+    color: #F59E0B;
+}
+
+/* ------------------------------------------
+   THEME OVERRIDES FOR FEEDBACK PAGE
+------------------------------------------ */
+[data-bs-theme="dark"] {
+    .pb-feedback-card {
+        background-color: #151c2c !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    .pb-feedback-bg-soft,
+    .pb-feedback-hero {
+        background: #0b0f19 !important;
+    }
+    .pb-feedback-input {
+        background-color: #0b0f19 !important;
+        color: #f1f5f9 !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+}
+
+[data-bs-theme="premium"] {
+    .pb-feedback-card {
+        background-color: #121212 !important;
+        border-color: rgba(212, 175, 55, 0.2) !important;
+    }
+    .pb-feedback-bg-soft,
+    .pb-feedback-hero {
+        background: #050505 !important;
+    }
+    .pb-feedback-input {
+        background-color: #050505 !important;
+        color: #e5e5e5 !important;
+        border-color: rgba(212, 175, 55, 0.25) !important;
+    }
+    .pb-feedback-input:focus {
+        border-color: #D4AF37 !important;
+        box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.2) !important;
+    }
+    .pb-feedback-rating input[type="radio"]:checked ~ label,
+    .pb-feedback-rating label:hover,
+    .pb-feedback-rating label:hover ~ label {
+        color: #D4AF37;
+    }
+}
+
+/* Premium Mode Form Placeholders */
+[data-bs-theme="premium"] .pb-feedback-input::placeholder {
+    color: #a3a3a3 !important;
+    opacity: 0.8 !important;
+}
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/* ==========================================
+   DASHBOARD PAGE STYLES (Prefix: pb-dash-)
+========================================== */
+
+.pb-dash-bg-soft {
+    background-color: #F8FAFC !important;
+}
+
+.pb-dash-hero {
+    background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.05) 0%, var(--bs-body-bg) 100%) !important;
+}
+
+.pb-dash-badge {
+    border: 1px solid rgba(var(--bs-primary-rgb), 0.2) !important;
+}
+
+.pb-dash-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pb-dash-card:hover {
+    box-shadow: 0 15px 30px -10px rgba(var(--bs-primary-rgb), 0.08) !important;
+}
+
+.pb-dash-icon-box {
+    width: 48px;
+    height: 48px;
+    background-color: rgba(var(--bs-primary-rgb), 0.08);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pb-dash-btn-pill {
+    border-radius: 50rem !important;
+    padding: 0.6rem 1.2rem;
+    transition: transform 0.2s ease !important;
+}
+
+.pb-dash-btn-pill:hover {
+    transform: translateY(-2px) !important;
+}
+
+/* ------------------------------------------
+   THEME OVERRIDES FOR DASHBOARD
+------------------------------------------ */
+[data-bs-theme="dark"] {
+    .pb-dash-card {
+        background-color: #151c2c !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    .pb-dash-bg-soft,
+    .pb-dash-hero {
+        background: #0b0f19 !important;
+    }
+}
+
+[data-bs-theme="premium"] {
+    .pb-dash-card {
+        background-color: #121212 !important;
+        border-color: rgba(212, 175, 55, 0.2) !important;
+    }
+    .pb-dash-bg-soft,
+    .pb-dash-hero {
+        background: #050505 !important;
+    }
+    .pb-dash-icon-box {
+        background-color: rgba(212, 175, 55, 0.15) !important;
+        color: #D4AF37 !important;
+    }
+}
+
+
+/* ==========================================
+   PROJECT ITEM THEME COMPONENT
+========================================== */
+
+/* Light Theme Default */
+.pb-dash-project-item {
+    background-color: #F8FAFC;
+    border-color: rgba(15, 23, 42, 0.08) !important;
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.pb-dash-project-title {
+    color: #0F172A;
+}
+
+.pb-dash-btn-subtle {
+    color: #475569;
+    border-color: rgba(15, 23, 42, 0.15);
+}
+
+.pb-dash-btn-subtle:hover {
+    background-color: #0F172A;
+    color: #ffffff;
+}
+
+/* Dark Theme Overrides */
+[data-bs-theme="dark"] .pb-dash-project-item {
+    background-color: #0b0f19 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-bs-theme="dark"] .pb-dash-project-title {
+    color: #F1F5F9 !important;
+}
+
+[data-bs-theme="dark"] .pb-dash-btn-subtle {
+    color: #94A3B8 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-bs-theme="dark"] .pb-dash-btn-subtle:hover {
+    background-color: #F1F5F9 !important;
+    color: #0B0F19 !important;
+}
+
+/* Premium Theme Overrides */
+[data-bs-theme="premium"] .pb-dash-project-item {
+    background-color: #050505 !important;
+    border-color: rgba(212, 175, 55, 0.2) !important;
+}
+
+[data-bs-theme="premium"] .pb-dash-project-title {
+    color: #FFFFFF !important;
+}
+
+[data-bs-theme="premium"] .pb-dash-btn-subtle {
+    color: #D4AF37 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-bs-theme="premium"] .pb-dash-btn-subtle:hover {
+    background-color: #D4AF37 !important;
+    color: #000000 !important;
+}
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+/* ==========================================
+   10-STEP WIZARD STYLES (Prefix: pb-wizard-)
+========================================== */
+
+.pb-wizard-bg-soft {
+    background-color: #F8FAFC !important;
+}
+
+.pb-wizard-hero {
+    background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.05) 0%, var(--bs-body-bg) 100%) !important;
+}
+
+.pb-wizard-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Slide visibility toggling */
+.pb-wizard-step {
+    display: none;
+}
+
+.pb-wizard-step.active {
+    display: block;
+    animation: pbWizardFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pbWizardFadeIn {
+    from { opacity: 0; transform: translateX(15px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.pb-wizard-input {
+    border-radius: 12px !important;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    font-size: 0.95rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pb-wizard-input:focus {
+    border-color: var(--bs-primary) !important;
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.15) !important;
+}
+
+.pb-wizard-btn-pill {
+    border-radius: 50rem !important;
+    padding: 0.75rem 1.5rem;
+}
+
+/* ------------------------------------------
+   THEME OVERRIDES FOR WIZARD
+------------------------------------------ */
+[data-bs-theme="dark"] {
+    .pb-wizard-card,
+    .pb-wizard-review-box {
+        background-color: #151c2c !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    .pb-wizard-bg-soft,
+    .pb-wizard-hero {
+        background: #0b0f19 !important;
+    }
+    .pb-wizard-input {
+        background-color: #0b0f19 !important;
+        color: #f1f5f9 !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+}
+
+[data-bs-theme="premium"] {
+    .pb-wizard-card,
+    .pb-wizard-review-box {
+        background-color: #121212 !important;
+        border-color: rgba(212, 175, 55, 0.2) !important;
+    }
+    .pb-wizard-bg-soft,
+    .pb-wizard-hero {
+        background: #050505 !important;
+    }
+    .pb-wizard-input {
+        background-color: #050505 !important;
+        color: #e5e5e5 !important;
+        border-color: rgba(212, 175, 55, 0.25) !important;
+    }
+    .pb-wizard-input::placeholder {
+        color: #a3a3a3 !important;
+    }
+    .pb-wizard-input:focus {
+        border-color: #D4AF37 !important;
+        box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.2) !important;
+    }
+}
+
+/* ==========================================
+   10-SLIDE WIZARD STYLES (Prefix: pb-wizard-)
+========================================== */
+
+.pb-wizard-bg-soft {
+    background-color: #F8FAFC !important;
+}
+
+.pb-wizard-hero {
+    background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.05) 0%, var(--bs-body-bg) 100%) !important;
+}
+
+.pb-wizard-progress-bg {
+    background-color: rgba(15, 23, 42, 0.08);
+}
+
+.pb-wizard-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pb-wizard-step {
+    display: none;
+}
+
+.pb-wizard-step.active {
+    display: block;
+    animation: pbWizardSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pbWizardSlideIn {
+    from { opacity: 0; transform: translateX(12px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.pb-wizard-input {
+    border-radius: 12px !important;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    font-size: 0.95rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pb-wizard-input:focus {
+    border-color: var(--bs-primary) !important;
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.15) !important;
+}
+
+.pb-wizard-btn-pill {
+    border-radius: 50rem !important;
+    padding: 0.75rem 1.5rem;
+}
+
+/* ------------------------------------------
+   THEME OVERRIDES FOR WIZARD
+------------------------------------------ */
+[data-bs-theme="dark"] {
+    .pb-wizard-card,
+    .pb-wizard-review-box {
+        background-color: #151c2c !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    .pb-wizard-bg-soft,
+    .pb-wizard-hero {
+        background: #0b0f19 !important;
+    }
+    .pb-wizard-input {
+        background-color: #0b0f19 !important;
+        color: #f1f5f9 !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    .pb-wizard-progress-bg {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+[data-bs-theme="premium"] {
+    .pb-wizard-card,
+    .pb-wizard-review-box {
+        background-color: #121212 !important;
+        border-color: rgba(212, 175, 55, 0.2) !important;
+    }
+    .pb-wizard-bg-soft,
+    .pb-wizard-hero {
+        background: #050505 !important;
+    }
+    .pb-wizard-step-num {
+        background-color: #D4AF37 !important;
+        color: #000000 !important;
+    }
+    .pb-wizard-input {
+        background-color: #050505 !important;
+        color: #e5e5e5 !important;
+        border-color: rgba(212, 175, 55, 0.25) !important;
+    }
+    .pb-wizard-input::placeholder {
+        color: #a3a3a3 !important;
+        opacity: 0.8 !important;
+    }
+    .pb-wizard-input:focus {
+        border-color: #D4AF37 !important;
+        box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.2) !important;
+    }
+    .pb-wizard-progress-bg {
+        background-color: rgba(212, 175, 55, 0.15);
+    }
+}/* ==========================================
+   10-SLIDE WIZARD STYLES (Prefix: pb-proj-)
+========================================== */
+
+.pb-proj-bg-soft {
+    background-color: #F8FAFC !important;
+}
+
+.pb-proj-hero {
+    background: linear-gradient(135deg, rgba(var(--bs-primary-rgb), 0.05) 0%, var(--bs-body-bg) 100%) !important;
+}
+
+.pb-proj-progress-track {
+    background-color: rgba(15, 23, 42, 0.08);
+}
+
+.pb-proj-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pb-proj-slide {
+    display: none;
+}
+
+.pb-proj-slide.active {
+    display: block;
+    animation: pbProjSlideFade 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pbProjSlideFade {
+    from { opacity: 0; transform: translateX(12px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.pb-proj-input {
+    border-radius: 12px !important;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    font-size: 0.95rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pb-proj-input:focus {
+    border-color: var(--bs-primary) !important;
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.15) !important;
+}
+
+.pb-proj-btn-pill {
+    border-radius: 50rem !important;
+    padding: 0.75rem 1.5rem;
+}
+
+/* ------------------------------------------
+   THEME OVERRIDES FOR 10-SLIDE WIZARD
+------------------------------------------ */
+[data-bs-theme="dark"] {
+    .pb-proj-card,
+    .pb-proj-review-box {
+        background-color: #151c2c !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    .pb-proj-bg-soft,
+    .pb-proj-hero {
+        background: #0b0f19 !important;
+    }
+    .pb-proj-input {
+        background-color: #0b0f19 !important;
+        color: #f1f5f9 !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    .pb-proj-progress-track {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+[data-bs-theme="premium"] {
+    .pb-proj-card,
+    .pb-proj-review-box {
+        background-color: #121212 !important;
+        border-color: rgba(212, 175, 55, 0.2) !important;
+    }
+    .pb-proj-bg-soft,
+    .pb-proj-hero {
+        background: #050505 !important;
+    }
+    .pb-proj-step-num {
+        background-color: #D4AF37 !important;
+        color: #000000 !important;
+    }
+    .pb-proj-input {
+        background-color: #050505 !important;
+        color: #e5e5e5 !important;
+        border-color: rgba(212, 175, 55, 0.25) !important;
+    }
+    .pb-proj-input::placeholder {
+        color: #a3a3a3 !important;
+        opacity: 0.8 !important;
+    }
+    .pb-proj-input:focus {
+        border-color: #D4AF37 !important;
+        box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.2) !important;
+    }
+    .pb-proj-progress-track {
+        background-color: rgba(212, 175, 55, 0.15);
+    }
+}
+
+
+/* ==========================================
+   STEP 3 COMPETENCIES & WIZARD STYLES
+========================================== */
+
+#competenciesBox {
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+/* Dark Theme Overrides */
+[data-bs-theme="dark"] #competenciesBox {
+    background-color: #0b0f19 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-info-box {
+    background-color: rgba(13, 110, 253, 0.1) !important;
+    border-color: rgba(13, 110, 253, 0.2) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-info-box p {
+    color: #e2e8f0 !important;
+}
+
+/* Premium Gold Theme Overrides */
+[data-bs-theme="premium"] #competenciesBox {
+    background-color: #050505 !important;
+    border-color: rgba(212, 175, 55, 0.25) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-info-box {
+    background-color: rgba(212, 175, 55, 0.08) !important;
+    border-color: rgba(212, 175, 55, 0.25) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-info-box p {
+    color: #f5f5f5 !important;
+}
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+/* ==========================================
+   EXPLORE PAGE STYLES (Prefix: pb-exp-)
+========================================== */
+
+.pb-exp-bg-soft {
+    background-color: #F8FAFC !important;
+}
+
+.pb-exp-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pb-exp-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 35px -10px rgba(15, 23, 42, 0.12) !important;
+}
+
+.pb-exp-input {
+    border-radius: 12px !important;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    font-size: 0.95rem;
+}
+
+/* ------------------------------------------
+   THEME OVERRIDES FOR EXPLORE PAGE
+------------------------------------------ */
+[data-bs-theme="dark"] {
+    .pb-exp-bg-soft {
+        background-color: #0b0f19 !important;
+    }
+    .pb-exp-card,
+    .pb-exp-input {
+        background-color: #151c2c !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+        color: #f1f5f9 !important;
+    }
+}
+
+[data-bs-theme="premium"] {
+    .pb-exp-bg-soft {
+        background-color: #050505 !important;
+    }
+    .pb-exp-card,
+    .pb-exp-input {
+        background-color: #121212 !important;
+        border-color: rgba(212, 175, 55, 0.2) !important;
+        color: #e5e5e5 !important;
+    }
+}
+
+
+
+
+
+
+/* ==========================================
+   STEP 3 ADVANCED THEME STYLES (Prefix: pb-ts-)
+========================================== */
+
+/* Light Mode Defaults */
+.pb-ts-bg-soft {
+    background-color: #F8FAFC !important;
+}
+
+.pb-ts-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.3s ease;
+}
+
+.pb-ts-border-subtle {
+    border-color: rgba(15, 23, 42, 0.1) !important;
+}
+
+.pb-ts-progress-track {
+    background-color: #E2E8F0;
+}
+
+.pb-ts-input {
+    border-radius: 12px !important;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    font-size: 0.95rem;
+}
+
+.pb-ts-input-addon {
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    border-radius: 12px 0 0 12px !important;
+}
+
+.pb-ts-slider-box {
+    background-color: #F8FAFC;
+    border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+.pb-ts-dashed-box {
+    border: 2px dashed #CBD5E1 !important;
+    background-color: #FAFAFA;
+}
+
+.pb-ts-info-banner {
+    background-color: #EBF8FF;
+    border: 1px solid #BEE3F8;
+}
+
+/* ------------------------------------------
+   DARK THEME OVERRIDES
+------------------------------------------ */
+[data-bs-theme="dark"] .pb-ts-bg-soft {
+    background-color: #0b0f19 !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-card {
+    background-color: #151c2c !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-heading,
+[data-bs-theme="dark"] .pb-ts-label {
+    color: #f1f5f9 !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-border-subtle {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-progress-track {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-bs-theme="dark"] .pb-ts-input,
+[data-bs-theme="dark"] .pb-ts-input-addon {
+    background-color: #0b0f19 !important;
+    color: #f1f5f9 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-slider-box {
+    background-color: #0b0f19 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-badge {
+    background-color: #151c2c !important;
+    color: #0d6efd !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-dashed-box {
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    background-color: #0b0f19 !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-info-banner {
+    background-color: rgba(13, 110, 253, 0.1) !important;
+    border-color: rgba(13, 110, 253, 0.2) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-info-text {
+    color: #e2e8f0 !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-btn-outline {
+    background-color: #151c2c !important;
+    color: #94a3b8 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-skill-tag {
+    background-color: #151c2c !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* ------------------------------------------
+   PREMIUM GOLD THEME OVERRIDES
+------------------------------------------ */
+[data-bs-theme="premium"] .pb-ts-bg-soft {
+    background-color: #050505 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-card {
+    background-color: #121212 !important;
+    border-color: rgba(212, 175, 55, 0.2) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-heading,
+[data-bs-theme="premium"] .pb-ts-label,
+[data-bs-theme="premium"] .pb-ts-brand-text {
+    color: #ffffff !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-percent-text {
+    color: #D4AF37 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-border-subtle {
+    border-color: rgba(212, 175, 55, 0.15) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-progress-track {
+    background-color: rgba(212, 175, 55, 0.15);
+}
+
+[data-bs-theme="premium"] .pb-ts-progress-bar {
+    background-color: #D4AF37 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-input,
+[data-bs-theme="premium"] .pb-ts-input-addon {
+    background-color: #050505 !important;
+    color: #e5e5e5 !important;
+    border-color: rgba(212, 175, 55, 0.25) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-slider-box {
+    background-color: #050505 !important;
+    border-color: rgba(212, 175, 55, 0.25) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-badge {
+    background-color: #121212 !important;
+    color: #D4AF37 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-dashed-box {
+    border-color: rgba(212, 175, 55, 0.3) !important;
+    background-color: #050505 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-info-banner {
+    background-color: rgba(212, 175, 55, 0.08) !important;
+    border-color: rgba(212, 175, 55, 0.25) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-info-text {
+    color: #f5f5f5 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-info-icon {
+    color: #D4AF37 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-btn-main {
+    background-color: #D4AF37 !important;
+    border-color: #D4AF37 !important;
+    color: #000000 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-btn-outline {
+    background-color: #121212 !important;
+    color: #D4AF37 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-lvl-pill {
+    background-color: #D4AF37 !important;
+    color: #000000 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-skill-tag {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+
+
+
+/* ==========================================
+   SLIDE 1 ENHANCED STYLES
+========================================== */
+
+.pb-ts-option-card {
+    background-color: #FFFFFF;
+    transition: all 0.2s ease;
+}
+
+.pb-ts-option-card:hover {
+    border-color: var(--bs-primary) !important;
+    transform: translateY(-2px);
+}
+
+.btn-check:checked + .pb-ts-option-card {
+    border-color: var(--bs-primary) !important;
+    background-color: rgba(var(--bs-primary-rgb), 0.05) !important;
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-primary-rgb), 0.15) !important;
+}
+
+.pb-ts-toggle-btn {
+    transition: all 0.2s ease;
+}
+
+/* Dark Theme Overrides */
+[data-bs-theme="dark"] .pb-ts-option-card {
+    background-color: #0b0f19 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-bs-theme="dark"] .btn-check:checked + .pb-ts-option-card {
+    border-color: #0d6efd !important;
+    background-color: rgba(13, 110, 253, 0.15) !important;
+}
+
+/* Premium Gold Theme Overrides */
+[data-bs-theme="premium"] .pb-ts-option-card {
+    background-color: #050505 !important;
+    border-color: rgba(212, 175, 55, 0.2) !important;
+}
+
+[data-bs-theme="premium"] .btn-check:checked + .pb-ts-option-card {
+    border-color: #D4AF37 !important;
+    background-color: rgba(212, 175, 55, 0.12) !important;
+}
+
+[data-bs-theme="premium"] .btn-check:checked + .pb-ts-option-card svg {
+    color: #D4AF37 !important;
+}
+
+/* ==========================================
+   SLIDE 2 THEME STYLES (Prefix: pb-ts-)
+========================================== */
+
+.pb-ts-bottom-info-card {
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+/* ------------------------------------------
+   DARK THEME OVERRIDES FOR SLIDE 2
+------------------------------------------ */
+[data-bs-theme="dark"] .pb-ts-bottom-info-card {
+    background-color: #151c2c !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-bottom-info-card p {
+    color: #94a3b8 !important;
+}
+
+/* ------------------------------------------
+   PREMIUM GOLD THEME OVERRIDES FOR SLIDE 2
+------------------------------------------ */
+[data-bs-theme="premium"] .pb-ts-bottom-info-card {
+    background-color: #121212 !important;
+    border-color: rgba(212, 175, 55, 0.2) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-bottom-info-card p {
+    color: #a3a3a3 !important;
+}
+
+/* ==========================================
+   SLIDE 3 THEME STYLES (Prefix: pb-ts-)
+========================================== */
+
+/* Light Mode Defaults */
+.pb-ts-slider-box {
+    background-color: #F8FAFC;
+    border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+.pb-ts-dashed-box {
+    border: 2px dashed #CBD5E1 !important;
+    background-color: #FAFAFA;
+}
+
+.pb-ts-info-banner {
+    background-color: #EBF8FF;
+    border: 1px solid #BEE3F8;
+}
+
+/* ------------------------------------------
+   DARK THEME OVERRIDES FOR SLIDE 3
+------------------------------------------ */
+[data-bs-theme="dark"] .pb-ts-slider-box {
+    background-color: #0b0f19 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-badge {
+    background-color: #151c2c !important;
+    color: #0d6efd !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-dashed-box {
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    background-color: #0b0f19 !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-info-banner {
+    background-color: rgba(13, 110, 253, 0.1) !important;
+    border-color: rgba(13, 110, 253, 0.2) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-info-text {
+    color: #e2e8f0 !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-skill-tag {
+    background-color: #151c2c !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* ------------------------------------------
+   PREMIUM GOLD THEME OVERRIDES FOR SLIDE 3
+------------------------------------------ */
+[data-bs-theme="premium"] .pb-ts-slider-box {
+    background-color: #050505 !important;
+    border-color: rgba(212, 175, 55, 0.25) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-badge {
+    background-color: #121212 !important;
+    color: #D4AF37 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-dashed-box {
+    border-color: rgba(212, 175, 55, 0.3) !important;
+    background-color: #050505 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-info-banner {
+    background-color: rgba(212, 175, 55, 0.08) !important;
+    border-color: rgba(212, 175, 55, 0.25) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-info-text {
+    color: #f5f5f5 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-info-icon {
+    color: #D4AF37 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-btn-main {
+    background-color: #D4AF37 !important;
+    border-color: #D4AF37 !important;
+    color: #000000 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-btn-outline {
+    background-color: #121212 !important;
+    color: #D4AF37 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-lvl-pill {
+    background-color: #D4AF37 !important;
+    color: #000000 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-skill-tag {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+/* ==========================================
+   SLIDE 4 THEME STYLES (Prefix: pb-ts-)
+========================================== */
+
+.pb-ts-feature-card {
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.pb-ts-remove-exp-btn {
+    z-index: 5;
+    background-color: #ffffff !important;
+}
+
+/* ------------------------------------------
+   DARK THEME OVERRIDES FOR SLIDE 4
+------------------------------------------ */
+[data-bs-theme="dark"] .pb-ts-feature-card {
+    background-color: #151c2c !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-remove-exp-btn {
+    background-color: #151c2c !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #ffffff !important;
+}
+
+/* ------------------------------------------
+   PREMIUM GOLD THEME OVERRIDES FOR SLIDE 4
+------------------------------------------ */
+[data-bs-theme="premium"] .pb-ts-feature-card {
+    background-color: #121212 !important;
+    border-color: rgba(212, 175, 55, 0.2) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-feature-card svg {
+    color: #D4AF37 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-remove-exp-btn {
+    background-color: #121212 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+    color: #D4AF37 !important;
+}
+
+
+.pb-ts-slide {
+    display: none;
+}
+.pb-ts-slide.active {
+    display: block;
+}
+
+
+/* ==========================================
+   UNIFIED INPUT GROUP & HOVER/FOCUS FIX
+========================================== */
+
+/* Outer Input Group Wrapper */
+.pb-ts-input-group {
+    border-radius: 12px !important;
+    border: 1px solid #cbd5e1;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+
+/* Addon & Input Reset Inside Wrapper */
+.pb-ts-input-group .pb-ts-input-addon,
+.pb-ts-input-group .pb-ts-input {
+    border: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+}
+
+.pb-ts-input-group .pb-ts-input {
+    padding: 0.75rem 1rem 0.75rem 0.25rem;
+    font-size: 0.95rem;
+}
+
+/* Full Container Hover State (Icon + Input) */
+.pb-ts-input-group:hover {
+    border-color: #94a3b8;
+}
+
+/* Full Container Focus State (Icon + Input) */
+.pb-ts-input-group:focus-within {
+    border-color: var(--bs-primary) !important;
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.15) !important;
+}
+
+/* Skip Button Outline Styling */
+.pb-ts-btn-outline {
+    background-color: #ffffff !important;
+    color: #475569 !important;
+    border: 1px solid #cbd5e1 !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+.pb-ts-btn-outline:hover {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+    border-color: #94a3b8 !important;
+}
+
+/* ------------------------------------------
+   DARK THEME OVERRIDES
+------------------------------------------ */
+[data-bs-theme="dark"] .pb-ts-input-group {
+    background-color: #0b0f19 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-input-group .pb-ts-input {
+    color: #f1f5f9 !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-input-group:hover {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-input-group:focus-within {
+    border-color: #0d6efd !important;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-btn-outline {
+    background-color: #151c2c !important;
+    color: #cbd5e1 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-btn-outline:hover {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* ------------------------------------------
+   PREMIUM GOLD THEME OVERRIDES
+------------------------------------------ */
+[data-bs-theme="premium"] .pb-ts-input-group {
+    background-color: #050505 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-input-group .pb-ts-input {
+    color: #f5f5f5 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-input-group:hover {
+    border-color: rgba(212, 175, 55, 0.5) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-input-group:focus-within {
+    border-color: #d4af37 !important;
+    box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-btn-outline {
+    background-color: #121212 !important;
+    color: #d4af37 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-btn-outline:hover {
+    background-color: rgba(212, 175, 55, 0.15) !important;
+    color: #ffffff !important;
+    border-color: #d4af37 !important;
+}
+
+/* Textarea Border Matching */
+.pb-ts-textarea {
+    border-radius: 12px !important;
+    border: 1px solid #cbd5e1 !important;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pb-ts-textarea:hover {
+    border-color: #94a3b8 !important;
+}
+
+.pb-ts-textarea:focus {
+    border-color: var(--bs-primary) !important;
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.15) !important;
+}
+
+/* Dark Theme Textarea Override */
+[data-bs-theme="dark"] .pb-ts-textarea {
+    background-color: #0b0f19 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+    color: #f1f5f9 !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-textarea:focus {
+    border-color: #0d6efd !important;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+}
+
+/* Premium Gold Theme Textarea Override */
+[data-bs-theme="premium"] .pb-ts-textarea {
+    background-color: #050505 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+    color: #f5f5f5 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-textarea:focus {
+    border-color: #d4af37 !important;
+    box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25) !important;
+}
+
+/* ==========================================
+   SLIDE 5 THEME STYLES (Prefix: pb-ts-)
+========================================== */
+
+.pb-ts-project-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pb-ts-project-card:hover {
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* ------------------------------------------
+   DARK THEME OVERRIDES FOR SLIDE 5
+------------------------------------------ */
+[data-bs-theme="dark"] .pb-ts-project-card {
+    background-color: #151c2c !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-project-card p {
+    color: #94a3b8 !important;
+}
+
+[data-bs-theme="dark"] .modal-content {
+    background-color: #151c2c !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ------------------------------------------
+   PREMIUM GOLD THEME OVERRIDES FOR SLIDE 5
+------------------------------------------ */
+[data-bs-theme="premium"] .pb-ts-project-card {
+    background-color: #121212 !important;
+    border-color: rgba(212, 175, 55, 0.2) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-project-card p {
+    color: #a3a3a3 !important;
+}
+
+[data-bs-theme="premium"] .modal-content {
+    background-color: #121212 !important;
+    border-color: rgba(212, 175, 55, 0.25) !important;
+}
+
+/* ==========================================
+   SLIDE 6 THEME STYLES (Prefix: pb-ts-)
+========================================== */
+
+.pb-ts-subcard {
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+/* ------------------------------------------
+   DARK THEME OVERRIDES FOR SLIDE 6
+------------------------------------------ */
+[data-bs-theme="dark"] .pb-ts-subcard {
+    background-color: #0b0f19 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ------------------------------------------
+   PREMIUM GOLD THEME OVERRIDES FOR SLIDE 6
+------------------------------------------ */
+[data-bs-theme="premium"] .pb-ts-subcard {
+    background-color: #050505 !important;
+    border-color: rgba(212, 175, 55, 0.2) !important;
+}
+
+/* ==========================================
+   SLIDE 7 THEME STYLES (Prefix: pb-ts-)
+========================================== */
+
+.pb-ts-lang-pill {
+    background-color: #EFF6FF !important;
+    color: #2563EB !important;
+    border-color: #BFDBFE !important;
+}
+
+/* ------------------------------------------
+   DARK THEME OVERRIDES FOR SLIDE 7
+------------------------------------------ */
+[data-bs-theme="dark"] .pb-ts-lang-pill {
+    background-color: rgba(37, 99, 235, 0.15) !important;
+    color: #60A5FA !important;
+    border-color: rgba(37, 99, 235, 0.3) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-achievement-item {
+    background-color: #0b0f19 !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ------------------------------------------
+   PREMIUM GOLD THEME OVERRIDES FOR SLIDE 7
+------------------------------------------ */
+[data-bs-theme="premium"] .pb-ts-lang-pill {
+    background-color: rgba(212, 175, 55, 0.12) !important;
+    color: #D4AF37 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-achievement-item {
+    background-color: #050505 !important;
+    border-color: rgba(212, 175, 55, 0.2) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-achievement-item svg {
+    color: #D4AF37 !important;
+}
+
+/* ==========================================
+   SLIDE 8 TEMPLATE STYLES (Prefix: pb-ts-)
+========================================== */
+
+.pb-ts-template-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    cursor: pointer;
+}
+
+.pb-ts-template-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px -5px rgba(15, 23, 42, 0.1) !important;
+}
+
+.pb-ts-template-preview {
+    background-color: #F8FAFC !important;
+}
+
+/* ------------------------------------------
+   DARK THEME OVERRIDES FOR SLIDE 8
+------------------------------------------ */
+[data-bs-theme="dark"] .pb-ts-template-preview {
+    background-color: #0b0f19 !important;
+}
+
+[data-bs-theme="dark"] .active-template {
+    border-color: #0d6efd !important;
+}
+
+/* ------------------------------------------
+   PREMIUM GOLD THEME OVERRIDES FOR SLIDE 8
+------------------------------------------ */
+[data-bs-theme="premium"] .pb-ts-template-preview {
+    background-color: #050505 !important;
+}
+
+[data-bs-theme="premium"] .active-template {
+    border-color: #D4AF37 !important;
+}
+
+[data-bs-theme="premium"] .active-template .check-badge,
+[data-bs-theme="premium"] .active-template .template-action-btn {
+    background-color: #D4AF37 !important;
+    border-color: #D4AF37 !important;
+    color: #000000 !important;
+}
+/* ==========================================
+   SLIDE 9 DELIVERY & SUMMARY STYLES
+========================================== */
+
+.pb-ts-delivery-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.pb-ts-delivery-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* ------------------------------------------
+   DARK THEME OVERRIDES FOR SLIDE 9
+------------------------------------------ */
+[data-bs-theme="dark"] .pb-ts-subcard {
+    background-color: #0b0f19 !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-delivery-card {
+    background-color: #151c2c !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-delivery-card.active-delivery-card {
+    background-color: #0d6efd !important;
+    border-color: #0d6efd !important;
+}
+
+/* ------------------------------------------
+   PREMIUM GOLD THEME OVERRIDES FOR SLIDE 9
+------------------------------------------ */
+[data-bs-theme="premium"] .pb-ts-subcard {
+    background-color: #050505 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-delivery-card {
+    background-color: #121212 !important;
+    border-color: rgba(212, 175, 55, 0.2) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-delivery-card.active-delivery-card {
+    background-color: #D4AF37 !important;
+    border-color: #D4AF37 !important;
+    color: #000000 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-delivery-card.active-delivery-card h6,
+[data-bs-theme="premium"] .pb-ts-delivery-card.active-delivery-card p,
+[data-bs-theme="premium"] .pb-ts-delivery-card.active-delivery-card svg {
+    color: #000000 !important;
+}
+
+/* ==========================================
+   SLIDE 10 SUCCESS & DEPLOYMENT STYLES
+========================================== */
+
+.pb-ts-success-circle {
+    box-shadow: 0 10px 25px -5px rgba(13, 110, 253, 0.3) !important;
+}
+
+/* ------------------------------------------
+   DARK THEME OVERRIDES FOR SLIDE 10
+------------------------------------------ */
+[data-bs-theme="dark"] .pb-ts-success-circle {
+    background-color: #0d6efd !important;
+    box-shadow: 0 10px 25px -5px rgba(13, 110, 253, 0.5) !important;
+}
+
+/* ------------------------------------------
+   PREMIUM GOLD THEME OVERRIDES FOR SLIDE 10
+------------------------------------------ */
+[data-bs-theme="premium"] .pb-ts-success-circle {
+    background-color: #D4AF37 !important;
+    box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.4) !important;
+    color: #000000 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-success-circle svg {
+    stroke: #000000 !important;
+}
+
+
+/* ==========================================
+   ADMIN NAVBAR THEME STYLES
+========================================== */
+
+.pb-admin-avatar {
+    background-color: var(--bs-primary) !important;
+    color: #ffffff !important;
+    transition: all 0.25s ease;
+}
+
+/* ------------------------------------------
+   DARK THEME OVERRIDES
+------------------------------------------ */
+[data-bs-theme="dark"] .pb-admin-avatar {
+    background-color: #0d6efd !important;
+    color: #ffffff !important;
+}
+
+[data-bs-theme="dark"] .pb-admin-badge {
+    background-color: rgba(13, 110, 253, 0.15) !important;
+    color: #60a5fa !important;
+    border-color: rgba(13, 110, 253, 0.3) !important;
+}
+
+/* ------------------------------------------
+   PREMIUM GOLD THEME OVERRIDES
+------------------------------------------ */
+[data-bs-theme="premium"] .pb-admin-avatar {
+    background-color: #D4AF37 !important;
+    color: #000000 !important;
+}
+
+[data-bs-theme="premium"] .pb-admin-badge {
+    background-color: rgba(212, 175, 55, 0.15) !important;
+    color: #D4AF37 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+/* ==========================================
+   BUTTON & TABLE THEME STYLES (Prefix: pb-ts-, pb-admin-)
+========================================== */
+
+/* 1. OUTLINE BUTTON FIX (Ensures readable text on hover in all themes) */
+.pb-ts-btn-outline {
+    background-color: #ffffff;
+    color: #334155 !important;
+    border: 1px solid #cbd5e1 !important;
+    transition: all 0.2s ease-in-out;
+}
+
+.pb-ts-btn-outline:hover, 
+.pb-ts-btn-outline:focus {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+    border-color: #94a3b8 !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* 2. TABLE HEADERS & ROWS */
+.pb-admin-table-header {
+    background-color: #f8fafc;
+    color: #64748b;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.pb-admin-table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+/* ------------------------------------------
+   DARK THEME OVERRIDES
+------------------------------------------ */
+[data-bs-theme="dark"] .pb-ts-btn-outline {
+    background-color: #151c2c;
+    color: #cbd5e1 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-btn-outline:hover {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+[data-bs-theme="dark"] .pb-admin-table-header {
+    background-color: #0b0f19 !important;
+    color: #94a3b8 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-bs-theme="dark"] .pb-admin-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+[data-bs-theme="dark"] .pb-admin-table td {
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ------------------------------------------
+   PREMIUM GOLD THEME OVERRIDES
+------------------------------------------ */
+[data-bs-theme="premium"] .pb-ts-btn-outline {
+    background-color: #121212;
+    color: #D4AF37 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-btn-outline:hover {
+    background-color: rgba(212, 175, 55, 0.15) !important;
+    color: #ffd700 !important;
+    border-color: #D4AF37 !important;
+}
+
+[data-bs-theme="premium"] .pb-admin-table-header {
+    background-color: #050505 !important;
+    color: #D4AF37 !important;
+    border-color: rgba(212, 175, 55, 0.2) !important;
+}
+
+[data-bs-theme="premium"] .pb-admin-table tbody tr:hover {
+    background-color: rgba(212, 175, 55, 0.05) !important;
+}
+
+[data-bs-theme="premium"] .pb-admin-table td {
+    border-color: rgba(212, 175, 55, 0.15) !important;
+}
+
+/* ==========================================
+   REVIEW MODERATION THEME STYLES
+========================================== */
+
+/* 1. DANGER OUTLINE BUTTON FIX (Hover Readable) */
+.pb-ts-btn-danger-outline {
+    background-color: #ffffff;
+    color: #dc2626 !important;
+    border: 1px solid #fca5a5 !important;
+    transition: all 0.2s ease-in-out;
+}
+
+.pb-ts-btn-danger-outline:hover,
+.pb-ts-btn-danger-outline:focus {
+    background-color: #fef2f2 !important;
+    color: #b91c1c !important;
+    border-color: #f87171 !important;
+    box-shadow: 0 2px 5px rgba(220, 38, 38, 0.1);
+}
+
+/* 2. STAR RATING STYLES */
+.pb-mod-stars {
+    letter-spacing: 2px;
+}
+
+/* ------------------------------------------
+   DARK THEME OVERRIDES FOR MODERATION
+------------------------------------------ */
+[data-bs-theme="dark"] .pb-ts-btn-danger-outline {
+    background-color: #151c2c;
+    color: #f87171 !important;
+    border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-btn-danger-outline:hover {
+    background-color: rgba(239, 68, 68, 0.15) !important;
+    color: #fca5a5 !important;
+    border-color: #ef4444 !important;
+}
+
+/* ------------------------------------------
+   PREMIUM GOLD THEME OVERRIDES FOR MODERATION
+------------------------------------------ */
+[data-bs-theme="premium"] .pb-ts-btn-danger-outline {
+    background-color: #121212;
+    color: #ef4444 !important;
+    border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-btn-danger-outline:hover {
+    background-color: rgba(239, 68, 68, 0.2) !important;
+    color: #f87171 !important;
+    border-color: #ef4444 !important;
+}
+
+[data-bs-theme="premium"] .pb-mod-stars {
+    color: #D4AF37 !important;
+}
+
+/* ==========================================
+   INQUIRY INBOX THEME STYLES
+========================================== */
+
+/* 1. INBOX LIST ITEMS */
+.pb-inbox-item {
+    background-color: #ffffff;
+    transition: background-color 0.2s ease;
+}
+
+.pb-inbox-item:hover {
+    background-color: #f8fafc;
+}
+
+.pb-inbox-item.active-inbox-item {
+    background-color: #f1f5f9 !important;
+    border-left: 3px solid var(--bs-primary) !important;
+}
+
+/* ------------------------------------------
+   DARK THEME OVERRIDES FOR INBOX
+------------------------------------------ */
+[data-bs-theme="dark"] .pb-inbox-item {
+    background-color: #151c2c;
+}
+
+[data-bs-theme="dark"] .pb-inbox-item:hover {
+    background-color: #1e293b;
+}
+
+[data-bs-theme="dark"] .pb-inbox-item.active-inbox-item {
+    background-color: #1e293b !important;
+    border-left: 3px solid #0d6efd !important;
+}
+
+[data-bs-theme="dark"] code.pb-ts-subcard {
+    background-color: #0b0f19 !important;
+    color: #60a5fa !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ------------------------------------------
+   PREMIUM GOLD THEME OVERRIDES FOR INBOX
+------------------------------------------ */
+[data-bs-theme="premium"] .pb-inbox-item {
+    background-color: #121212;
+}
+
+[data-bs-theme="premium"] .pb-inbox-item:hover {
+    background-color: rgba(212, 175, 55, 0.08);
+}
+
+[data-bs-theme="premium"] .pb-inbox-item.active-inbox-item {
+    background-color: rgba(212, 175, 55, 0.15) !important;
+    border-left: 3px solid #D4AF37 !important;
+}
+
+[data-bs-theme="premium"] code.pb-ts-subcard {
+    background-color: #050505 !important;
+    color: #D4AF37 !important;
+    border-color: rgba(212, 175, 55, 0.2) !important;
+}
+
+/* ==========================================
+   CREATOR DASHBOARD THEME STYLES
+========================================== */
+
+/* 1. BUTTON OUTLINE HOVER FIX */
+.pb-ts-btn-outline {
+    background-color: #ffffff;
+    color: #334155 !important;
+    border: 1px solid #cbd5e1 !important;
+    transition: all 0.2s ease-in-out;
+}
+
+.pb-ts-btn-outline:hover, 
+.pb-ts-btn-outline:focus {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+    border-color: #94a3b8 !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* 2. DANGER BUTTON OUTLINE */
+.pb-ts-btn-danger-outline {
+    background-color: #ffffff;
+    color: #dc2626 !important;
+    border: 1px solid #fca5a5 !important;
+    transition: all 0.2s ease-in-out;
+}
+
+.pb-ts-btn-danger-outline:hover,
+.pb-ts-btn-danger-outline:focus {
+    background-color: #fef2f2 !important;
+    color: #b91c1c !important;
+    border-color: #f87171 !important;
+}
+
+/* ------------------------------------------
+   DARK THEME OVERRIDES FOR DASHBOARD
+------------------------------------------ */
+[data-bs-theme="dark"] .pb-ts-btn-outline {
+    background-color: #151c2c;
+    color: #cbd5e1 !important;
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-btn-outline:hover {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-btn-danger-outline {
+    background-color: #151c2c;
+    color: #f87171 !important;
+    border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+[data-bs-theme="dark"] .pb-ts-btn-danger-outline:hover {
+    background-color: rgba(239, 68, 68, 0.15) !important;
+    color: #fca5a5 !important;
+}
+
+/* ------------------------------------------
+   PREMIUM GOLD THEME OVERRIDES FOR DASHBOARD
+------------------------------------------ */
+[data-bs-theme="premium"] .pb-ts-btn-outline {
+    background-color: #121212;
+    color: #D4AF37 !important;
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-btn-outline:hover {
+    background-color: rgba(212, 175, 55, 0.15) !important;
+    color: #ffd700 !important;
+    border-color: #D4AF37 !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-btn-danger-outline {
+    background-color: #121212;
+    color: #ef4444 !important;
+    border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+[data-bs-theme="premium"] .pb-ts-btn-danger-outline:hover {
+    background-color: rgba(239, 68, 68, 0.2) !important;
+    color: #f87171 !important;
+}
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+/* ==========================================
+   ADMIN DASHBOARD STYLES (Prefix: pb-admin-)
+========================================== */
+
+.pb-admin-bg-soft {
+    background-color: #F8FAFC !important;
+}
+
+.extra-small {
+    font-size: 0.75rem !important;
+}
+
+.pb-admin-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pb-admin-sidebar .nav-link {
+    color: #64748B;
+}
+
+.pb-admin-sidebar .nav-link.active {
+    background-color: rgba(var(--bs-primary-rgb), 0.1) !important;
+    color: var(--bs-primary) !important;
+}
+
+/* ------------------------------------------
+   THEME OVERRIDES FOR ADMIN PANEL
+------------------------------------------ */
+[data-bs-theme="dark"] {
+    .pb-admin-bg-soft {
+        background-color: #0b0f19 !important;
+    }
+    .pb-admin-card,
+    .pb-admin-sidebar,
+    .pb-admin-sidebar .bg-light {
+        background-color: #151c2c !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    .pb-admin-sidebar .nav-link {
+        color: #94A3B8;
+    }
+    .pb-admin-sidebar .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        color: #FFFFFF !important;
+    }
+    .table-hover tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.03) !important;
+    }
+}
+
+[data-bs-theme="premium"] {
+    .pb-admin-bg-soft {
+        background-color: #050505 !important;
+    }
+    .pb-admin-card,
+    .pb-admin-sidebar,
+    .pb-admin-sidebar .bg-light {
+        background-color: #121212 !important;
+        border-color: rgba(212, 175, 55, 0.2) !important;
+    }
+    .pb-admin-sidebar .nav-link.active {
+        background-color: rgba(212, 175, 55, 0.15) !important;
+        color: #D4AF37 !important;
+    }
+}/* ==========================================
+   ADMIN DASHBOARD FULL-WIDTH STYLES
+========================================== */
+
+.pb-admin-bg-soft {
+    background-color: #F8FAFC !important;
+}
+
+.extra-small {
+    font-size: 0.75rem !important;
+}
+
+.pb-admin-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* ------------------------------------------
+   THEME OVERRIDES FOR FULL-WIDTH ADMIN
+------------------------------------------ */
+[data-bs-theme="dark"] {
+    .pb-admin-bg-soft {
+        background-color: #0b0f19 !important;
+    }
+    .pb-admin-card {
+        background-color: #151c2c !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    .table-hover tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.03) !important;
+    }
+}
+
+[data-bs-theme="premium"] {
+    .pb-admin-bg-soft {
+        background-color: #050505 !important;
+    }
+    .pb-admin-card {
+        background-color: #121212 !important;
+        border-color: rgba(212, 175, 55, 0.2) !important;
+    }
+}
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+/* ==========================================
+   REVIEW MODERATION FULL-WIDTH STYLES
+========================================== */
+
+.pb-mod-bg-soft {
+    background-color: #F8FAFC !important;
+}
+
+.extra-small {
+    font-size: 0.75rem !important;
+}
+
+.pb-mod-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pb-mod-stars {
+    letter-spacing: 2px;
+}
+
+/* ------------------------------------------
+   THEME OVERRIDES FOR MODERATION PAGE
+------------------------------------------ */
+[data-bs-theme="dark"] {
+    .pb-mod-bg-soft {
+        background-color: #0b0f19 !important;
+    }
+    .pb-mod-card,
+    .pb-mod-card .bg-light {
+        background-color: #151c2c !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    .pb-mod-input {
+        background-color: #151c2c !important;
+        color: #f1f5f9 !important;
+    }
+}
+
+[data-bs-theme="premium"] {
+    .pb-mod-bg-soft {
+        background-color: #050505 !important;
+    }
+    .pb-mod-card,
+    .pb-mod-card .bg-light {
+        background-color: #121212 !important;
+        border-color: rgba(212, 175, 55, 0.2) !important;
+    }
+    .pb-mod-stars {
+        color: #D4AF37 !important;
+    }
+}
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+/* ==========================================
+   INQUIRY INBOX STYLES (Prefix: pb-inbox-)
+========================================== */
+
+.pb-inbox-bg-soft {
+    background-color: #F8FAFC !important;
+}
+
+.extra-small {
+    font-size: 0.75rem !important;
+}
+
+.pb-inbox-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pb-inbox-list .list-group-item {
+    transition: background-color 0.2s ease;
+}
+
+.pb-inbox-list .list-group-item.active {
+    background-color: #EFF6FF !important;
+    border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+/* ------------------------------------------
+   THEME OVERRIDES FOR INQUIRY INBOX
+------------------------------------------ */
+[data-bs-theme="dark"] {
+    .pb-inbox-bg-soft {
+        background-color: #0b0f19 !important;
+    }
+    .pb-inbox-card,
+    .pb-inbox-card .bg-light,
+    .pb-inbox-card .bg-white {
+        background-color: #151c2c !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    .pb-inbox-input {
+        background-color: #151c2c !important;
+        color: #f1f5f9 !important;
+    }
+    .pb-inbox-list .list-group-item.active {
+        background-color: #1e293b !important;
+    }
+}
+
+[data-bs-theme="premium"] {
+    .pb-inbox-bg-soft {
+        background-color: #050505 !important;
+    }
+    .pb-inbox-card,
+    .pb-inbox-card .bg-light,
+    .pb-inbox-card .bg-white {
+        background-color: #121212 !important;
+        border-color: rgba(212, 175, 55, 0.2) !important;
+    }
+    .pb-inbox-list .list-group-item.active {
+        background-color: rgba(212, 175, 55, 0.12) !important;
+    }
+}
