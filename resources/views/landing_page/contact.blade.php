@@ -37,31 +37,31 @@
                     <h3 class="fw-bold text-dark mb-2">Send us a message</h3>
                     <p class="text-muted small mb-4">Fill out the form below and we'll reply as soon as possible.</p>
 
-                    <form action="#" method="POST">
+                    <form action="{{route('contact')}}" method="POST">
                         @csrf
                         <div class="row g-3">
                             <!-- Full Name -->
                             <div class="col-md-6">
                                 <label for="contactName" class="form-label fw-semibold small text-dark">Full Name</label>
-                                <input type="text" class="form-control pb-contact-input" id="contactName" placeholder="John Doe" required>
+                                <input type="text" name="name" class="form-control pb-contact-input" id="contactName" placeholder="John Doe" required>
                             </div>
 
                             <!-- Email Address -->
                             <div class="col-md-6">
                                 <label for="contactEmail" class="form-label fw-semibold small text-dark">Email Address</label>
-                                <input type="email" class="form-control pb-contact-input" id="contactEmail" placeholder="john@example.com" required>
+                                <input type="email" name="email" class="form-control pb-contact-input" id="contactEmail" placeholder="john@example.com" required>
                             </div>
 
                             <!-- Subject -->
                             <div class="col-12">
                                 <label for="contactSubject" class="form-label fw-semibold small text-dark">Subject</label>
-                                <input type="text" class="form-control pb-contact-input" id="contactSubject" placeholder="How can we help you?" required>
+                                <input type="text" name="subject" class="form-control pb-contact-input" id="contactSubject" placeholder="How can we help you?" required>
                             </div>
 
                             <!-- Message -->
                             <div class="col-12">
                                 <label for="contactMessage" class="form-label fw-semibold small text-dark">Message</label>
-                                <textarea class="form-control pb-contact-input" id="contactMessage" rows="5" placeholder="Write your message here..." required></textarea>
+                                <textarea class="form-control pb-contact-input" name="message" id="contactMessage" rows="5" placeholder="Write your message here..." required></textarea>
                             </div>
 
                             <!-- Submit Button -->
