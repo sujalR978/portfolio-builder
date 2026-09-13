@@ -48,38 +48,38 @@
                     </div>
 
                     <!-- FORM -->
-                    <form action="#" method="POST">
+                    <form action="{{route('register')}}" method="POST">
                         @csrf
                         
                         <!-- Name Grid -->
                         <div class="row g-3 mb-3">
                             <div class="col-sm-6">
                                 <label for="regFirstName" class="form-label fw-semibold small text-dark">First Name</label>
-                                <input type="text" class="form-control pb-auth-input" id="regFirstName" placeholder="Jane" required>
+                                <input type="text" name="firstName" class="form-control pb-auth-input" id="regFirstName" placeholder="Jane" required>
                             </div>
                             <div class="col-sm-6">
                                 <label for="regLastName" class="form-label fw-semibold small text-dark">Last Name</label>
-                                <input type="text" class="form-control pb-auth-input" id="regLastName" placeholder="Doe" required>
+                                <input type="text" name="lastName" class="form-control pb-auth-input" id="regLastName" placeholder="Doe" required>
                             </div>
                         </div>
 
                         <!-- Email Input -->
                         <div class="mb-3">
                             <label for="regEmail" class="form-label fw-semibold small text-dark">Email Address</label>
-                            <input type="email" class="form-control pb-auth-input" id="regEmail" placeholder="jane@example.com" required>
+                            <input type="email" name="email" class="form-control pb-auth-input" id="regEmail" placeholder="jane@example.com" required>
                         </div>
 
                         <!-- Password Input -->
                         <div class="mb-3">
                             <label for="regPassword" class="form-label fw-semibold small text-dark">Password</label>
-                            <input type="password" class="form-control pb-auth-input" id="regPassword" placeholder="Minimum 8 characters" required>
+                            <input type="password" name="password" class="form-control pb-auth-input" id="regPassword" placeholder="Minimum 8 characters" required>
                             <div class="form-text small text-muted">Must contain letters, numbers, and at least 8 chars.</div>
                         </div>
 
                         <!-- Password Confirmation -->
                         <div class="mb-3">
                             <label for="regPasswordConfirm" class="form-label fw-semibold small text-dark">Confirm Password</label>
-                            <input type="password" class="form-control pb-auth-input" id="regPasswordConfirm" placeholder="Re-enter password" required>
+                            <input type="password" name="" class="form-control pb-auth-input" id="regPasswordConfirm" placeholder="Re-enter password" required>
                         </div>
 
                         <!-- Terms and Conditions Checkbox -->
