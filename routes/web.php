@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 
 
 
@@ -21,6 +22,9 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('landing_page.contact');
 });
+Route::post('/contact', [ContactController::class, 'contact'])
+    ->name('contact');
+
 Route::get('/how_it_works', function () {
     return view('landing_page.how_it_works');
 });
@@ -30,6 +34,12 @@ Route::get('/forgot_password', function () {
 Route::get('/register', function () {
     return view('landing_page.register');
 });
+Route::get('log_in',function(){
+    return view('landing_page.log_in');
+});
+Route::post('/register',[AuthController::class, 'register'])
+    ->name('register');
+    
 
 // Admin Dashboard
     Route::get('/admin_dashboard', function () {
@@ -72,8 +82,5 @@ Route::get('/feedback', function () {
 });
 
 
-Route::get('/log_in', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/log_in', [AuthController::class, 'login']);
-Route::post('/log_out', [AuthController::class, 'logout'])->name('logout');
-Route::get('/log_out', [AuthController::class, 'logout']);
+
 
