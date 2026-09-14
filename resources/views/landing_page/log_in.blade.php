@@ -70,7 +70,7 @@
                     </div>
 
                     <!-- FORM -->
-                    <form action="{{ url('/log_in') }}" method="POST">
+                    <form action="{{ route('log_in') }}" method="POST">
                         @csrf
                         
                         <!-- Email Input -->
