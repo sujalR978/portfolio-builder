@@ -79,12 +79,12 @@
                         <!-- Password Confirmation -->
                         <div class="mb-3">
                             <label for="regPasswordConfirm" class="form-label fw-semibold small text-dark">Confirm Password</label>
-                            <input type="password" name="" class="form-control pb-auth-input" id="regPasswordConfirm" placeholder="Re-enter password" required>
+                            <input type="password" name="password_confirmation" class="form-control pb-auth-input" id="regPasswordConfirm" placeholder="Re-enter password" required>
                         </div>
 
                         <!-- Terms and Conditions Checkbox -->
                         <div class="form-check mb-4">
-                            <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                            <input class="form-check-input" name="term" type="checkbox" id="agreeTerms" required>
                             <label class="form-check-input-label small text-muted" for="agreeTerms">
                                 I agree to the <a href="#" class="text-primary text-decoration-none fw-semibold">Terms of Service</a> and <a href="#" class="text-primary text-decoration-none fw-semibold">Privacy Policy</a>.
                             </label>
