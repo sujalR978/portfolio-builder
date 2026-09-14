@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -34,9 +35,16 @@ Route::get('/forgot_password', function () {
 Route::get('/register', function () {
     return view('landing_page.register');
 });
-Route::get('log_in',function(){
+// Login page
+Route::get('/log_in', function () {
     return view('landing_page.log_in');
-});
+})->name('login.form');
+
+
+// Login submit
+Route::post('/log_in', [AuthController::class, 'Login'])
+    ->name('log_in');
+
 Route::post('/register',[AuthController::class, 'register'])
     ->name('register');
     
