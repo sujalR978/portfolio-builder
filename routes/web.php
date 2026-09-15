@@ -1,95 +1,138 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
-use Illuminate\Support\Facades\Auth;
 
 
+// ==========================================
+// PUBLIC PAGES
+// ==========================================
 
-// Home Page
 Route::get('/', function () {
     return view('landing_page.home');
 });
+
 Route::get('/home', function () {
     return view('landing_page.home');
 });
 
-// Other Public Pages
 Route::get('/about', function () {
     return view('landing_page.about');
 });
+
+
+// ==========================================
+// CONTACT
+// ==========================================
+
 Route::get('/contact', function () {
     return view('landing_page.contact');
 });
+
 Route::post('/contact', [ContactController::class, 'contact'])
     ->name('contact');
+
+
+// ==========================================
+// OTHER PUBLIC PAGES
+// ==========================================
 
 Route::get('/how_it_works', function () {
     return view('landing_page.how_it_works');
 });
+
 Route::get('/forgot_password', function () {
     return view('landing_page.forgot_password');
 });
+
+
+// ==========================================
+// REGISTER
+// ==========================================
+
 Route::get('/register', function () {
     return view('landing_page.register');
-});
+})->name('register.form');
+
+Route::post('/register', [AuthController::class, 'register'])
+    ->name('register');
+
+
+// ==========================================
+// LOGIN
+// ==========================================
+
 Route::get('/log_in', function () {
-    return view('log_in');
-})->name('log_in');
+    return view('landing_page.log_in');
+})->name('login.form');
 
 Route::post('/log_in', [AuthController::class, 'log_in'])
-    ->name('login.submit');
+    ->name('log_in');
+
+
+// ==========================================
+// LOGOUT
+// ==========================================
+
+Route::post('/home', [AuthController::class, 'log_out'])
+    ->name('log_out');
+
+
+// ==========================================
+// USER PAGES
+// ==========================================
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware('auth');
-
-Route::post('/register',[AuthController::class, 'register'])
-    ->name('register');
-    
-
-// Admin Dashboard
-    Route::get('/admin_dashboard', function () {
-        if (!session('is_logged_in') || session('user_role') !== 'admin') {
-            return redirect('/log_in')->withErrors(['email' => 'Admin authorization required.']);
-        }
-        return view('admin.admin_dashboard');
-    });
-
-    Route::get('/admin_feedback', function () {
-    return view('admin.admin_feedback');
-});
-Route::get('/admin_inquiry', function () {
-    return view('admin.admin_inquiry');
-});
-
-
-// User Dashboard
-Route::get('/dashboard', function () {
-    if (!session('is_logged_in')) {
-        return redirect('/log_in')->withErrors(['email' => 'Please log in first.']);
-    }
     return view('main.dashboard');
-});
+})->middleware('auth');
 
 Route::get('/profile', function () {
     return view('main.profile');
-});
+})->middleware('auth');
 
 Route::get('/create_project', function () {
     return view('main.create_project');
-});
+})->middleware('auth');
 
 Route::get('/explor', function () {
     return view('main.explor');
-});
+})->middleware('auth');
 
 Route::get('/feedback', function () {
     return view('main.feedback');
+})->middleware('auth');
+
+
+// ==========================================
+// ADMIN PAGES
+// ==========================================
+
+Route::get('/admin_dashboard', function () {
+
+    if (!session('is_admin')) {
+        return redirect('/log_in')->withErrors([
+            'email' => 'Admin authorization required.'
+        ]);
+    }
+
+    return view('admin.admin_dashboard');
+
+});
+Route::get('/admin_feedback',function(){
+    if(!session('is_admin')){
+      return redirect('/log_in')->withErrors([
+            'email' => 'Admin authorization required.'
+        ]);
+    }
+    return view('admin.admin_feedback');
 });
 
 
-
+Route::get('/admin_inquiry',function(){
+    if(!session('is_admin')){
+        return redirect('/log_in')->withErrors(['email'=>'admin autorization required.']);
+    }
+    return view('admin.admin_inquiry');
+});
 
