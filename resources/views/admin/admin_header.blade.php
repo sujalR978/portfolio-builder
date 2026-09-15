@@ -6,7 +6,7 @@
         <nav class="navbar navbar-expand-lg pb-navbar px-3 py-2 shadow-sm">
             
             <!-- Admin Brand Logo -->
-            <a href="{{ url('/admin/dashboard') }}" class="navbar-brand pb-brand d-flex align-items-center text-decoration-none">
+            <a href="{{ url('/admin_dashboard') }}" class="navbar-brand pb-brand d-flex align-items-center text-decoration-none">
                 <div class="pb-brand-icon-bg me-2 d-flex align-items-center justify-content-center">
                     <svg class="pb-brand-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -61,7 +61,7 @@
                            
                             <li><hr class="dropdown-divider my-1 pb-ts-border-subtle"></li>
                             <li>
-                                <form action="{{ url('/log_out') }}" method="POST" class="m-0">
+                                <form action="{{ route('log_out') }}" method="POST" class="m-0">
                                     @csrf
                                     <button type="submit" class="dropdown-item rounded-3 small py-2 text-danger fw-semibold d-flex align-items-center gap-2">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
