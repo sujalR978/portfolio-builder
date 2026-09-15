@@ -35,9 +35,32 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+         if (
+            $request->email === 'admin123@gmail.com' &&
+            $request->password === 'admin123'
+        ) {
+            // Remove any normal user login
+            Auth::logout();
+
+            // Create admin session
+            $request->session()->regenerate();
+
+            session([
+                'is_admin' => true,
+                'is_logged_in' => true,
+            ]);
+
+            return redirect('/admin_dashboard');
+        }
+
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+
+                    session()->forget([
+                'is_admin',
+                'is_logged_in',
+            ]);
 
             return redirect('/dashboard');
         }
@@ -45,5 +68,14 @@ class AuthController extends Controller
         return back()->withErrors([
             'email' => 'Email or password is incorrect.',
         ])->onlyInput('email');
+    }
+
+    public function log_out(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/log_in')
+            ->with('success', 'You have been logged out successfully.');
     }
 }
