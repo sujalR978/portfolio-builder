@@ -30,7 +30,7 @@
             
             <!-- Brand Info Column -->
             <div class="col-lg-4 col-md-6">
-                <a href="{{ url('/admin/dashboard') }}" class="navbar-brand pb-brand d-flex align-items-center text-decoration-none mb-3">
+                <a href="{{ url('/admin_dashboard') }}" class="navbar-brand pb-brand d-flex align-items-center text-decoration-none mb-3">
                     <div class="pb-brand-icon-bg me-2 d-flex align-items-center justify-content-center">
                         <svg class="pb-brand-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -68,7 +68,7 @@
                                 <span class="extra-small text-muted d-block">Super Admin Privilege</span>
                             </div>
                         </div>
-                        <form action="{{ url('/logout') }}" method="POST" class="m-0">
+                        <form action="{{ route('log_out') }}" method="POST" class="m-0">
                             @csrf
                             <button type="submit" class="btn btn-outline-danger btn-sm rounded-3 extra-small fw-bold px-3 py-1.5">
                                 Logout
