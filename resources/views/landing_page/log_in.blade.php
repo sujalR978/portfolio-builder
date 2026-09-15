@@ -70,7 +70,7 @@
                     </div>
 
                     <!-- FORM -->
-                    <form action="{{ route('log_in') }}" method="POST">
+                    <form action="{{ route('login.submit') }}" method="POST">
                         @csrf
                         
                         <!-- Email Input -->
@@ -98,7 +98,7 @@
 
                         <!-- Submit Button -->
                         <button type="submit" class="btn btn-primary btn-lg pb-auth-btn-pill w-100 fw-bold shadow-sm mb-3">
-                            Log In &rarr;
+                            Log In 
                         </button>
 
                         <!-- Sign Up Redirect Link -->
