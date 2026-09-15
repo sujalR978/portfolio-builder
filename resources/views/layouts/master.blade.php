@@ -1,66 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- 1. Bootstrap CSS (Via CDN for instant loading) -->
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Anti-Flicker Theme Script (Must be in head) -->
+    <!-- Anti-Flicker Theme Script -->
     <script>
         const savedTheme = localStorage.getItem('pb-theme') || 'light';
         document.documentElement.setAttribute('data-bs-theme', savedTheme);
     </script>
 
-    <!-- css file -->
-    <link rel="stylesheet" href= "{{ asset('css/style.css')}}">
-    
-    <title>Document</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    <title>@yield('title', 'Portfolio Builder')</title>
 </head>
+
 <body>
 
-    
-    @if(session('is_logged_in'))
-        @if(session('user_role') === 'admin')
-            <!-- ADMIN NAVBAR -->
-            @include('admin.admin_header')
-        @else
-            <!-- USER DASHBOARD NAVBAR -->
-            @include('main.user_header')
-        @endif
+    {{-- ==========================================
+         HEADER
+    ========================================== --}}
+
+    @if(session('is_admin'))
+
+        {{-- ADMIN HEADER --}}
+        @include('admin.admin_header')
+
+    @elseif(Auth::check())
+
+        {{-- LOGGED-IN USER HEADER --}}
+        @include('main.user_header')
+
     @else
-        <!-- GUEST / PUBLIC NAVBAR -->
+
+        {{-- PUBLIC / GUEST HEADER --}}
         @include('layouts.header')
+
     @endif
 
 
-@yield('content')
+    {{-- ==========================================
+         PAGE CONTENT
+    ========================================== --}}
 
- 
-  
-    @if(session('is_logged_in'))
-        @if(session('user_role') === 'admin')
-            <!-- ADMIN footer -->
-            @include('admin.admin_footer')
-        @else
-            <!-- USER footer  -->
-            @include('main.user_footer')
-        @endif
+    @yield('content')
+
+
+    {{-- ==========================================
+         FOOTER
+    ========================================== --}}
+
+    @if(session('is_admin'))
+
+        {{-- ADMIN FOOTER --}}
+        @include('admin.admin_footer')
+
+    @elseif(Auth::check())
+
+        {{-- LOGGED-IN USER FOOTER --}}
+        @include('main.user_footer')
+
     @else
-        <!-- GUEST / PUBLIC footer -->
+
+        {{-- PUBLIC / GUEST FOOTER --}}
         @include('layouts.footer')
+
     @endif
 
-<!-- Theme Switcher JS -->
+
+    {{-- ==========================================
+         THEME SWITCHER
+    ========================================== --}}
+
     <script>
         function switchTheme(themeName) {
             document.documentElement.setAttribute('data-bs-theme', themeName);
             localStorage.setItem('pb-theme', themeName);
         }
     </script>
-    <!-- 3. Bootstrap JS (Via CDN) -->
+
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
     @stack('scripts')
+
 </body>
+
 </html>
