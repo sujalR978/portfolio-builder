@@ -53,14 +53,17 @@
                             <div class="rounded-circle bg-primary text-white fw-bold d-flex align-items-center justify-content-center shadow-sm" style="width: 38px; height: 38px; font-size: 0.9rem;">
                                 {{ strtoupper(substr(session('user_name', 'U'), 0, 1)) }}
                             </div>
+                            @foreach($user as $u)
+
                             <span class="fw-semibold small text-dark d-none d-xl-inline-block">{{ session('user_name', 'Account') }}</span>
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted d-none d-xl-inline-block"><polyline points="6 9 12 15 18 9"/></svg>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-4 mt-2 p-2" style="min-width: 200px;">
                             <li class="px-3 py-2 border-bottom mb-1">
-                                <span class="d-block fw-bold text-dark small">{{ session('user_name', 'User') }}</span>
+                                <span class="d-block fw-bold text-dark small">{{$u->firstName}}</span>
                                 <span class="d-block text-muted extra-small">Member</span>
                             </li>
+                            @endforeach
                             <li>
                                 <a class="dropdown-item rounded-3 small py-2 d-flex align-items-center gap-2" href="{{ url('/profile') }}">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>

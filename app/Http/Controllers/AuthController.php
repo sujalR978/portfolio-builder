@@ -78,4 +78,8 @@ class AuthController extends Controller
         return redirect('/log_in')
             ->with('success', 'You have been logged out successfully.');
     }
+    public function read(){
+      
+
+    }
 }
