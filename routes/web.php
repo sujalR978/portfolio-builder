@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FeedbackController;
 use Illuminate\Foundation\Auth\User;
 
 // ==========================================
@@ -103,6 +104,13 @@ Route::get('/feedback', function () {
     return view('main.feedback');
 })->middleware('auth');
 
+Route::get('/feedback', function () {
+    return view('main.feedback');
+})->name('feedback.form');
+
+Route::post('/feedback', [FeedbackController::class, 'feedback'])
+    ->name('feedback');
+
 
 // ==========================================
 // ADMIN PAGES
@@ -111,16 +119,16 @@ Route::get('/admin_dashboard', [AuthController::class, 'adminDashboard']);
 
 Route::get('/admin_inquiry',[ContactController::class, 'adminInquiry']);
 
-Route::get('/admin_feedback',function(){
-    if(!session('is_admin')){
-      return redirect('/log_in')->withErrors([
-            'email' => 'Admin authorization required.'
-        ]);
-    }
-    return view('admin.admin_feedback');
-});
+// Route::get('/admin_feedback',function(){
+//     if(!session('is_admin')){
+//       return redirect('/log_in')->withErrors([
+//             'email' => 'Admin authorization required.'
+//         ]);
+//     }
+//     return view('admin.admin_feedback');
+// });
 
-
+Route::get('/admin_feedback',[FeedbackController::class, 'adminFeedback']);
 
 
 
