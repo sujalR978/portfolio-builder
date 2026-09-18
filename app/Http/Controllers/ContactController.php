@@ -22,7 +22,7 @@ class ContactController extends Controller
             'message' =>$request->message,
         ]);
 
-        return Redirect('/log_in')->with('success','Registration Successfully!');
+        return Redirect('/contact')->with('success','Registration Successfully!');
     }
 
    public function adminInquiry(Request $request)
