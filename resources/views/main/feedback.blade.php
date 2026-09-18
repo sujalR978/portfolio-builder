@@ -3,7 +3,7 @@
 @section('title', 'Submit Feedback - Portfolio Builder')
 
 @section('content')
-
+@auth
 <!-- ==========================================
      FEEDBACK HERO SECTION
 =========================================== -->
@@ -71,11 +71,11 @@
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
                                 <label for="fbName" class="form-label fw-semibold small text-dark">Your Name</label>
-                                <input type="text" class="form-control pb-feedback-input" id="fbName" name="name" placeholder="John Doe" value="{{ session('user_name', '') }}" required>
+                                <input type="text" class="form-control pb-feedback-input" id="fbName" name="name" placeholder="John Doe" value="{{ Auth::user()->firstName}} {{Auth::user()->lastName}}" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="fbEmail" class="form-label fw-semibold small text-dark">Email Address</label>
-                                <input type="email" class="form-control pb-feedback-input" id="fbEmail" name="email" placeholder="john@example.com" value="{{ session('user_email', '') }}" required>
+                                <input type="email" class="form-control pb-feedback-input" id="fbEmail" name="email" placeholder="john@example.com" value="{{ Auth::user()->email }}" required>
                             </div>
                         </div>
 
@@ -118,5 +118,5 @@
         </div>
     </div>
 </section>
-
+@endauth
 @endsection
