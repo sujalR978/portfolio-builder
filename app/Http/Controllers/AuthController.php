@@ -78,8 +78,12 @@ class AuthController extends Controller
         return redirect('/log_in')
             ->with('success', 'You have been logged out successfully.');
     }
-    public function read(){
-      
 
-    }
+
+public function deleteUser(User $user)
+{
+    $user->delete();
+
+    return back()->with('success', 'User deleted successfully.');
+}
 }
