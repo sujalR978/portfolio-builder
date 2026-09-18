@@ -56,7 +56,7 @@
                         <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-4 mt-2 p-2 pb-ts-card" style="min-width: 210px;">
                             <li class="px-3 py-2 border-bottom pb-ts-border-subtle mb-1">
                                 <span class="d-block fw-bold small pb-ts-heading">{{ session('user_name', 'Administrator') }}</span>
-                                <span class="d-block text-muted extra-small">admin@example.com</span>
+                                <span class="d-block text-muted extra-small">admin123@gmail.com</span>
                             </li>
                            
                             <li><hr class="dropdown-divider my-1 pb-ts-border-subtle"></li>
