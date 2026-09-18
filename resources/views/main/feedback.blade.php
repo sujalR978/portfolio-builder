@@ -42,7 +42,7 @@
                         </div>
                     @endif
 
-                    <form action="#" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('feedback')}}" method="POST" >
                         @csrf
                         
                         <!-- 1. EXPERIENCE RATING -->
@@ -101,7 +101,7 @@
                         <!-- 5. ATTACHMENT UPLOAD (OPTIONAL) -->
                         <div class="mb-4">
                             <label for="fbAttachment" class="form-label fw-semibold small text-dark">Attach Screenshot (Optional)</label>
-                            <input class="form-control pb-feedback-input" type="file" id="fbAttachment" name="attachment" accept="image/*">
+                            <input class="form-control pb-feedback-input" type="file" id="fbAttachment" name="image" accept="image/*">
                             <div class="form-text small text-muted">Supports PNG, JPG, or GIF up to 5MB.</div>
                         </div>
 
