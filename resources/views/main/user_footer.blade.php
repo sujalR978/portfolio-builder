@@ -1,6 +1,7 @@
 <!-- ==========================================
      EXECUTIVE LOGGED-IN USER FOOTER
 =========================================== -->
+@auth
 <footer class="pb-footer-wrapper mt-auto pt-5 pb-4">
     <div class="container-xl">
         
@@ -76,10 +77,10 @@
                 <div class="p-3 bg-light rounded-4 border pb-ts-subcard">
                     <div class="d-flex align-items-center gap-3">
                         <div class="rounded-circle bg-primary text-white fw-bold d-flex align-items-center justify-content-center shadow-sm" style="width: 42px; height: 42px; flex-shrink: 0;">
-                            {{ strtoupper(substr(session('user_name', 'U'), 0, 1)) }}
+                            {{ strtoupper(substr(Auth::user()->firstName, 0, 1)) }}
                         </div>
                         <div class="overflow-hidden">
-                            <h6 class="fw-bold text-dark mb-0 small text-truncate">{{ session('user_name', 'Active User') }}</h6>
+                            <h6 class="fw-bold text-dark mb-0 small text-truncate">{{ Auth::user()->firstName }} {{Auth::user()->lastName}}</h6>
                             <span class="extra-small text-muted d-block">User Member</span>
                         </div>
                     </div>
@@ -116,3 +117,4 @@
 
     </div>
 </footer>
+@endauth
