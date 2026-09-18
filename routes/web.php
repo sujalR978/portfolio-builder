@@ -115,7 +115,7 @@ Route::get('/admin_dashboard', function () {
             'email' => 'Admin authorization required.'
         ]);
     }
-
+    $users = User::all();
     return view('admin.admin_dashboard');
 
 });
