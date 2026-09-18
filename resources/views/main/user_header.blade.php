@@ -46,24 +46,24 @@
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                         <span class="ms-1.5">New Project</span>
                     </a>
-
+                        @auth
                     <!-- Profile Dropdown -->
                     <div class="dropdown">
                         <button class="btn p-0 border-0 d-flex align-items-center gap-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="rounded-circle bg-primary text-white fw-bold d-flex align-items-center justify-content-center shadow-sm" style="width: 38px; height: 38px; font-size: 0.9rem;">
-                                {{ strtoupper(substr(session('user_name', 'U'), 0, 1)) }}
+                                {{ strtoupper(substr(Auth::user()->firstName, 0, 1)) }}
                             </div>
-                            @foreach($user as $u)
+                            
 
                             <span class="fw-semibold small text-dark d-none d-xl-inline-block">{{ session('user_name', 'Account') }}</span>
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted d-none d-xl-inline-block"><polyline points="6 9 12 15 18 9"/></svg>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-4 mt-2 p-2" style="min-width: 200px;">
                             <li class="px-3 py-2 border-bottom mb-1">
-                                <span class="d-block fw-bold text-dark small">{{$u->firstName}}</span>
+                                <span class="d-block fw-bold text-dark small">{{ Auth::user()->firstName}} {{Auth::user()->lastName}}</span>
                                 <span class="d-block text-muted extra-small">Member</span>
                             </li>
-                            @endforeach
+                           
                             <li>
                                 <a class="dropdown-item rounded-3 small py-2 d-flex align-items-center gap-2" href="{{ url('/profile') }}">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -90,7 +90,7 @@
                     </div>
 
                 </div>
-
+ @endauth
             </div>
             
         </nav>
