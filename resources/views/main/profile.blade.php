@@ -3,7 +3,7 @@
 @section('title', 'My Profile & Settings - Portfolio Builder')
 
 @section('content')
-
+@auth
 <!-- ==========================================
      PROFILE HERO & STATS BANNER
 =========================================== -->
@@ -20,7 +20,7 @@
                     </div>
                     <div>
                         <div class="d-flex align-items-center gap-2 mb-1">
-                            <h2 class="fw-bold text-dark mb-0 fs-3">{{ session('user_email', 'john@example.com') }}</h2>
+                            <h2 class="fw-bold text-dark mb-0 fs-3">{{ Auth::user()->email }}</h2>
                             <span class="badge bg-primary rounded-pill text-white small">Pro Member</span>
                         </div>
                         <p class="text-muted small mb-2">Member since August 2026</p>
@@ -104,11 +104,11 @@
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold small text-dark">Full Name</label>
-                                        <input type="text" class="form-control pb-profile-input" value="Jane Doe" required>
+                                        <input type="text" class="form-control pb-profile-input" value="{{Auth::user()->firstName}}" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold small text-dark">Email Address</label>
-                                        <input type="email" class="form-control pb-profile-input" value="{{ session('user_email', 'jane@example.com') }}" required>
+                                        <input type="email" class="form-control pb-profile-input" value="{{Auth::user()->email }}" required>
                                     </div>
                                     <div class="col-12">
                                         <label class="form-label fw-semibold small text-dark">Bio / Headline</label>
@@ -301,5 +301,5 @@
         localStorage.setItem('pb_theme', themeName);
     }
 </script>
-
+@endauth
 @endsection
