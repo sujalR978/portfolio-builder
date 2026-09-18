@@ -107,18 +107,10 @@ Route::get('/feedback', function () {
 // ==========================================
 // ADMIN PAGES
 // ==========================================
+Route::get('/admin_dashboard', [AuthController::class, 'adminDashboard']);
 
-Route::get('/admin_dashboard', function () {
+Route::get('/admin_inquiry',[ContactController::class, 'adminInquiry']);
 
-    if (!session('is_admin')) {
-        return redirect('/log_in')->withErrors([
-            'email' => 'Admin authorization required.'
-        ]);
-    }
-    $users = User::all();
-    return view('admin.admin_dashboard',compact('users'));
-
-});
 Route::get('/admin_feedback',function(){
     if(!session('is_admin')){
       return redirect('/log_in')->withErrors([
@@ -129,15 +121,6 @@ Route::get('/admin_feedback',function(){
 });
 
 
-Route::get('/admin_inquiry',function(){
-    if(!session('is_admin')){
-        return redirect('/log_in')->withErrors(['email'=>'admin autorization required.']);
-    }
-    return view('admin.admin_inquiry');
-});
-
-
-
 
 
 
@@ -145,3 +128,6 @@ Route::get('/admin_inquiry',function(){
 
 Route::delete('/admin/user/{user}', [AuthController::class, 'deleteUser'])
     ->name('admin.user.delete');
+
+Route::delete('/admin/contact/{contact}',[ContactController::class,'deleteContact'])
+    ->name('admin.contect.delete');
