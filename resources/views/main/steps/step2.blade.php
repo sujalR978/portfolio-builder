@@ -1,3 +1,4 @@
+@auth
 <div class="pb-ts-slide" data-slide="2">
     
     <!-- TOP BACK LINK -->
@@ -54,7 +55,7 @@
                     <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     </span>
-                    <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" id="s2FullName" name="full_name" placeholder="John Doe" required>
+                    <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" id="s2FullName" name="full_name" placeholder="{{Auth::user()->firstName}} {{Auth::user()->lastName}}" required>
                 </div>
             </div>
 
@@ -76,7 +77,7 @@
                     <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     </span>
-                    <input type="email" class="form-control border-start-0 ps-2 pb-ts-input" id="s2Email" name="email" placeholder="john@example.com" required>
+                    <input type="email" class="form-control border-start-0 ps-2 pb-ts-input" id="s2Email" name="email" placeholder="{{Auth::user()->email}}" required>
                 </div>
             </div>
 
@@ -180,3 +181,4 @@
         document.getElementById('avatarFileInput').value = '';
     }
 </script>
+@endauth
