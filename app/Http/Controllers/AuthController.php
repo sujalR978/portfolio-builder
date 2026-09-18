@@ -86,4 +86,32 @@ public function deleteUser(User $user)
 
     return back()->with('success', 'User deleted successfully.');
 }
+
+
+    public function adminDashboard(Request $request)
+    {
+        // Check admin
+        if (!session('is_admin')) {
+            return redirect('/log_in')->withErrors([
+                'email' => 'Admin authorization required.'
+            ]);
+        }
+
+        // Search value
+        $search = $request->search;
+
+        // Get users
+        $users = User::query()
+            ->when($search, function ($query) use ($search) {
+
+                $query->where('firstName', 'like', '%' . $search . '%')
+                      ->orWhere('lastName', 'like', '%' . $search . '%')
+                      ->orWhere('email', 'like', '%' . $search . '%')
+                      ->orWhere('id', 'like', '%' . $search . '%');
+
+            })
+            ->get();
+
+        return view('admin.admin_dashboard', compact('users'));
+    }
 }
