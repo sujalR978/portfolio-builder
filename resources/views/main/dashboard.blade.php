@@ -3,7 +3,7 @@
 @section('title', 'Creator Dashboard - Portfolio Builder')
 
 @section('content')
-
+@auth
 <!-- ==========================================
      DASHBOARD TOP WELCOME BANNER
 =========================================== -->
@@ -13,10 +13,10 @@
             <div class="col-md-7">
                 <div class="d-inline-flex align-items-center px-3 py-1 rounded-pill border pb-ts-subcard pb-ts-border-subtle shadow-sm mb-2">
                     <span class="badge bg-primary rounded-pill me-2 text-white">Live</span>
-                    <span class="small fw-semibold text-muted">portfolio.build/{{ session('username', 'janedoe') }}</span>
+                    <span class="small fw-semibold text-muted">portfolio.build/{{ Auth::user()->firstName }}</span>
                 </div>
                 <h1 class="fw-bold text-dark fs-2 mb-1 pb-ts-heading">
-                    Welcome back, <span class="text-primary">{{ session('user_name', 'Jane') }}</span> 👋
+                    Welcome back, <span class="text-primary">{{ Auth::user()->firstName }}</span> 👋
                 </h1>
                 <p class="text-muted small mb-0">Manage your portfolio projects, track visitor stats, and tweak your design preferences.</p>
             </div>
@@ -234,5 +234,5 @@
         localStorage.setItem('pb_theme', themeName);
     }
 </script>
-
+@endauth
 @endsection
