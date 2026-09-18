@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
-
+use Illuminate\Foundation\Auth\User;
 
 // ==========================================
 // PUBLIC PAGES
@@ -116,7 +116,7 @@ Route::get('/admin_dashboard', function () {
         ]);
     }
     $users = User::all();
-    return view('admin.admin_dashboard');
+    return view('admin.admin_dashboard',compact('users'));
 
 });
 Route::get('/admin_feedback',function(){
@@ -136,3 +136,12 @@ Route::get('/admin_inquiry',function(){
     return view('admin.admin_inquiry');
 });
 
+
+
+
+
+
+
+
+Route::delete('/admin/user/{user}', [AuthController::class, 'deleteUser'])
+    ->name('admin.user.delete');
