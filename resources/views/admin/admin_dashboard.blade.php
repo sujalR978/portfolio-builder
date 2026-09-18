@@ -30,7 +30,7 @@
                 <div class="pb-ts-card bg-white p-4 rounded-4 border shadow-sm h-100 d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted extra-small fw-bold text-uppercase d-block mb-1">Total Users</span>
-                        <h3 class="fw-bold text-dark mb-1 fs-2 pb-ts-heading">24,592</h3>
+                        <h3 class="fw-bold text-dark mb-1 fs-2 pb-ts-heading">{{$users->count()}}</h3>
                         <span class="small text-success fw-semibold">↗ +12% this month</span>
                     </div>
                     <div class="pb-admin-stat-icon bg-primary text-white rounded-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
@@ -44,7 +44,7 @@
                 <div class="pb-ts-card bg-white p-4 rounded-4 border shadow-sm h-100 d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted extra-small fw-bold text-uppercase d-block mb-1">Active Subscriptions</span>
-                        <h3 class="fw-bold text-dark mb-1 fs-2 pb-ts-heading">18,205</h3>
+                        <h3 class="fw-bold text-dark mb-1 fs-2 pb-ts-heading">{{$users->count() - 2}}</h3>
                         <span class="small text-success fw-semibold">↗ +5.4% this month</span>
                     </div>
                     <div class="pb-admin-stat-icon bg-primary-subtle text-primary rounded-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
@@ -58,7 +58,7 @@
                 <div class="pb-ts-card bg-white p-4 rounded-4 border shadow-sm h-100 d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted extra-small fw-bold text-uppercase d-block mb-1">New This Month</span>
-                        <h3 class="fw-bold text-dark mb-1 fs-2 pb-ts-heading">1,432</h3>
+                        <h3 class="fw-bold text-dark mb-1 fs-2 pb-ts-heading">{{$users->count() -3}}</h3>
                         <span class="small text-muted fw-semibold">— Steady growth</span>
                     </div>
                     <div class="pb-admin-stat-icon pb-ts-subcard text-muted rounded-3 d-flex align-items-center justify-content-center border" style="width: 48px; height: 48px;">
@@ -83,17 +83,7 @@
                     <input type="text" class="form-control border-start-0 ps-2 pb-ts-input extra-small" placeholder="Search by name, email, or ID...">
                 </div>
 
-                <!-- Fixed Theme Buttons (No Hover Disappearing Text) -->
-                <div class="d-flex align-items-center gap-2">
-                    <button type="button" class="btn btn-sm rounded-3 fw-semibold pb-ts-btn-outline d-flex align-items-center gap-1.5 px-3 py-1.5">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-                        <span>Filter</span>
-                    </button>
-                    <button type="button" class="btn btn-sm rounded-3 fw-semibold pb-ts-btn-outline d-flex align-items-center gap-1.5 px-3 py-1.5">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        <span>Export</span>
-                    </button>
-                </div>
+               
             </div>
 
             <!-- User Table -->
@@ -109,67 +99,65 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        @foreach($users as $user)
                         <!-- Row 1 -->
                         <tr>
                             <td class="ps-3"><input class="form-check-input" type="checkbox"></td>
                             <td>
                                 <div class="d-flex align-items-center gap-3">
                                     <div class="rounded-circle bg-primary text-white fw-bold d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; font-size: 0.85rem;">
-                                        ES
+                                          {{ strtoupper(substr($user->firstName, 0, 1) . substr($user->lastName, 0, 1)) }}
                                     </div>
                                     <div>
-                                        <h6 class="fw-bold text-dark mb-0 small pb-ts-label">Emma Smith</h6>
-                                        <span class="text-muted extra-small">emma.smith@example.com</span>
+                                        <h6 class="fw-bold text-dark mb-0 small pb-ts-label">{{$user->firstName}} {{$user->lastName}}</h6>
+                                        <span class="text-muted extra-small">{{$user->email}}</span>
                                     </div>
                                 </div>
                             </td>
                             <td><span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-1 fw-semibold extra-small">• Active</span></td>
-                            <td class="small text-muted">Oct 12, 2023</td>
-                            <td class="text-end pe-3">
-                                <button class="btn btn-sm btn-link text-muted p-0 border-0" title="Options">⋮</button>
-                            </td>
+                            <td class="small text-muted">{{$user->created_at}}</td>
+                           <td class="text-end pe-3">
+
+    <div class="dropdown">
+
+        <button
+            class="btn btn-sm btn-link text-muted p-0 border-0"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            title="Options">
+            ⋮
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-3">
+
+          
+
+           
+
+            <li>
+                <form action="{{ route('admin.user.delete', $user->id) }}"
+                      method="POST"
+                      onsubmit="return confirm('Are you sure you want to delete this user?');">
+
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit" class="dropdown-item text-danger">
+                        Delete
+                    </button>
+                </form>
+            </li>
+
+        </ul>
+
+    </div>
+
+</td>
                         </tr>
 
-                        <!-- Row 2 -->
-                        <tr>
-                            <td class="ps-3"><input class="form-check-input" type="checkbox"></td>
-                            <td>
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="rounded-circle pb-ts-subcard text-muted fw-bold border d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; font-size: 0.85rem;">
-                                        JD
-                                    </div>
-                                    <div>
-                                        <h6 class="fw-bold text-dark mb-0 small pb-ts-label">James Doe</h6>
-                                        <span class="text-muted extra-small">james.d@company.net</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle rounded-pill px-3 py-1 fw-semibold extra-small">• Inactive</span></td>
-                            <td class="small text-muted">Sep 04, 2023</td>
-                            <td class="text-end pe-3">
-                                <button class="btn btn-sm btn-link text-muted p-0 border-0" title="Options">⋮</button>
-                            </td>
-                        </tr>
-
-                        <!-- Row 3 -->
-                        <tr>
-                            <td class="ps-3"><input class="form-check-input" type="checkbox"></td>
-                            <td>
-                                <div class="d-flex align-items-center gap-3">
-                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=120&auto=format&fit=crop" class="rounded-circle object-fit-cover border" width="38" height="38" alt="Sarah Chen Avatar">
-                                    <div>
-                                        <h6 class="fw-bold text-dark mb-0 small pb-ts-label">Sarah Chen</h6>
-                                        <span class="text-muted extra-small">schen@startup.io</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill px-3 py-1 fw-semibold extra-small">• Active</span></td>
-                            <td class="small text-muted">Nov 21, 2023</td>
-                            <td class="text-end pe-3">
-                                <button class="btn btn-sm btn-link text-muted p-0 border-0" title="Options">⋮</button>
-                            </td>
-                        </tr>
+                    
+                        @endforeach
 
                     </tbody>
                 </table>
@@ -177,18 +165,9 @@
 
             <!-- Table Footer & Pagination -->
             <div class="p-3 border-top pb-ts-border-subtle pb-ts-subcard d-flex align-items-center justify-content-between flex-wrap gap-2">
-                <span class="small text-muted">Showing 1 to 10 of 24,592 results</span>
+                <span class="small text-muted">Showing {{$user->id}} results</span>
 
-                <nav>
-                    <ul class="pagination pagination-sm mb-0 gap-1">
-                        <li class="page-item disabled"><a class="page-link rounded-3 pb-ts-btn-outline" href="#">&larr;</a></li>
-                        <li class="page-item active"><a class="page-link rounded-3 pb-ts-btn-main" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link rounded-3 pb-ts-btn-outline" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link rounded-3 pb-ts-btn-outline" href="#">3</a></li>
-                        <li class="page-item disabled"><span class="page-link border-0 text-muted">...</span></li>
-                        <li class="page-item"><a class="page-link rounded-3 pb-ts-btn-outline" href="#">&rarr;</a></li>
-                    </ul>
-                </nav>
+               
             </div>
 
         </div>
