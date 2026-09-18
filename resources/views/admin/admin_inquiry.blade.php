@@ -4,18 +4,14 @@
 
 @section('content')
 
-<!-- ==========================================
-     INQUIRY INBOX MAIN CONTAINER
-=========================================== -->
+
 
 <div class="pb-inbox-wrapper min-vh-100 pb-admin-bg-soft p-3 p-md-4">
 
-```
+
 <div class="container-fluid p-0">
 
-    <!-- ==========================================
-         SEARCH BAR
-    =========================================== -->
+
 
     <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-3">
 
@@ -89,18 +85,12 @@
     </div>
 
 
-    <!-- ==========================================
-         INBOX CARD
-    =========================================== -->
-
     <div class="pb-ts-card bg-white rounded-4 border shadow-sm overflow-hidden">
 
         <div class="row g-0">
 
 
-            <!-- ==========================================
-                 LEFT SIDE - INQUIRY LIST
-            =========================================== -->
+    
 
             <div class="col-md-5 col-xl-4 border-end pb-ts-border-subtle">
 
@@ -145,9 +135,7 @@
                 </div>
 
 
-                <!-- ==========================================
-                     INQUIRY LIST
-                =========================================== -->
+              
 
                 <div class="list-group list-group-flush pb-inbox-list overflow-y-auto"
                      style="max-height: 720px;">
@@ -190,9 +178,7 @@
 
                         @foreach($contact as $con)
 
-                            <!-- ==========================================
-                                 CLICKABLE INQUIRY
-                            =========================================== -->
+                   
 
                             <a href="{{ url('/admin_inquiry') }}?id={{ $con->id }}{{ !empty($search) ? '&search=' . urlencode($search) : '' }}"
                                class="list-group-item list-group-item-action p-3 border-bottom pb-ts-border-subtle
@@ -261,9 +247,7 @@
             </div>
 
 
-            <!-- ==========================================
-                 RIGHT SIDE - SELECTED INQUIRY
-            =========================================== -->
+            
 
             <div class="col-md-7 col-xl-8 d-flex flex-column pb-ts-card">
 
@@ -271,9 +255,7 @@
                 @if($selectedContact)
 
 
-                    <!-- ==========================================
-                         SELECTED INQUIRY
-                    =========================================== -->
+                    
 
                     <div>
 
