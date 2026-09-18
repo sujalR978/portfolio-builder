@@ -108,12 +108,7 @@
                         </p>
                     </form>
 
-                    <!-- QUICK DEMO LOGINS NOTICE -->
-                    <div class="mt-4 p-3 bg-light rounded-3 border extra-small text-muted">
-                        <strong class="d-block mb-1 text-dark">Demo Credentials:</strong>
-                        <div>🔑 <strong>Admin:</strong> admin@example.com / admin123</div>
-                        <div>👤 <strong>User:</strong> user@example.com / user123</div>
-                    </div>
+                   
 
                 </div>
             </div>
