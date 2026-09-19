@@ -112,6 +112,28 @@ Route::post('/feedback', [FeedbackController::class, 'feedback'])
     ->name('feedback');
 
 
+
+
+
+// ==========================================
+// update methods
+// ==========================================
+
+
+
+
+Route::post('/profile/update/{id}', [AuthController::class, 'updateName'])->name('profile.update');
+
+Route::post('/profile/delete/{id}', [AuthController::class, 'deleteAccount'])->name('profile.delete');
+
+
+
+
+
+
+
+
+
 // ==========================================
 // ADMIN PAGES
 // ==========================================
@@ -119,14 +141,6 @@ Route::get('/admin_dashboard', [AuthController::class, 'adminDashboard']);
 
 Route::get('/admin_inquiry',[ContactController::class, 'adminInquiry']);
 
-// Route::get('/admin_feedback',function(){
-//     if(!session('is_admin')){
-//       return redirect('/log_in')->withErrors([
-//             'email' => 'Admin authorization required.'
-//         ]);
-//     }
-//     return view('admin.admin_feedback');
-// });
 
 Route::get('/admin_feedback',[FeedbackController::class, 'adminFeedback']);
 
