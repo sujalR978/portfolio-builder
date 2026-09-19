@@ -12,71 +12,80 @@
         <!-- DYNAMIC EXPERIENCE ITEMS CONTAINER -->
         <div id="experienceItemsContainer">
             
-            <!-- Experience Item 0 -->
-            <div class="pb-ts-exp-item position-relative ps-4 mb-4 border-start border-3 border-primary" data-exp-index="0">
-                <!-- Delete Item Circle Badge -->
-                <button type="button" class="btn btn-sm btn-light border rounded-circle position-absolute top-0 start-0 translate-middle text-muted shadow-sm pb-ts-remove-exp-btn" onclick="removeExperienceItem(this)" title="Remove Experience" style="width: 28px; height: 28px; padding: 0; display: flex; align-items: center; justify-content: center;">
-                    &times;
-                </button>
+            @php
+                // Pre-load existing experiences from database if editing, or old input if validation failed, else default to one empty array
+                $savedExperiences = old('experiences', isset($portfolio->experiences) && is_array($portfolio->experiences) ?$portfolio->experiences : [[]]);
+                if (empty($savedExperiences)) {$savedExperiences = [[]];
+                }
+            @endphp
 
-                <div class="row g-3 mb-3">
-                    <!-- Company Name -->
-                    <div class="col-md-6">
-                        <label class="form-label fw-bold text-dark small mb-2 pb-ts-label">Company Name</label>
-                        <div class="input-group pb-ts-input-group">
-                            <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                            </span>
-                            <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" name="experiences[0][company]" placeholder="e.g. Acme Corp">
-                        </div>
-                    </div>
+            @foreach($savedExperiences as $index =>$exp)
+                <!-- Experience Item -->
+                <div class="pb-ts-exp-item position-relative ps-4 mb-4 border-start border-3 border-primary" data-exp-index="{{ $index }}">
+                    <!-- Delete Item Circle Badge -->
+                    <button type="button" class="btn btn-sm btn-light border rounded-circle position-absolute top-0 start-0 translate-middle text-muted shadow-sm pb-ts-remove-exp-btn" onclick="removeExperienceItem(this)" title="Remove Experience" style="width: 28px; height: 28px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                        &times;
+                    </button>
 
-                    <!-- Role / Title -->
-                    <div class="col-md-6">
-                        <label class="form-label fw-bold text-dark small mb-2 pb-ts-label">Role / Title</label>
-                        <div class="input-group pb-ts-input-group">
-                            <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                            </span>
-                            <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" name="experiences[0][role]" placeholder="e.g. Senior Frontend Engineer">
+                    <div class="row g-3 mb-3">
+                        <!-- Company Name -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-dark small mb-2 pb-ts-label">Company Name</label>
+                            <div class="input-group pb-ts-input-group">
+                                <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                                </span>
+                                <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" name="experiences[{{ $index }}][company]" value="{{ $exp['company'] ?? '' }}" placeholder="e.g. Acme Corp">
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Start Date -->
-                    <div class="col-md-6">
-                        <label class="form-label fw-bold text-dark small mb-2 pb-ts-label">Start Date</label>
-                        <div class="input-group pb-ts-input-group">
-                            <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                            </span>
-                            <input type="date" class="form-control border-start-0 ps-2 pb-ts-input" name="experiences[0][start_date]">
+                        <!-- Role / Title -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-dark small mb-2 pb-ts-label">Role / Title</label>
+                            <div class="input-group pb-ts-input-group">
+                                <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                </span>
+                                <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" name="experiences[{{ $index }}][role]" value="{{ $exp['role'] ?? '' }}" placeholder="e.g. Senior Frontend Engineer">
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- End Date + Checkbox -->
-                    <div class="col-md-6">
-                        <label class="form-label fw-bold text-dark small mb-2 pb-ts-label">End Date</label>
-                        <div class="input-group pb-ts-input-group">
-                            <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                            </span>
-                            <input type="date" class="form-control border-start-0 ps-2 pb-ts-input exp-end-date" name="experiences[0][end_date]">
+                        <!-- Start Date -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-dark small mb-2 pb-ts-label">Start Date</label>
+                            <div class="input-group pb-ts-input-group">
+                                <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                </span>
+                                <input type="date" class="form-control border-start-0 ps-2 pb-ts-input" name="experiences[{{ $index }}][start_date]" value="{{ $exp['start_date'] ?? '' }}">
+                            </div>
                         </div>
-                        <div class="form-check mt-2">
-                            <input class="form-check-input exp-current-check" type="checkbox" name="experiences[0][current]" id="currentWork_0" onchange="toggleEndDate(this)">
-                            <label class="form-check-label extra-small text-muted fw-semibold" for="currentWork_0">
-                                I currently work here
-                            </label>
-                        </div>
-                    </div>
 
-                    <!-- Description -->
-                    <div class="col-12">
-                        <label class="form-label fw-bold text-dark small mb-2 pb-ts-label">Description</label>
-                        <textarea class="form-control pb-ts-textarea" name="experiences[0][description]" rows="3" placeholder="Briefly describe your key achievements and responsibilities..."></textarea>
+                        <!-- End Date + Checkbox -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-dark small mb-2 pb-ts-label">End Date</label>
+                            <div class="input-group pb-ts-input-group">
+                                <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                </span>
+                                <input type="date" class="form-control border-start-0 ps-2 pb-ts-input exp-end-date" name="experiences[{{ $index }}][end_date]" value="{{ $exp['end_date'] ?? '' }}" {{ isset($exp['current']) &&$exp['current'] ? 'disabled' : '' }}>
+                            </div>
+                            <div class="form-check mt-2">
+                                <input class="form-check-input exp-current-check" type="checkbox" name="experiences[{{ $index }}][current]" id="currentWork_{{ $index }}" value="1" {{ isset($exp['current']) &&$exp['current'] ? 'checked' : '' }} onchange="toggleEndDate(this)">
+                                <label class="form-check-label extra-small text-muted fw-semibold" for="currentWork_{{ $index }}">
+                                    I currently work here
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="col-12">
+                            <label class="form-label fw-bold text-dark small mb-2 pb-ts-label">Description</label>
+                            <textarea class="form-control pb-ts-textarea" name="experiences[{{ $index }}][description]" rows="3" placeholder="Briefly describe your key achievements and responsibilities...">{{ $exp['description'] ?? '' }}</textarea>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
 
         </div>
 
@@ -146,7 +155,8 @@
 
 <!-- SLIDE 4 INTERACTIVE JAVASCRIPT -->
 <script>
-    let expCount = 1;
+    // Initialize expCount based on how many items were loaded from DB/old input to prevent duplicate array indexes
+    let expCount = document.querySelectorAll('.pb-ts-exp-item').length || 1;
 
     function toggleEndDate(checkbox) {
         const item = checkbox.closest('.pb-ts-exp-item');
@@ -212,7 +222,7 @@
                         <input type="date" class="form-control border-start-0 ps-2 pb-ts-input exp-end-date" name="experiences[${index}][end_date]">
                     </div>
                     <div class="form-check mt-2">
-                        <input class="form-check-input exp-current-check" type="checkbox" name="experiences[${index}][is_current]" id="currentWork_${index}" onchange="toggleEndDate(this)">
+                        <input class="form-check-input exp-current-check" type="checkbox" name="experiences[${index}][current]" id="currentWork_${index}" value="1" onchange="toggleEndDate(this)">
                         <label class="form-check-label extra-small text-muted fw-semibold" for="currentWork_${index}">
                             I currently work here
                         </label>
