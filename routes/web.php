@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('landing_page.home');
 });
 
+
 Route::get('/home', function () {
     return view('landing_page.home');
 });
@@ -87,7 +88,7 @@ Route::post('/home', [AuthController::class, 'log_out'])
 
 Route::get('/dashboard', function () {
     return view('main.dashboard');
-})->middleware('auth');
+})->middleware('auth')->name('dashboard');
 
 Route::get('/profile', function () {
     return view('main.profile');
@@ -161,5 +162,6 @@ Route::delete('/admin/contact/{contact}',[ContactController::class,'deleteContac
     // user wizerd
 
 
-Route::post('/portfolios',[PortfoliosController::class,'storeOrUpdate'])
+Route::post('/portfolios', [PortfoliosController::class, 'storeOrUpdate'])
     ->name('portfolio.store');
+   
