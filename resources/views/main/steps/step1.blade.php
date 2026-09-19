@@ -13,18 +13,17 @@
     <div class="pb-ts-card bg-white p-4 p-sm-5 rounded-4 border shadow-sm mb-4">
         
         <!-- 1. Project Name Field -->
-  <!-- 1. Project Name Field -->
-<div class="mb-4">
-    <label for="s1ProjectName" class="form-label fw-bold text-dark small mb-2 pb-ts-label">Project Name *</label>
-    <div class="input-group pb-ts-input-group">
-        <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-        </span>
-        <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" id="s1ProjectName" name="project_name" placeholder="e.g. My Creative Journey 2026" required>
-    </div>
-    <div class="form-text extra-small text-muted mt-1">A unique title to identify your portfolio in your dashboard.</div>
-    <div class="invalid-feedback">Please enter a project name.</div>
-</div>
+        <div class="mb-4">
+            <label for="s1ProjectName" class="form-label fw-bold text-dark small mb-2 pb-ts-label">Project Name *</label>
+            <div class="input-group pb-ts-input-group">
+                <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                </span>
+                <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" id="s1ProjectName" name="project_name" value="{{ old('project_name', $portfolio->project_name ?? '') }}" placeholder="e.g. My Creative Journey 2026" required>
+            </div>
+            <div class="form-text extra-small text-muted mt-1">A unique title to identify your portfolio in your dashboard.</div>
+            <div class="invalid-feedback">Please enter a project name.</div>
+        </div>
 
         <!-- 2. Portfolio Audience (Custom Interactive Radio Selector) -->
         <div class="mb-4">
@@ -32,7 +31,7 @@
             <div class="row g-2">
                 
                 <div class="col-sm-4">
-                    <input type="radio" class="btn-check" name="target_type" id="pfMyself" value="myself" checked>
+                    <input type="radio" class="btn-check" name="target_type" value="myself" id="pfMyself" {{ old('target_type', $portfolio->target_type ?? 'myself') == 'myself' ? 'checked' : '' }}>
                     <label class="pb-ts-option-card p-3 border rounded-3 text-center d-flex flex-column align-items-center justify-content-center cursor-pointer h-100" for="pfMyself">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-2 text-primary"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                         <span class="fw-bold small text-dark d-block pb-ts-label">Myself</span>
@@ -41,7 +40,7 @@
                 </div>
 
                 <div class="col-sm-4">
-                    <input type="radio" class="btn-check" name="target_type" id="pfClient" value="client">
+                    <input type="radio" class="btn-check" name="target_type" value="client" id="pfClient" {{ old('target_type', $portfolio->target_type ?? '') == 'client' ? 'checked' : '' }}>
                     <label class="pb-ts-option-card p-3 border rounded-3 text-center d-flex flex-column align-items-center justify-content-center cursor-pointer h-100" for="pfClient">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-2 text-primary"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                         <span class="fw-bold small text-dark d-block pb-ts-label">Client</span>
@@ -50,7 +49,7 @@
                 </div>
 
                 <div class="col-sm-4">
-                    <input type="radio" class="btn-check" name="target_type" id="pfCompany" value="company">
+                    <input type="radio" class="btn-check" name="target_type" value="company" id="pfCompany" {{ old('target_type', $portfolio->target_type ?? '') == 'company' ? 'checked' : '' }}>
                     <label class="pb-ts-option-card p-3 border rounded-3 text-center d-flex flex-column align-items-center justify-content-center cursor-pointer h-100" for="pfCompany">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-2 text-primary"><path d="M3 21h18"/><path d="M3 7v14"/><path d="M21 7v14"/><path d="M6 3h12l3 4H3l3-4z"/></svg>
                         <span class="fw-bold small text-dark d-block pb-ts-label">Company</span>
@@ -66,14 +65,14 @@
             <label class="form-label fw-bold text-dark small mb-2 pb-ts-label">Visibility</label>
             <div class="row g-2">
                 <div class="col-6">
-                    <input type="radio" class="btn-check" name="visibility" id="visPublic" value="public" checked>
+                    <input type="radio" class="btn-check" name="visibility" id="visPublic" value="public" {{ old('visibility', $portfolio->visibility ?? 'public') == 'public' ? 'checked' : '' }}>
                     <label class="btn btn-outline-primary pb-ts-toggle-btn rounded-3 py-2 px-3 fw-semibold border w-100 d-flex align-items-center justify-content-center gap-2" for="visPublic">
                         <span>🌐 Public</span>
                     </label>
                 </div>
 
                 <div class="col-6">
-                    <input type="radio" class="btn-check" name="visibility" id="visPrivate" value="private">
+                    <input type="radio" class="btn-check" name="visibility" id="visPrivate" value="private" {{ old('visibility', $portfolio->visibility ?? '') == 'private' ? 'checked' : '' }}>
                     <label class="btn btn-outline-primary pb-ts-toggle-btn rounded-3 py-2 px-3 fw-semibold border w-100 d-flex align-items-center justify-content-center gap-2" for="visPrivate">
                         <span>🔒 Private</span>
                     </label>
