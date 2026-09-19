@@ -29,29 +29,38 @@
 
         <!-- Dynamic Education Rows Container -->
         <div id="educationRowsContainer">
-            <!-- Row 0 -->
-            <div class="p-3 bg-light rounded-4 border mb-3 position-relative pb-ts-subcard" data-edu-index="0">
-                <div class="row g-3">
-                    <div class="col-md-5">
-                        <label class="form-label fw-bold text-dark small mb-1 pb-ts-label">School / University</label>
-                        <div class="input-group pb-ts-input-group">
-                            <input type="text" class="form-control pb-ts-input" name="education[0][school]" placeholder="e.g. Stanford University" required>
+            @php
+                $savedEducation = old('education', isset($portfolio->education) && is_array($portfolio->education) ?$portfolio->education : [[]]);
+                if (empty($savedEducation)) {$savedEducation = [[]]; }
+            @endphp
+
+            @foreach($savedEducation as $index =>$edu)
+                <div class="p-3 bg-light rounded-4 border mb-3 position-relative pb-ts-subcard" data-edu-index="{{ $index }}">
+                    @if($index > 0)
+                        <button type="button" class="btn-close position-absolute top-0 end-0 m-2" style="font-size: 0.75rem;" onclick="this.closest('.pb-ts-subcard').remove()" aria-label="Remove"></button>
+                    @endif
+                    <div class="row g-3">
+                        <div class="col-md-5">
+                            <label class="form-label fw-bold text-dark small mb-1 pb-ts-label">School / University</label>
+                            <div class="input-group pb-ts-input-group">
+                                <input type="text" class="form-control pb-ts-input" name="education[{{ $index }}][school]" value="{{ $edu['school'] ?? '' }}" placeholder="e.g. Stanford University" {{ $index === 0 ? 'required' : '' }}>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label fw-bold text-dark small mb-1 pb-ts-label">Degree</label>
-                        <div class="input-group pb-ts-input-group">
-                            <input type="text" class="form-control pb-ts-input" name="education[0][degree]" placeholder="e.g. B.S. Computer Science" required>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold text-dark small mb-1 pb-ts-label">Degree</label>
+                            <div class="input-group pb-ts-input-group">
+                                <input type="text" class="form-control pb-ts-input" name="education[{{ $index }}][degree]" value="{{ $edu['degree'] ?? '' }}" placeholder="e.g. B.S. Computer Science" {{ $index === 0 ? 'required' : '' }}>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label fw-bold text-dark small mb-1 pb-ts-label">Year Graduated</label>
-                        <div class="input-group pb-ts-input-group">
-                            <input type="text" class="form-control pb-ts-input" name="education[0][year]" placeholder="YYYY" maxlength="4" required>
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold text-dark small mb-1 pb-ts-label">Year Graduated</label>
+                            <div class="input-group pb-ts-input-group">
+                                <input type="text" class="form-control pb-ts-input" name="education[{{ $index }}][year]" value="{{ $edu['year'] ?? '' }}" placeholder="YYYY" maxlength="4" {{ $index === 0 ? 'required' : '' }}>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
 
@@ -76,29 +85,63 @@
 
         <!-- Dynamic Certifications Rows Container -->
         <div id="certificationsRowsContainer">
-            <!-- Row 0 -->
-            <div class="p-3 bg-light rounded-4 border mb-3 position-relative pb-ts-subcard" data-cert-index="0">
-                <div class="row g-3">
-                    <div class="col-md-5">
-                        <label class="form-label fw-bold text-dark small mb-1 pb-ts-label">Certificate Name</label>
-                        <div class="input-group pb-ts-input-group">
-                            <input type="text" class="form-control pb-ts-input" name="certifications[0][name]" placeholder="e.g. AWS Solutions Architect">
+            @php
+                $savedCerts = old('certifications', isset($portfolio->certifications) && is_array($portfolio->certifications) ?$portfolio->certifications : []);
+            @endphp
+
+            @if(empty($savedCerts))
+                <!-- Default empty row if none stored -->
+                <div class="p-3 bg-light rounded-4 border mb-3 position-relative pb-ts-subcard" data-cert-index="0">
+                    <div class="row g-3">
+                        <div class="col-md-5">
+                            <label class="form-label fw-bold text-dark small mb-1 pb-ts-label">Certificate Name</label>
+                            <div class="input-group pb-ts-input-group">
+                                <input type="text" class="form-control pb-ts-input" name="certifications[0][name]" placeholder="e.g. AWS Solutions Architect">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label fw-bold text-dark small mb-1 pb-ts-label">Issuing Organization</label>
-                        <div class="input-group pb-ts-input-group">
-                            <input type="text" class="form-control pb-ts-input" name="certifications[0][issuer]" placeholder="e.g. Amazon Web Services">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold text-dark small mb-1 pb-ts-label">Issuing Organization</label>
+                            <div class="input-group pb-ts-input-group">
+                                <input type="text" class="form-control pb-ts-input" name="certifications[0][issuer]" placeholder="e.g. Amazon Web Services">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label fw-bold text-dark small mb-1 pb-ts-label">Year Issued</label>
-                        <div class="input-group pb-ts-input-group">
-                            <input type="text" class="form-control pb-ts-input" name="certifications[0][year]" placeholder="YYYY" maxlength="4">
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold text-dark small mb-1 pb-ts-label">Year Issued</label>
+                            <div class="input-group pb-ts-input-group">
+                                <input type="text" class="form-control pb-ts-input" name="certifications[0][year]" placeholder="YYYY" maxlength="4">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @else
+                @foreach($savedCerts as $index =>$cert)
+                    <div class="p-3 bg-light rounded-4 border mb-3 position-relative pb-ts-subcard" data-cert-index="{{ $index }}">
+                        @if($index > 0)
+                            <button type="button" class="btn-close position-absolute top-0 end-0 m-2" style="font-size: 0.75rem;" onclick="this.closest('.pb-ts-subcard').remove()" aria-label="Remove"></button>
+                        @endif
+                        <div class="row g-3">
+                            <div class="col-md-5">
+                                <label class="form-label fw-bold text-dark small mb-1 pb-ts-label">Certificate Name</label>
+                                <div class="input-group pb-ts-input-group">
+                                    <input type="text" class="form-control pb-ts-input" name="certifications[{{ $index }}][name]" value="{{ $cert['name'] ?? '' }}" placeholder="e.g. AWS Solutions Architect">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold text-dark small mb-1 pb-ts-label">Issuing Organization</label>
+                                <div class="input-group pb-ts-input-group">
+                                    <input type="text" class="form-control pb-ts-input" name="certifications[{{ $index }}][issuer]" value="{{ $cert['issuer'] ?? '' }}" placeholder="e.g. Amazon Web Services">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold text-dark small mb-1 pb-ts-label">Year Issued</label>
+                                <div class="input-group pb-ts-input-group">
+                                    <input type="text" class="form-control pb-ts-input" name="certifications[{{ $index }}][year]" value="{{ $cert['year'] ?? '' }}" placeholder="YYYY" maxlength="4">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
         </div>
     </div>
 
@@ -153,8 +196,8 @@
 
 <!-- SLIDE 6 DYNAMIC ROW SCRIPT -->
 <script>
-    let eduCount = 1;
-    let certCount = 1;
+    let eduCount = document.querySelectorAll('#educationRowsContainer .pb-ts-subcard').length || 1;
+    let certCount = document.querySelectorAll('#certificationsRowsContainer .pb-ts-subcard').length || 1;
 
     function addEducationRow() {
         const container = document.getElementById('educationRowsContainer');
@@ -208,7 +251,7 @@
                 <div class="col-md-4">
                     <label class="form-label fw-bold text-dark small mb-1 pb-ts-label">Issuing Organization</label>
                     <div class="input-group pb-ts-input-group">
-                        <input type="text" class="form-control pb-ts-input" name="certifications[${index}][organization]" placeholder="e.g. Amazon Web Services">
+                        <input type="text" class="form-control pb-ts-input" name="certifications[${index}][issuer]" placeholder="e.g. Amazon Web Services">
                     </div>
                 </div>
                 <div class="col-md-3">
