@@ -114,4 +114,54 @@ public function deleteUser(User $user)
 
         return view('admin.admin_dashboard', compact('users'));
     }
+
+    public function updateName(Request $request)
+{
+    $request->validate([
+        'firstName' => 'required|string|max:255',
+        'lastName' => 'required|string|max:255',
+        'bio' => 'nullable|string|max:500',
+        'slug' => 'nullable|string|max:255|unique:users,slug,' . Auth::id(), 
+        'github' => 'nullable|string|max:255',
+        'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120', 
+    ]);
+
+    $user = Auth::user();
+
+
+    $user->firstName = $request->input('firstName');
+    $user->lastName = $request->input('lastName'); 
+    $user->bio = $request->input('bio');
+    $user->slug = $request->input('slug');
+    $user->github = $request->input('github');
+
+
+    if ($request->hasFile('profile_image')) {
+        $imagePath = $request->file('profile_image')->store('profiles', 'public');
+        $user->profile_image = $imagePath; 
+    }
+    
+    $user->save();
+
+    return redirect()->back()->with('success', 'Profile updated successfully!');
+}
+
+public function deleteAccount(Request $request)
+{
+    $user = Auth::user();
+
+
+    if ($user->profile_image) {
+        \Illuminate\Support\Facades\Storage::disk('public')->delete($user->profile_image);
+    }
+
+    $user->delete();
+
+
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return redirect('/log_in')->with('success', 'Your account has been permanently deleted.');
+}
 }
