@@ -11,7 +11,7 @@ class Portfolios extends Model
 
     protected $table = 'portfolios';
 
-
+protected $guarded = ['id'];
 
     protected $fillable = [
         'user_id',
