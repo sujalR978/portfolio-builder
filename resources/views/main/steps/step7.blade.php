@@ -18,23 +18,27 @@
         <div class="mb-4">
             <label class="form-label fw-bold text-dark small mb-2 pb-ts-label">Social Links</label>
             <div class="row g-3">
+                @php
+                    $savedSocials = old('social_links', isset($portfolio->social_links) && is_array($portfolio->social_links) ?$portfolio->social_links : []);
+                @endphp
+
                 <!-- LinkedIn URL -->
                 <div class="col-md-6">
                     <div class="input-group pb-ts-input-group">
                         <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
                         </span>
-                        <input type="url" class="form-control border-start-0 ps-2 pb-ts-input" name="social_links[linkedin]" placeholder="LinkedIn URL">
+                        <input type="url" class="form-control border-start-0 ps-2 pb-ts-input" name="social_links[linkedin]" value="{{ $savedSocials['linkedin'] ?? '' }}" placeholder="LinkedIn URL">
                     </div>
                 </div>
 
-                <!-- Twitter / Alternate Email -->
+                <!-- Twitter / X Handle -->
                 <div class="col-md-6">
                     <div class="input-group pb-ts-input-group">
                         <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"/></svg>
                         </span>
-                        <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" name="social_links[twitter]" placeholder="Twitter / X Handle">
+                        <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" name="social_links[twitter]" value="{{ $savedSocials['twitter'] ?? '' }}" placeholder="Twitter / X Handle">
                     </div>
                 </div>
 
@@ -44,7 +48,7 @@
                         <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                         </span>
-                        <input type="url" class="form-control border-start-0 ps-2 pb-ts-input" name="social_links[github]" placeholder="GitHub / Portfolio">
+                        <input type="url" class="form-control border-start-0 ps-2 pb-ts-input" name="social_links[github]" value="{{ $savedSocials['github'] ?? '' }}" placeholder="GitHub / Portfolio">
                     </div>
                 </div>
 
@@ -54,7 +58,7 @@
                         <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                         </span>
-                        <input type="url" class="form-control border-start-0 ps-2 pb-ts-input" name="social_links[website]" placeholder="Personal Website">
+                        <input type="url" class="form-control border-start-0 ps-2 pb-ts-input" name="social_links[website]" value="{{ $savedSocials['website'] ?? '' }}" placeholder="Personal Website">
                     </div>
                 </div>
             </div>
@@ -66,18 +70,26 @@
             <div class="col-md-6">
                 <label for="languageInput" class="form-label fw-bold text-dark small mb-2 pb-ts-label">Languages</label>
                 <div class="input-group pb-ts-input-group mb-2">
-                    <input type="text" class="form-control ps-3 pb-ts-input" id="languageInput" name="languages[]" placeholder="e.g. English, Japanese, French" onkeydown="handleLanguageKeyPress(event)">
+                    <input type="text" class="form-control ps-3 pb-ts-input" id="languageInput" placeholder="e.g. English, Japanese, French" onkeydown="handleLanguageKeyPress(event)">
                 </div>
                 <!-- Interactive Language Tags Output Container -->
                 <div id="languageTagsContainer" class="d-flex flex-wrap gap-2 pt-1">
-                    <span class="badge bg-primary-subtle text-primary border rounded-pill px-3 py-1 extra-small fw-bold d-inline-flex align-items-center gap-1 pb-ts-lang-pill">
-                        English
-                        <button type="button" class="btn-close ms-1" style="font-size: 0.55rem;" onclick="this.parentElement.remove()" aria-label="Remove"></button>
-                    </span>
-                    <span class="badge bg-primary-subtle text-primary border rounded-pill px-3 py-1 extra-small fw-bold d-inline-flex align-items-center gap-1 pb-ts-lang-pill">
-                        German
-                        <button type="button" class="btn-close ms-1" style="font-size: 0.55rem;" onclick="this.parentElement.remove()" aria-label="Remove"></button>
-                    </span>
+                    @php
+                        $savedLanguages = old('languages', isset($portfolio->languages) && is_array($portfolio->languages) ?$portfolio->languages : ['English', 'German']);
+                        if (is_string($savedLanguages)) {
+                            $savedLanguages = array_map('trim', explode(',',$savedLanguages));
+                        }
+                    @endphp
+
+                    @foreach($savedLanguages as $lang)
+                        @if(!empty($lang))
+                            <span class="badge bg-primary-subtle text-primary border rounded-pill px-3 py-1 extra-small fw-bold d-inline-flex align-items-center gap-1 pb-ts-lang-pill">
+                                {{ $lang }}
+                                <input type="hidden" name="languages[]" value="{{ $lang }}">
+                                <button type="button" class="btn-close ms-1" style="font-size: 0.55rem;" onclick="this.parentElement.remove()" aria-label="Remove"></button>
+                            </span>
+                        @endif
+                    @endforeach
                 </div>
             </div>
 
@@ -85,7 +97,10 @@
             <div class="col-md-6">
                 <label for="hobbiesInput" class="form-label fw-bold text-dark small mb-2 pb-ts-label">Hobbies</label>
                 <div class="input-group pb-ts-input-group">
-                    <input type="text" class="form-control ps-3 pb-ts-input" id="hobbiesInput" name="hobbies[]" placeholder="e.g. Generative Art, Sailing">
+                    @php
+                        $savedHobbies = old('hobbies', isset($portfolio->hobbies) ? (is_array($portfolio->hobbies) ? implode(', ', $portfolio->hobbies) :$portfolio->hobbies) : '');
+                    @endphp
+                    <input type="text" class="form-control ps-3 pb-ts-input" id="hobbiesInput" name="hobbies" value="{{ $savedHobbies }}" placeholder="e.g. Generative Art, Sailing">
                 </div>
             </div>
         </div>
@@ -96,23 +111,36 @@
             
             <!-- Achievements List Container -->
             <div id="achievementsContainer" class="d-flex flex-column gap-2 mb-3">
-                
-                <!-- Achievement Item 1 -->
-                <div class="p-3 bg-light rounded-4 border d-flex align-items-center justify-content-between gap-3 pb-ts-subcard pb-ts-achievement-item">
-                    <div class="d-flex align-items-center gap-3">
-                        <div class="rounded-3 bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center shadow-sm" style="width: 44px; height: 44px; flex-shrink: 0;">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1v-2.34"/><path d="M14 14.66V17c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-2.34"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
-                        </div>
-                        <div>
-                            <h6 class="fw-bold text-dark mb-0 small pb-ts-label">Top 1% UI Contributor 2023</h6>
-                            <p class="extra-small text-muted mb-0">Recognized by Global Design Council</p>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-link text-muted p-0 border-0" onclick="this.closest('.pb-ts-achievement-item').remove()" title="Delete Achievement">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                    </button>
-                </div>
+                @php
+                    $savedAchievements = old('achievements', isset($portfolio->achievements) && is_array($portfolio->achievements) ?$portfolio->achievements : [[
+                        'title' => 'Top 1% UI Contributor 2023',
+                        'issuer' => 'Recognized by Global Design Council'
+                    ]]);
+                    if (empty($savedAchievements)) {$savedAchievements = []; }
+                @endphp
 
+                @foreach($savedAchievements as $index=>$ach)
+                    <!-- Achievement Item -->
+                    <div class="p-3 bg-light rounded-4 border d-flex align-items-center justify-content-between gap-3 pb-ts-subcard pb-ts-achievement-item" data-ach-index="{{ $index }}">
+                        <input type="hidden" name="achievements[{{ $index }}][title]" value="{{ $ach['title'] ?? '' }}">
+                        <input type="hidden" name="achievements[{{ $index }}][issuer]" value="{{ $ach['issuer'] ?? '' }}">
+
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="rounded-3 bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center shadow-sm" style="width: 44px; height: 44px; flex-shrink: 0;">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1v-2.34"/><path d="M14 14.66V17c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-2.34"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold text-dark mb-0 small pb-ts-label">{{ $ach['title'] ?? 'Achievement' }}</h6>
+                                @if(!empty($ach['issuer']))
+                                    <p class="extra-small text-muted mb-0">{{ $ach['issuer'] }}</p>
+                                @endif
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-link text-muted p-0 border-0" onclick="this.closest('.pb-ts-achievement-item').remove()" title="Delete Achievement">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                        </button>
+                    </div>
+                @endforeach
             </div>
 
             <!-- Dashed Add Achievement Button -->
@@ -159,13 +187,13 @@
                     <div class="mb-3">
                         <label class="form-label fw-bold text-dark small pb-ts-label">Achievement Title *</label>
                         <div class="input-group pb-ts-input-group">
-                            <input type="text" name="achievements[0][title]" id="modalAchieveTitle" class="form-control ps-3 pb-ts-input" placeholder="e.g. Top 1% UI Contributor 2023" required>
+                            <input type="text" id="modalAchieveTitle" class="form-control ps-3 pb-ts-input" placeholder="e.g. Top 1% UI Contributor 2023" required>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-bold text-dark small pb-ts-label">Issuer / Organization</label>
                         <div class="input-group pb-ts-input-group">
-                            <input type="text" name="achievements[0][issuer]" id="modalAchieveIssuer" class="form-control ps-3 pb-ts-input" placeholder="e.g. Recognized by Global Design Council">
+                            <input type="text" id="modalAchieveIssuer" class="form-control ps-3 pb-ts-input" placeholder="e.g. Recognized by Global Design Council">
                         </div>
                     </div>
                 </form>
@@ -180,6 +208,8 @@
 
 <!-- SLIDE 7 JAVASCRIPT LOGIC -->
 <script>
+    let achievementIndexCount = document.querySelectorAll('.pb-ts-achievement-item').length || 1;
+
     function handleLanguageKeyPress(event) {
         if (event.key === 'Enter' || event.key === ',') {
             event.preventDefault();
@@ -198,6 +228,7 @@
         pill.className = 'badge bg-primary-subtle text-primary border rounded-pill px-3 py-1 extra-small fw-bold d-inline-flex align-items-center gap-1 pb-ts-lang-pill';
         pill.innerHTML = `
             ${escapeHtml(name)}
+            <input type="hidden" name="languages[]" value="${escapeHtml(name)}">
             <button type="button" class="btn-close ms-1" style="font-size: 0.55rem;" onclick="this.parentElement.remove()" aria-label="Remove"></button>
         `;
         container.appendChild(pill);
@@ -224,10 +255,18 @@
             return;
         }
 
+        if (titleEl) titleEl.classList.remove('is-invalid');
+
+        const index = achievementIndexCount++;
         const container = document.getElementById('achievementsContainer');
         const item = document.createElement('div');
         item.className = 'p-3 bg-light rounded-4 border d-flex align-items-center justify-content-between gap-3 pb-ts-subcard pb-ts-achievement-item';
+        item.setAttribute('data-ach-index', index);
+
         item.innerHTML = `
+            <input type="hidden" name="achievements[${index}][title]" value="${escapeHtml(title)}">
+            <input type="hidden" name="achievements[${index}][issuer]" value="${escapeHtml(issuer)}">
+
             <div class="d-flex align-items-center gap-3">
                 <div class="rounded-3 bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center shadow-sm" style="width: 44px; height: 44px; flex-shrink: 0;">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1v-2.34"/><path d="M14 14.66V17c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-2.34"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
