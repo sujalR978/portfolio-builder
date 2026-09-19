@@ -24,22 +24,22 @@
 
         <!-- PROFILE PHOTO SECTION -->
         <div class="d-flex align-items-center gap-4 mb-4 pb-4 border-bottom pb-ts-border-subtle flex-wrap">
-        <div class="position-relative">
-    <!-- Displays the uploaded profile image or falls back to Unsplash -->
-    <img id="avatarPreviewImg" 
-         src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop' }}" 
-         class="rounded-circle object-fit-cover border border-3 border-primary shadow-sm" 
-         width="96" height="96" 
-         alt="Profile Photo">
-         
-    <!-- Edit Pencil Icon Button -->
-    <label for="avatarFileInput" class="position-absolute bottom-0 end-0 bg-primary text-white rounded-circle p-1 d-flex align-items-center justify-content-center shadow-sm cursor-pointer" style="width: 26px; height: 26px; transform: translate(2px, 2px);">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-    </label>
+            <div class="position-relative">
+                <!-- Displays the uploaded profile image or falls back to database / Unsplash -->
+                <img id="avatarPreviewImg" 
+                     src="{{ isset($portfolio) && $portfolio->profile_photo ? asset('storage/' . $portfolio->profile_photo) : (Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop') }}" 
+                     class="rounded-circle object-fit-cover border border-3 border-primary shadow-sm" 
+                     width="96" height="96" 
+                     alt="Profile Photo">
+                     
+                <!-- Edit Pencil Icon Button -->
+                <label for="avatarFileInput" class="position-absolute bottom-0 end-0 bg-primary text-white rounded-circle p-1 d-flex align-items-center justify-content-center shadow-sm cursor-pointer" style="width: 26px; height: 26px; transform: translate(2px, 2px);">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                </label>
 
-    <!-- File Input (Note: name is set to "profile_image" to match your controller) -->
-    <input type="file" id="avatarFileInput" name="profile_photo" class="d-none" accept="image/*" onchange="previewUserAvatar(this)">
-</div>
+                <!-- File Input -->
+                <input type="file" id="avatarFileInput" name="profile_photo" class="d-none" accept="image/*" onchange="previewUserAvatar(this)">
+            </div>
             <div>
                 <h6 class="fw-bold text-dark mb-1 pb-ts-label">Profile Photo</h6>
                 <p class="text-muted extra-small mb-2">Recommended: 400×400px. JPG, PNG or WebP.</p>
@@ -64,7 +64,7 @@
                     <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     </span>
-                    <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" id="s2FullName" name="full_name" placeholder="{{Auth::user()->firstName}} {{Auth::user()->lastName}}" required>
+                    <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" id="s2FullName" name="full_name" value="{{ old('full_name', $portfolio->full_name ?? '') }}" placeholder="{{ Auth::user()->firstName }} {{ Auth::user()->lastName }}" required>
                 </div>
             </div>
 
@@ -75,7 +75,7 @@
                     <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
                     </span>
-                    <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" id="s2TitleRole" name="title_role" placeholder="Senior Product Designer" required>
+                    <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" id="s2TitleRole" name="title_role" value="{{ old('title_role', $portfolio->title_role ?? '') }}" placeholder="Senior Product Designer" required>
                 </div>
             </div>
 
@@ -86,7 +86,7 @@
                     <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                     </span>
-                    <input type="email" class="form-control border-start-0 ps-2 pb-ts-input" id="s2Email" name="email" placeholder="{{Auth::user()->email}}" required>
+                    <input type="email" class="form-control border-start-0 ps-2 pb-ts-input" id="s2Email" name="email" value="{{ old('email', $portfolio->email ?? Auth::user()->email) }}" placeholder="{{ Auth::user()->email }}" required>
                 </div>
             </div>
 
@@ -97,7 +97,7 @@
                     <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.79 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                     </span>
-                    <input type="tel" class="form-control border-start-0 ps-2 pb-ts-input" id="s2Phone" name="phone_number" placeholder="+1 (555) 000-0000">
+                    <input type="tel" class="form-control border-start-0 ps-2 pb-ts-input" id="s2Phone" name="phone_number" value="{{ old('phone_number', $portfolio->phone_number ?? '') }}" placeholder="+1 (555) 000-0000">
                 </div>
             </div>
 
@@ -108,7 +108,7 @@
                     <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     </span>
-                    <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" id="s2Location" name="location" placeholder="San Francisco, CA">
+                    <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" id="s2Location" name="location" value="{{ old('location', $portfolio->location ?? '') }}" placeholder="San Francisco, CA">
                 </div>
             </div>
 
@@ -116,9 +116,9 @@
             <div class="col-12">
                 <div class="d-flex align-items-center justify-content-between mb-2">
                     <label for="s2Bio" class="form-label fw-bold text-dark small mb-0 pb-ts-label">Short Bio</label>
-                    <span class="extra-small text-muted"><span id="bioCharCount">0</span>/300</span>
+                    <span class="extra-small text-muted"><span id="bioCharCount">{{ strlen(old('short_bio', $portfolio->short_bio ?? '')) }}</span>/300</span>
                 </div>
-                <textarea class="form-control pb-ts-textarea" id="s2Bio" name="short_bio" rows="4" maxlength="300" placeholder="Briefly describe your professional background and what drives your creativity..." oninput="document.getElementById('bioCharCount').innerText = this.value.length"></textarea>
+                <textarea class="form-control pb-ts-textarea" id="s2Bio" name="short_bio" rows="4" maxlength="300" placeholder="Briefly describe your professional background and what drives your creativity..." oninput="document.getElementById('bioCharCount').innerText = this.value.length">{{ old('short_bio', $portfolio->short_bio ?? '') }}</textarea>
             </div>
 
         </div>
