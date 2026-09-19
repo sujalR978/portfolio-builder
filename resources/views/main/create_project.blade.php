@@ -12,8 +12,9 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
 
-              <form id="tachSaasProjectForm" action="{{ route('portfolio.store') }}" method="POST" enctype="multipart/form-data" onsubmit="alert('Form is submitting!');">
-                   @csrf
+  <form id="tachSaasProjectForm" action="{{ isset($portfolio) && $portfolio->id ? route('portfolio.update', $portfolio->id) : route('portfolio.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+
 
                     <!-- Include individual step files -->
                     @include('main.steps.step1')
@@ -180,6 +181,99 @@
 
     function escapeHtml(str) {
         return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+</script>
+<script>
+    // Pre-load existing skills from database if editing, or old input if validation failed
+    let skillsData = @json(old('skills', isset($portfolio->skills) ?$portfolio->skills : []));
+
+    // Ensure array elements are formatted cleanly on page load
+    if (!Array.isArray(skillsData)) {
+        skillsData = [];
+    } else {
+        skillsData = skillsData.map((s, idx) => ({
+            id: s.id || Date.now() + idx,
+            name: s.name || s[0] || '',
+            level: s.level || s[1] || '3'
+        })).filter(s => s.name);
+    }
+
+    // Run render immediately when the script loads so existing badges appear
+    document.addEventListener("DOMContentLoaded", function() {
+        renderSkills();
+    });
+
+    function updateSliderValue(val) {
+        const badge = document.getElementById('sliderValueBadge');
+        if (badge) badge.innerText = val;
+    }
+
+    function handleAddSkill() {
+        const inputEl = document.getElementById('skillNameInput');
+        const sliderEl = document.getElementById('skillProficiencySlider');
+        if (!inputEl || !sliderEl) return;
+
+        const name = inputEl.value.trim();
+        const level = sliderEl.value;
+
+        if (!name) {
+            inputEl.classList.add('is-invalid');
+            return;
+        }
+        inputEl.classList.remove('is-invalid');
+
+        skillsData.push({ id: Date.now(), name, level });
+        inputEl.value = '';
+        sliderEl.value = 3;
+        updateSliderValue(3);
+
+        renderSkills();
+    }
+
+    function renderSkills() {
+        const emptyState = document.getElementById('competenciesEmptyState');
+        const listEl = document.getElementById('competenciesList');
+        const counterEl = document.getElementById('competenciesCounter');
+        const hiddenContainer = document.getElementById('hiddenSkillsContainer');
+
+        if (counterEl) counterEl.innerText = `${skillsData.length} added`;
+
+        if (skillsData.length === 0) {
+            if (emptyState) emptyState.style.display = 'flex';
+            if (listEl) listEl.innerHTML = '';
+            if (hiddenContainer) hiddenContainer.innerHTML = '';
+            return;
+        }
+
+        if (emptyState) emptyState.style.display = 'none';
+
+        if (listEl) {
+            listEl.innerHTML = skillsData.map(item => `
+                <div class="badge bg-white text-dark border shadow-sm rounded-pill px-3 py-2 d-inline-flex align-items-center gap-2 fs-6 fw-normal pb-ts-skill-tag">
+                    <span class="fw-bold">${escapeHtml(item.name)}</span>
+                    <span class="badge bg-primary text-white rounded-pill px-2 py-1 small pb-ts-lvl-pill">Level ${item.level}/5</span>
+                    <button type="button" class="btn-close ms-1" style="font-size: 0.65rem;" onclick="removeSkill(${item.id})" aria-label="Remove"></button>
+                </div>
+            `).join('');
+        }
+
+        // Dynamically generate hidden input fields so Laravel receives the array on form submit
+        if (hiddenContainer) {
+            hiddenContainer.innerHTML = skillsData.map((item, index) => `
+                <input type="hidden" name="skills[${index}][name]" value="${escapeHtml(item.name)}">
+                <input type="hidden" name="skills[${index}][level]" value="${item.level}">
+            `).join('');
+        }
+    }
+
+    function removeSkill(id) {
+        skillsData = skillsData.filter(s => s.id !== id);
+        renderSkills();
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
 </script>
 
