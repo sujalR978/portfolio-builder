@@ -29,29 +29,29 @@
                         </div>
                         <div>
                             <span class="extra-small text-muted fw-bold tracking-wider text-uppercase d-block">PROJECT NAME</span>
-                            <h6 class="fw-bold text-dark mb-0 small pb-ts-label">TachSaaS Portfolio Builder 2026</h6>
+                            <h6 class="fw-bold text-dark mb-0 small pb-ts-label">{{ old('project_name', $portfolio->project_name ?? 'TachSaaS Portfolio Builder 2026') }}</h6>
                         </div>
                     </div>
 
-                    <!-- Detail 2: Infrastructure -->
+                    <!-- Detail 2: Target Audience / Type -->
                     <div class="d-flex align-items-center gap-3">
                         <div class="rounded-3 bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 44px; height: 44px;">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
                         </div>
                         <div>
-                            <span class="extra-small text-muted fw-bold tracking-wider text-uppercase d-block">INFRASTRUCTURE</span>
-                            <h6 class="fw-bold text-dark mb-0 small pb-ts-label">Serverless Architecture (Node.js/AWS)</h6>
+                            <span class="extra-small text-muted fw-bold tracking-wider text-uppercase d-block">TARGET AUDIENCE</span>
+                            <h6 class="fw-bold text-dark mb-0 small pb-ts-label">{{ ucfirst(old('target_type', $portfolio->target_type ?? 'Myself')) }} Portfolio</h6>
                         </div>
                     </div>
 
-                    <!-- Detail 3: Auth Protocol -->
+                    <!-- Detail 3: Selected Template -->
                     <div class="d-flex align-items-center gap-3">
                         <div class="rounded-3 bg-primary-subtle text-primary p-2 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 44px; height: 44px;">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                         </div>
                         <div>
-                            <span class="extra-small text-muted fw-bold tracking-wider text-uppercase d-block">AUTH PROTOCOL</span>
-                            <h6 class="fw-bold text-dark mb-0 small pb-ts-label">OAuth 2.0 + MFA Enterprise</h6>
+                            <span class="extra-small text-muted fw-bold tracking-wider text-uppercase d-block">TEMPLATE CONFIG</span>
+                            <h6 class="fw-bold text-dark mb-0 small pb-ts-label">{{ ucwords(str_replace('_', ' ', old('template_name', $portfolio->template_name ?? 'enterprise_hub'))) }}</h6>
                         </div>
                     </div>
 
@@ -65,7 +65,7 @@
                 </div>
 
                 <!-- Edit Details Link -->
-                <a href="#" class="extra-small text-primary fw-bold text-decoration-none d-inline-flex align-items-center gap-1" onclick="changeSlide(-1); return false;">
+                <a href="#" class="extra-small text-primary fw-bold text-decoration-none d-inline-flex align-items-center gap-1" onclick="changeSlide(-8); return false;">
                     <span>Edit Full Details</span>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                 </a>
@@ -134,10 +134,10 @@
             <span>Previous Step</span>
         </button>
 
-      <button type="button" class="btn btn-success rounded-3 px-5 py-2 fw-bold shadow-sm text-white pb-ts-btn-main d-inline-flex align-items-center gap-2" onclick="document.getElementById('tachSaasProjectForm').submit();">
-    <span>Finalize &amp; Deploy</span>
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-</button>
+        <button type="button" class="btn btn-success rounded-3 px-5 py-2 fw-bold shadow-sm text-white pb-ts-btn-main d-inline-flex align-items-center gap-2" onclick="document.getElementById('tachSaasProjectForm').submit();">
+            <span>Finalize &amp; Deploy</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
     </div>
 
 </div>
