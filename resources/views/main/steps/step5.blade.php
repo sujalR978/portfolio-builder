@@ -11,43 +11,80 @@
     <!-- FEATURED PROJECTS LIST CONTAINER -->
     <div id="featuredProjectsContainer" class="d-flex flex-column gap-3 mb-4">
         
-        <!-- Project Item 1 -->
-        <div class="pb-ts-card bg-white p-4 rounded-4 border shadow-sm pb-ts-project-card" data-project-id="1">
-            <div class="row align-items-center g-4">
-                <!-- Thumbnail -->
-                <div class="col-md-4 col-lg-4">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop" class="img-fluid rounded-3 border object-fit-cover w-100" style="max-height: 160px;" alt="CloudScale Optimizer">
-                </div>
-                <!-- Details -->
-                <div class="col-md-8 col-lg-8">
-                    <div class="d-flex align-items-start justify-content-between mb-2">
-                        <h5 class="fw-bold text-dark mb-0 pb-ts-heading">CloudScale Optimizer</h5>
-                        <div class="d-flex align-items-center gap-2">
-                            <button type="button" class="btn btn-link text-muted p-0 border-0" title="Edit Project">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                            </button>
-                            <button type="button" class="btn btn-link text-muted p-0 border-0" onclick="deleteProjectCard(this)" title="Delete Project">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                            </button>
+        @php
+            // Pre-load projects from database if editing, or old input if validation failed, else default to a default starter project
+            $savedProjects = old('projects', isset($portfolio->projects) && is_array($portfolio->projects) ?$portfolio->projects : [[
+                'title' => 'CloudScale Optimizer',
+                'description' => 'An automated resource allocation engine for Kubernetes clusters that reduced cloud spend by 35% across 200+ microservices.',
+                'tech_stack' => ['GOLANG', 'KUBERNETES', 'TERRAFORM'],
+                'demo_link' => 'https://github.com/tachsaas/cloudscale',
+                'image_url' => 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop'
+            ]]);
+            if (empty($savedProjects)) {$savedProjects = [[]];
+            }
+        @endphp
+
+        @foreach($savedProjects as $index =>$proj)
+            @php
+                // Handle tech stack format whether it's stored as an array or comma-separated string
+                $techTags =$proj['tech_stack'] ?? [];
+                if (is_string($techTags)) {
+                    $techTags = array_map('trim', explode(',',$techTags));
+                }
+                $projImg =$proj['image_url'] ?? 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop';
+                $projLink =$proj['demo_link'] ?? '#';
+            @endphp
+
+            <!-- Project Item -->
+            <div class="pb-ts-card bg-white p-4 rounded-4 border shadow-sm pb-ts-project-card" data-project-id="{{ $index }}">
+                
+                <!-- Hidden inputs so Laravel request collects this project data on submit -->
+                <input type="hidden" name="projects[{{ $index }}][title]" value="{{ $proj['title'] ?? '' }}">
+                <input type="hidden" name="projects[{{ $index }}][description]" value="{{ $proj['description'] ?? '' }}">
+                <input type="hidden" name="projects[{{ $index }}][demo_link]" value="{{ $projLink }}">
+                <input type="hidden" name="projects[{{ $index }}][image_url]" value="{{ $projImg }}">
+                @if(is_array($techTags))
+                    <input type="hidden" name="projects[{{ $index }}][tech_stack]" value="{{ implode(', ', $techTags) }}">
+                @else
+                    <input type="hidden" name="projects[{{ $index }}][tech_stack]" value="{{ $techTags }}">
+                @endif
+
+                <div class="row align-items-center g-4">
+                    <!-- Thumbnail -->
+                    <div class="col-md-4 col-lg-4">
+                        <img src="{{ $projImg }}" class="img-fluid rounded-3 border object-fit-cover w-100" style="max-height: 160px;" alt="{{ $proj['title'] ?? 'Project' }}">
+                    </div>
+                    <!-- Details -->
+                    <div class="col-md-8 col-lg-8">
+                        <div class="d-flex align-items-start justify-content-between mb-2">
+                            <h5 class="fw-bold text-dark mb-0 pb-ts-heading">{{ $proj['title'] ?? 'Untitled Project' }}</h5>
+                            <div class="d-flex align-items-center gap-2">
+                                <button type="button" class="btn btn-link text-muted p-0 border-0" title="Edit Project">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                                </button>
+                                <button type="button" class="btn btn-link text-muted p-0 border-0" onclick="deleteProjectCard(this)" title="Delete Project">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                                </button>
+                            </div>
                         </div>
+                        <p class="text-secondary small mb-3">
+                            {{ $proj['description'] ?? 'No description provided.' }}
+                        </p>
+                        <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                            @foreach($techTags as $tag)
+                                @if(!empty($tag))
+                                    <span class="badge bg-primary-subtle text-primary fw-bold px-2 py-1 extra-small rounded-2">{{ strtoupper($tag) }}</span>
+                                @endif
+                            @endforeach
+                        </div>
+                        <a href="{{ $projLink }}" target="_blank" class="extra-small text-primary fw-semibold text-decoration-none d-inline-flex align-items-center gap-1">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                            <span>{{ $projLink }}</span>
+                        </a>
                     </div>
-                    <p class="text-secondary small mb-3">
-                        An automated resource allocation engine for Kubernetes clusters that reduced cloud spend by 35% across 200+ microservices.
-                    </p>
-                    <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
-                        <span class="badge bg-primary-subtle text-primary fw-bold px-2 py-1 extra-small rounded-2">GOLANG</span>
-                        <span class="badge bg-primary-subtle text-primary fw-bold px-2 py-1 extra-small rounded-2">KUBERNETES</span>
-                        <span class="badge bg-primary-subtle text-primary fw-bold px-2 py-1 extra-small rounded-2">TERRAFORM</span>
-                    </div>
-                    <a href="https://github.com/tachsaas/cloudscale" target="_blank" class="extra-small text-primary fw-semibold text-decoration-none d-inline-flex align-items-center gap-1">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                        <span>github.com/tachsaas/cloudscale</span>
-                    </a>
                 </div>
             </div>
-        </div>
-
-        
+        @endforeach
 
     </div>
 
@@ -99,13 +136,13 @@
                                 <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
                                 </span>
-                                <input type="text" name="projects[0][title]" id="modalProjectTitle" class="form-control border-start-0 ps-2 pb-ts-input" placeholder="e.g. AI Content Studio" required>
+                                <input type="text" id="modalProjectTitle" class="form-control border-start-0 ps-2 pb-ts-input" placeholder="e.g. AI Content Studio" required>
                             </div>
                         </div>
 
                         <div class="col-12">
                             <label class="form-label fw-bold text-dark small pb-ts-label">Short Description *</label>
-                            <textarea id="modalProjectDesc" name="projects[0][description]" class="form-control pb-ts-textarea" rows="3" placeholder="Briefly describe what this project does and key achievements..." required></textarea>
+                            <textarea id="modalProjectDesc" class="form-control pb-ts-textarea" rows="3" placeholder="Briefly describe what this project does and key achievements..." required></textarea>
                         </div>
 
                         <div class="col-md-6">
@@ -114,7 +151,7 @@
                                 <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                                 </span>
-                                <input type="text" name="projects[0][tech_stack]" id="modalProjectTags" class="form-control border-start-0 ps-2 pb-ts-input" placeholder="Vue.js, Laravel, Tailwind">
+                                <input type="text" id="modalProjectTags" class="form-control border-start-0 ps-2 pb-ts-input" placeholder="Vue.js, Laravel, Tailwind">
                             </div>
                         </div>
 
@@ -124,7 +161,7 @@
                                 <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
                                 </span>
-                                <input type="url" name="projects[0][demo_link]" id="modalProjectLink" class="form-control border-start-0 ps-2 pb-ts-input" placeholder="https://myproject.com">
+                                <input type="url" id="modalProjectLink" class="form-control border-start-0 ps-2 pb-ts-input" placeholder="https://myproject.com">
                             </div>
                         </div>
 
@@ -134,7 +171,7 @@
                                 <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                                 </span>
-                                <input type="url" name="projects[0][image_url]" id="modalProjectImg" class="form-control border-start-0 ps-2 pb-ts-input" placeholder="https://images.unsplash.com/...">
+                                <input type="url" id="modalProjectImg" class="form-control border-start-0 ps-2 pb-ts-input" placeholder="https://images.unsplash.com/...">
                             </div>
                         </div>
                     </div>
@@ -150,10 +187,21 @@
 
 <!-- SLIDE 5 JAVASCRIPT LOGIC -->
 <script>
+    let projectIndexCount = document.querySelectorAll('.pb-ts-project-card').length || 1;
+
     function deleteProjectCard(btn) {
         const card = btn.closest('.pb-ts-project-card');
-        if (card) {
+        const container = document.getElementById('featuredProjectsContainer');
+        if (container.querySelectorAll('.pb-ts-project-card').length > 1) {
             card.remove();
+        } else {
+            card.querySelectorAll('input').forEach(i => i.value = '');
+            card.querySelector('.pb-ts-heading').innerText = 'Untitled Project';
+            card.querySelector('p.text-secondary').innerText = 'No description provided.';
+            card.querySelector('.d-flex.flex-wrap.align-items-center.gap-2').innerHTML = '';
+            card.querySelector('a.extra-small').href = '#';
+            card.querySelector('a.extra-small span').innerText = '#';
+            card.querySelector('img').src = 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop';
         }
     }
 
@@ -168,9 +216,7 @@
 
     function resetModalInputs() {
         const form = document.getElementById('newProjectModalForm');
-        if (form) {
-            form.reset();
-        }
+        if (form) form.reset();
         ['modalProjectTitle', 'modalProjectDesc', 'modalProjectTags', 'modalProjectLink', 'modalProjectImg'].forEach(id => {
             const el = document.getElementById(id);
             if (el) {
@@ -202,12 +248,21 @@
         if (titleEl) titleEl.classList.remove('is-invalid');
         if (descEl) descEl.classList.remove('is-invalid');
 
+        const index = projectIndexCount++;
         const tags = tagsRaw ? tagsRaw.split(',').map(t => t.trim().toUpperCase()) : ['PROJECT'];
         const container = document.getElementById('featuredProjectsContainer');
 
         const newCard = document.createElement('div');
         newCard.className = 'pb-ts-card bg-white p-4 rounded-4 border shadow-sm pb-ts-project-card';
+        newCard.setAttribute('data-project-id', index);
+        
         newCard.innerHTML = `
+            <input type="hidden" name="projects[${index}][title]" value="${escapeHtml(title)}">
+            <input type="hidden" name="projects[${index}][description]" value="${escapeHtml(desc)}">
+            <input type="hidden" name="projects[${index}][demo_link]" value="${escapeHtml(link)}">
+            <input type="hidden" name="projects[${index}][image_url]" value="${escapeHtml(img)}">
+            <input type="hidden" name="projects[${index}][tech_stack]" value="${escapeHtml(tagsRaw)}">
+
             <div class="row align-items-center g-4">
                 <div class="col-md-4 col-lg-4">
                     <img src="${escapeHtml(img)}" class="img-fluid rounded-3 border object-fit-cover w-100" style="max-height: 160px;" alt="${escapeHtml(title)}">
@@ -238,7 +293,6 @@
 
         container.appendChild(newCard);
 
-        // Hide modal & reset inputs completely
         const modalEl = document.getElementById('addProjectModal');
         if (modalEl) {
             const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
@@ -247,7 +301,6 @@
         resetModalInputs();
     }
 
-    // Attach event listener to clean up modal fields on close
     document.addEventListener('DOMContentLoaded', function() {
         const modalEl = document.getElementById('addProjectModal');
         if (modalEl) {
