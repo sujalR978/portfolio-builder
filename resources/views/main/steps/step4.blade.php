@@ -63,7 +63,7 @@
                             <input type="date" class="form-control border-start-0 ps-2 pb-ts-input exp-end-date" name="experiences[0][end_date]">
                         </div>
                         <div class="form-check mt-2">
-                            <input class="form-check-input exp-current-check" type="checkbox" name="experiences[0][is_current]" id="currentWork_0" onchange="toggleEndDate(this)">
+                            <input class="form-check-input exp-current-check" type="checkbox" name="experiences[0][current]" id="currentWork_0" onchange="toggleEndDate(this)">
                             <label class="form-check-label extra-small text-muted fw-semibold" for="currentWork_0">
                                 I currently work here
                             </label>

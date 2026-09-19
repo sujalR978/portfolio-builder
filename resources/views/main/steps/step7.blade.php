@@ -24,7 +24,7 @@
                         <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
                         </span>
-                        <input type="url" class="form-control border-start-0 ps-2 pb-ts-input" name="social[linkedin]" placeholder="LinkedIn URL">
+                        <input type="url" class="form-control border-start-0 ps-2 pb-ts-input" name="social_links[linkedin]" placeholder="LinkedIn URL">
                     </div>
                 </div>
 
@@ -34,7 +34,7 @@
                         <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"/></svg>
                         </span>
-                        <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" name="social[twitter]" placeholder="Twitter / X Handle">
+                        <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" name="social_links[twitter]" placeholder="Twitter / X Handle">
                     </div>
                 </div>
 
@@ -44,7 +44,7 @@
                         <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                         </span>
-                        <input type="url" class="form-control border-start-0 ps-2 pb-ts-input" name="social[github]" placeholder="GitHub / Portfolio">
+                        <input type="url" class="form-control border-start-0 ps-2 pb-ts-input" name="social_links[github]" placeholder="GitHub / Portfolio">
                     </div>
                 </div>
 
@@ -54,7 +54,7 @@
                         <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                         </span>
-                        <input type="url" class="form-control border-start-0 ps-2 pb-ts-input" name="social[website]" placeholder="Personal Website">
+                        <input type="url" class="form-control border-start-0 ps-2 pb-ts-input" name="social_links[website]" placeholder="Personal Website">
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
             <div class="col-md-6">
                 <label for="languageInput" class="form-label fw-bold text-dark small mb-2 pb-ts-label">Languages</label>
                 <div class="input-group pb-ts-input-group mb-2">
-                    <input type="text" class="form-control ps-3 pb-ts-input" id="languageInput" placeholder="e.g. English, Japanese, French" onkeydown="handleLanguageKeyPress(event)">
+                    <input type="text" class="form-control ps-3 pb-ts-input" id="languageInput" name="languages[]" placeholder="e.g. English, Japanese, French" onkeydown="handleLanguageKeyPress(event)">
                 </div>
                 <!-- Interactive Language Tags Output Container -->
                 <div id="languageTagsContainer" class="d-flex flex-wrap gap-2 pt-1">
@@ -85,7 +85,7 @@
             <div class="col-md-6">
                 <label for="hobbiesInput" class="form-label fw-bold text-dark small mb-2 pb-ts-label">Hobbies</label>
                 <div class="input-group pb-ts-input-group">
-                    <input type="text" class="form-control ps-3 pb-ts-input" id="hobbiesInput" name="hobbies" placeholder="e.g. Generative Art, Sailing">
+                    <input type="text" class="form-control ps-3 pb-ts-input" id="hobbiesInput" name="hobbies[]" placeholder="e.g. Generative Art, Sailing">
                 </div>
             </div>
         </div>
@@ -159,13 +159,13 @@
                     <div class="mb-3">
                         <label class="form-label fw-bold text-dark small pb-ts-label">Achievement Title *</label>
                         <div class="input-group pb-ts-input-group">
-                            <input type="text" id="modalAchieveTitle" class="form-control ps-3 pb-ts-input" placeholder="e.g. Top 1% UI Contributor 2023" required>
+                            <input type="text" name="achievements[0][title]" id="modalAchieveTitle" class="form-control ps-3 pb-ts-input" placeholder="e.g. Top 1% UI Contributor 2023" required>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-bold text-dark small pb-ts-label">Issuer / Organization</label>
                         <div class="input-group pb-ts-input-group">
-                            <input type="text" id="modalAchieveIssuer" class="form-control ps-3 pb-ts-input" placeholder="e.g. Recognized by Global Design Council">
+                            <input type="text" name="achievements[0][issuer]" id="modalAchieveIssuer" class="form-control ps-3 pb-ts-input" placeholder="e.g. Recognized by Global Design Council">
                         </div>
                     </div>
                 </form>

@@ -18,7 +18,7 @@
                     <span class="input-group-text bg-transparent border-end-0 text-muted pe-1 pb-ts-input-addon">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                     </span>
-                    <input type="text" class="form-control border-start-0 ps-2 pb-ts-input" id="skillNameInput" placeholder="e.g. React.js, Python, AWS">
+                    <input type="text" name="skills[0][name]" class="form-control border-start-0 ps-2 pb-ts-input" id="skillNameInput" placeholder="e.g. React.js, Python, AWS">
                 </div>
             </div>
 
@@ -26,7 +26,7 @@
             <div class="col-md-5">
                 <label for="skillProficiencySlider" class="form-label fw-bold text-dark small mb-2 pb-ts-label">Proficiency</label>
                 <div class="d-flex align-items-center gap-2 p-2 rounded-3 border pb-ts-slider-box">
-                    <input type="range" class="form-range flex-grow-1 px-2" id="skillProficiencySlider" min="1" max="5" value="3" oninput="updateSliderValue(this.value)">
+                    <input type="range" name="skills[0][proficiency]" class="form-range flex-grow-1 px-2" id="skillProficiencySlider" min="1" max="5" value="3" oninput="updateSliderValue(this.value)">
                     <span id="sliderValueBadge" class="badge bg-white text-primary border shadow-sm px-2 py-1 fs-6 fw-bold pb-ts-badge">3</span>
                 </div>
             </div>

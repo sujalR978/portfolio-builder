@@ -8,8 +8,8 @@
         </p>
     </div>
 
-    <!-- Hidden Input for Form Submission -->
-    <input type="hidden" name="selected_template" id="selectedTemplateInput" value="enterprise_hub">
+    <!-- Hidden Input for Form Submission (Updated name to match controller/database: template_name) -->
+    <input type="hidden" name="template_name" id="selectedTemplateInput" value="enterprise_hub">
 
     <!-- TEMPLATES GRID -->
     <div class="row g-4 mb-4">

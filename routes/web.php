@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\PortfoliosController;
 use Illuminate\Foundation\Auth\User;
 
 // ==========================================
@@ -153,3 +154,12 @@ Route::delete('/admin/user/{user}', [AuthController::class, 'deleteUser'])
 
 Route::delete('/admin/contact/{contact}',[ContactController::class,'deleteContact'])
     ->name('admin.contect.delete');
+
+
+
+
+    // user wizerd
+
+
+Route::post('/portfolios',[PortfoliosController::class,'storeOrUpdate'])
+    ->name('portfolio.store');

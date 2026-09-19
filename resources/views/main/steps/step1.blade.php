@@ -32,7 +32,7 @@
             <div class="row g-2">
                 
                 <div class="col-sm-4">
-                    <input type="radio" class="btn-check" name="portfolio_for" id="pfMyself" value="myself" checked>
+                    <input type="radio" class="btn-check" name="target_type" id="pfMyself" value="myself" checked>
                     <label class="pb-ts-option-card p-3 border rounded-3 text-center d-flex flex-column align-items-center justify-content-center cursor-pointer h-100" for="pfMyself">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-2 text-primary"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                         <span class="fw-bold small text-dark d-block pb-ts-label">Myself</span>
@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="col-sm-4">
-                    <input type="radio" class="btn-check" name="portfolio_for" id="pfClient" value="client">
+                    <input type="radio" class="btn-check" name="target_type" id="pfClient" value="client">
                     <label class="pb-ts-option-card p-3 border rounded-3 text-center d-flex flex-column align-items-center justify-content-center cursor-pointer h-100" for="pfClient">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-2 text-primary"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                         <span class="fw-bold small text-dark d-block pb-ts-label">Client</span>
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="col-sm-4">
-                    <input type="radio" class="btn-check" name="portfolio_for" id="pfCompany" value="company">
+                    <input type="radio" class="btn-check" name="target_type" id="pfCompany" value="company">
                     <label class="pb-ts-option-card p-3 border rounded-3 text-center d-flex flex-column align-items-center justify-content-center cursor-pointer h-100" for="pfCompany">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-2 text-primary"><path d="M3 21h18"/><path d="M3 7v14"/><path d="M21 7v14"/><path d="M6 3h12l3 4H3l3-4z"/></svg>
                         <span class="fw-bold small text-dark d-block pb-ts-label">Company</span>

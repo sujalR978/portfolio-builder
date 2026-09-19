@@ -134,10 +134,10 @@
             <span>Previous Step</span>
         </button>
 
-        <button type="button" class="btn btn-success rounded-3 px-5 py-2 fw-bold shadow-sm text-white pb-ts-btn-main d-inline-flex align-items-center gap-2" onclick="handleNextClick()">
-            <span>Finalize &amp; Deploy</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        </button>
+      <button type="button" class="btn btn-success rounded-3 px-5 py-2 fw-bold shadow-sm text-white pb-ts-btn-main d-inline-flex align-items-center gap-2" onclick="document.getElementById('tachSaasProjectForm').submit();">
+    <span>Finalize &amp; Deploy</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+</button>
     </div>
 
 </div>

@@ -12,8 +12,8 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
 
-                <form id="tachSaasProjectForm" action="#" method="POST" enctype="multipart/form-data" novalidate>
-                    @csrf
+              <form id="tachSaasProjectForm" action="{{ route('portfolio.store') }}" method="POST" enctype="multipart/form-data" onsubmit="alert('Form is submitting!');">
+                   @csrf
 
                     <!-- Include individual step files -->
                     @include('main.steps.step1')

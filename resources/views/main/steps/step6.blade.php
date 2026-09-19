@@ -88,7 +88,7 @@
                     <div class="col-md-4">
                         <label class="form-label fw-bold text-dark small mb-1 pb-ts-label">Issuing Organization</label>
                         <div class="input-group pb-ts-input-group">
-                            <input type="text" class="form-control pb-ts-input" name="certifications[0][organization]" placeholder="e.g. Amazon Web Services">
+                            <input type="text" class="form-control pb-ts-input" name="certifications[0][issuer]" placeholder="e.g. Amazon Web Services">
                         </div>
                     </div>
                     <div class="col-md-3">
