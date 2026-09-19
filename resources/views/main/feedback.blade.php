@@ -4,9 +4,6 @@
 
 @section('content')
 @auth
-<!-- ==========================================
-     FEEDBACK HERO SECTION
-=========================================== -->
 <section class="pb-feedback-hero py-5 text-center position-relative">
     <div class="container py-4 position-relative z-1">
         <div class="d-inline-flex align-items-center px-3 py-2 rounded-pill bg-white shadow-sm mb-4 pb-feedback-badge">
@@ -24,9 +21,6 @@
     </div>
 </section>
 
-<!-- ==========================================
-     FEEDBACK FORM SECTION
-=========================================== -->
 <section class="py-5 pb-feedback-bg-soft">
     <div class="container py-2">
         <div class="row justify-content-center">
@@ -34,7 +28,6 @@
                 
                 <div class="pb-feedback-card bg-white p-4 p-sm-5 rounded-4 border shadow-sm">
                     
-                    <!-- Alert Message if submitted -->
                     @if(session('success'))
                         <div class="alert alert-success rounded-3 mb-4 d-flex align-items-center gap-2" role="alert">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -42,36 +35,34 @@
                         </div>
                     @endif
 
-                    <form action="{{route('feedback')}}" method="POST" >
+                    <form action="{{ route('feedback') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         
-                        <!-- 1. EXPERIENCE RATING -->
                         <div class="mb-4 text-center">
                             <label class="form-label fw-bold text-dark d-block mb-2">How would you rate your overall experience?</label>
                             
-                   <div class="pb-feedback-rating">
-    <input type="radio" id="star5" name="rating" value="5" />
-    <label for="star5" title="1 stars">★</label>
+                            <div class="pb-feedback-rating">
+                                <input type="radio" id="star5" name="rating" value="5" />
+                                <label for="star5" title="5 stars">★</label>
 
-    <input type="radio" id="star4" name="rating" value="4" />
-    <label for="star4" title="2 stars">★</label>
+                                <input type="radio" id="star4" name="rating" value="4" />
+                                <label for="star4" title="4 stars">★</label>
 
-    <input type="radio" id="star3" name="rating" value="3" />
-    <label for="star3" title="3 stars">★</label>
+                                <input type="radio" id="star3" name="rating" value="3" />
+                                <label for="star3" title="3 stars">★</label>
 
-    <input type="radio" id="star2" name="rating" value="2" />
-    <label for="star2" title="4 stars">★</label>
+                                <input type="radio" id="star2" name="rating" value="2" />
+                                <label for="star2" title="2 stars">★</label>
 
-    <input type="radio" id="star1" name="rating" value="1" />
-    <label for="star1" title="5 star">★</label>
-</div>
+                                <input type="radio" id="star1" name="rating" value="1" />
+                                <label for="star1" title="1 star">★</label>
+                            </div>
                         </div>
 
-                        <!-- 2. USER DETAILS -->
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
                                 <label for="fbName" class="form-label fw-semibold small text-dark">Your Name</label>
-                                <input type="text" class="form-control pb-feedback-input" id="fbName" name="name" placeholder="John Doe" value="{{ Auth::user()->firstName}} {{Auth::user()->lastName}}" required>
+                                <input type="text" class="form-control pb-feedback-input" id="fbName" name="name" placeholder="John Doe" value="{{ Auth::user()->firstName }} {{ Auth::user()->lastName }}" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="fbEmail" class="form-label fw-semibold small text-dark">Email Address</label>
@@ -79,7 +70,6 @@
                             </div>
                         </div>
 
-                        <!-- 3. FEEDBACK TYPE CATEGORY -->
                         <div class="mb-3">
                             <label for="fbCategory" class="form-label fw-semibold small text-dark">Feedback Category</label>
                             <select class="form-select pb-feedback-input" id="fbCategory" name="category" required>
@@ -92,20 +82,17 @@
                             </select>
                         </div>
 
-                        <!-- 4. FEEDBACK MESSAGE -->
                         <div class="mb-3">
                             <label for="fbMessage" class="form-label fw-semibold small text-dark">Your Feedback & Suggestions</label>
                             <textarea class="form-control pb-feedback-input" id="fbMessage" name="message" rows="5" placeholder="Tell us what you love, or what we can do better..." required></textarea>
                         </div>
 
-                        <!-- 5. ATTACHMENT UPLOAD (OPTIONAL) -->
                         <div class="mb-4">
                             <label for="fbAttachment" class="form-label fw-semibold small text-dark">Attach Screenshot (Optional)</label>
                             <input class="form-control pb-feedback-input" type="file" id="fbAttachment" name="image" accept="image/*">
                             <div class="form-text small text-muted">Supports PNG, JPG, or GIF up to 5MB.</div>
                         </div>
 
-                        <!-- SUBMIT BUTTON -->
                         <button type="submit" class="btn btn-primary btn-lg pb-feedback-btn-pill w-100 fw-bold shadow-sm">
                             Submit Feedback &rarr;
                         </button>
