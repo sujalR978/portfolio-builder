@@ -15,9 +15,12 @@
                 <!-- User Avatar & Info -->
                 <div class="col-lg-6 d-flex align-items-center gap-4">
                     <div class="position-relative">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" class="rounded-circle object-fit-cover border border-3 border-primary shadow-sm" width="96" height="96" alt="Profile Avatar">
-                        <span class="position-absolute bottom-0 end-0 bg-success p-2 border border-2 border-white rounded-circle"></span>
-                    </div>
+    <img src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop' }}" 
+         class="rounded-circle object-fit-cover border border-3 border-primary shadow-sm" 
+         width="96" height="96" 
+         alt="Profile Avatar">
+    <span class="position-absolute bottom-0 end-0 bg-success p-2 border border-2 border-white rounded-circle"></span>
+</div>
                     <div>
                         <div class="d-flex align-items-center gap-2 mb-1">
                             <h2 class="fw-bold text-dark mb-0 fs-3">{{ Auth::user()->email }}</h2>
@@ -99,39 +102,64 @@
                             <h4 class="fw-bold text-dark mb-1">Personal Details</h4>
                             <p class="text-muted small mb-4">Update your basic profile information and public details.</p>
 
-                            <form action="#" method="POST">
-                                @csrf
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label fw-semibold small text-dark">Full Name</label>
-                                        <input type="text" class="form-control pb-profile-input" value="{{Auth::user()->firstName}}" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label fw-semibold small text-dark">Email Address</label>
-                                        <input type="email" class="form-control pb-profile-input" value="{{Auth::user()->email }}" required>
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label fw-semibold small text-dark">Bio / Headline</label>
-                                        <input type="text" class="form-control pb-profile-input" value="Senior Full Stack Developer & Open Source Contributor">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label fw-semibold small text-dark">Portfolio Domain Slug</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text small text-muted">portfolio.build/</span>
-                                            <input type="text" class="form-control pb-profile-input" value="janedoe">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label fw-semibold small text-dark">GitHub Username</label>
-                                        <input type="text" class="form-control pb-profile-input" value="janedoe-dev">
-                                    </div>
-                                    <div class="col-12 pt-3">
-                                        <button type="submit" class="btn btn-primary pb-profile-btn-pill px-4 fw-bold shadow-sm">
-                                            Save Changes &rarr;
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+                            <form action="{{ route('profile.update', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+   
+    <div class="row g-3">
+        <!-- First Name -->
+        <div class="col-md-6">
+            <label class="form-label fw-semibold small text-dark">First Name</label>
+            <input type="text" name="firstName" class="form-control pb-profile-input" value="{{ Auth::user()->firstName }}" required>
+        </div>
+
+        <!-- Last Name -->
+        <div class="col-md-6">
+            <label class="form-label fw-semibold small text-dark">Last Name</label>
+            <input type="text" name="lastName" class="form-control pb-profile-input" value="{{ Auth::user()->lastName }}" required>
+        </div>
+
+        <!-- Email Address -->
+        <div class="col-md-6">
+            <label class="form-label fw-semibold small text-dark">Email Address</label>
+            <input type="email" class="form-control pb-profile-input" value="{{ Auth::user()->email }}" disabled>
+        </div>
+
+        <!-- Profile Image Upload Field (Added Here) -->
+        <div class="col-md-6">
+            <label class="form-label fw-semibold small text-dark">Profile Image</label>
+            <input type="file" name="profile_image" value="{{Auth::user()->profile_image}}" class="form-control pb-profile-input" accept="image/*">
+            <div class="form-text small text-muted">Supports PNG, JPG, or GIF up to 5MB.</div>
+        </div>
+
+        <!-- Bio / Headline -->
+        <div class="col-12">
+            <label class="form-label fw-semibold small text-dark">Bio / Headline</label>
+            <input type="text" name="bio" class="form-control pb-profile-input" placeholder="Senior Full Stack Developer & Open Source Contributor" value="{{ Auth::user()->bio }}">
+        </div>
+
+        <!-- Portfolio Domain Slug -->
+        <div class="col-md-6">
+            <label class="form-label fw-semibold small text-dark">Portfolio Domain Slug</label>
+            <div class="input-group">
+                <span class="input-group-text small text-muted">portfolio.build/</span>
+                <input type="text" name="slug" class="form-control pb-profile-input" placeholder="janedoe" value="{{ Auth::user()->slug }}">
+            </div>
+        </div>
+
+        <!-- GitHub Username -->
+        <div class="col-md-6">
+            <label class="form-label fw-semibold small text-dark">GitHub Username</label>
+            <input type="text" name="github" class="form-control pb-profile-input" placeholder="janedoe-dev" value="{{ Auth::user()->github }}">
+        </div>
+
+        <!-- Submit Button -->
+        <div class="col-12 pt-3">
+            <button type="submit" class="btn btn-primary pb-profile-btn-pill px-4 fw-bold shadow-sm">
+                Save Changes &rarr;
+            </button>
+        </div>
+    </div>
+</form>
                         </div>
                     </div>
 
@@ -249,6 +277,7 @@
                             <button type="button" class="btn btn-danger pb-profile-btn-pill px-4 fw-bold" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
                                 Delete Account
                             </button>
+
                         </div>
                     </div>
 
@@ -271,23 +300,21 @@
                 </div>
 
                 <h4 class="fw-bold text-dark mb-2">Are you absolutely sure?</h4>
-                <p class="text-muted small mb-4">This will permanently delete your account, project links, and settings. Type <strong>DELETE</strong> below to confirm.</p>
+                <p class="text-muted small mb-4">This will permanently delete your account, project links, and settings. </p>
 
-                <div class="mb-4 text-start">
-                    <input type="text" class="form-control pb-profile-input" placeholder="Type DELETE to confirm">
-                </div>
+         
 
                 <div class="d-flex flex-column flex-sm-row gap-2">
                     <button type="button" class="btn btn-outline-secondary rounded-pill w-100 py-2 fw-semibold" data-bs-dismiss="modal">
                         Cancel
                     </button>
                     
-                    <form action="#" method="POST" class="w-100">
-                        @csrf
-                        <button type="submit" class="btn btn-danger pb-profile-btn-pill w-100 py-2 fw-bold shadow-sm">
-                            Permanently Delete
-                        </button>
-                    </form>
+                 <form action="{{ route('profile.delete',Auth::user()->id) }}" method="POST" class="w-100">
+    @csrf
+    <button type="submit" class="btn btn-danger pb-profile-btn-pill w-100 py-2 fw-bold shadow-sm">
+        Permanently Delete
+    </button>
+</form>
                 </div>
             </div>
         </div>
