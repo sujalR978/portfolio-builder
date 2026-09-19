@@ -47,7 +47,7 @@
                 <div class="pb-ts-card bg-white p-3 p-xl-4 rounded-4 border shadow-sm h-100 d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted small fw-semibold d-block mb-1">Total Profile Views</span>
-                        <h3 class="fw-bold text-dark mb-0 pb-ts-heading">2,480</h3>
+                        <h3 class="fw-bold text-dark mb-0 pb-ts-heading">0</h3>
                         <span class="small text-success fw-semibold"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> +18.4% this week</span>
                     </div>
                     <div class="pb-dash-icon-box bg-primary-subtle text-primary rounded-3 flex-shrink-0 d-flex align-items-center justify-content-center" style="width: 46px; height: 46px;">
@@ -61,7 +61,7 @@
                 <div class="pb-ts-card bg-white p-3 p-xl-4 rounded-4 border shadow-sm h-100 d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted small fw-semibold d-block mb-1">Active Projects</span>
-                        <h3 class="fw-bold text-dark mb-0 pb-ts-heading">08</h3>
+                        <h3 class="fw-bold text-dark mb-0 pb-ts-heading">{{$portfolios->count()}}</h3>
                         <span class="small text-muted">2 Drafts pending</span>
                     </div>
                     <div class="pb-dash-icon-box bg-primary-subtle text-primary rounded-3 flex-shrink-0 d-flex align-items-center justify-content-center" style="width: 46px; height: 46px;">
@@ -75,7 +75,7 @@
                 <div class="pb-ts-card bg-white p-3 p-xl-4 rounded-4 border shadow-sm h-100 d-flex align-items-center justify-content-between">
                     <div>
                         <span class="text-muted small fw-semibold d-block mb-1">Resume Downloads</span>
-                        <h3 class="fw-bold text-dark mb-0 pb-ts-heading">142</h3>
+                        <h3 class="fw-bold text-dark mb-0 pb-ts-heading">{{$portfolios->count()}}</h3>
                         <span class="small text-success fw-semibold"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> +8 today</span>
                     </div>
                     <div class="pb-dash-icon-box bg-primary-subtle text-primary rounded-3 flex-shrink-0 d-flex align-items-center justify-content-center" style="width: 46px; height: 46px;">
@@ -120,60 +120,47 @@
 
                     <!-- Project Items List with Dynamic Theme Support -->
                     <div class="d-flex flex-column gap-3">
-                        
-                        <!-- Item 1 -->
-                        <div class="p-3 rounded-4 border pb-ts-subcard pb-ts-border-subtle d-flex align-items-center justify-content-between flex-wrap gap-3">
-                            <div class="d-flex align-items-center gap-3">
-                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=200&auto=format&fit=crop" class="rounded-3 object-fit-cover border" width="60" height="60" alt="Project Thumbnail">
-                                <div>
-                                    <h6 class="fw-bold mb-1 small pb-ts-label">SaaS Analytics Dashboard</h6>
-                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill me-1 extra-small fw-bold">Laravel</span>
-                                    <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle rounded-pill extra-small fw-bold">Vue.js</span>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center gap-2 ms-auto">
-                                <button type="button" class="btn btn-sm rounded-3 px-3 fw-semibold pb-ts-btn-outline">Edit</button>
-                                <button type="button" class="btn btn-sm rounded-3 px-2 pb-ts-btn-danger-outline">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Item 2 -->
-                        <div class="p-3 rounded-4 border pb-ts-subcard pb-ts-border-subtle d-flex align-items-center justify-content-between flex-wrap gap-3">
-                            <div class="d-flex align-items-center gap-3">
-                                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=200&auto=format&fit=crop" class="rounded-3 object-fit-cover border" width="60" height="60" alt="Project Thumbnail">
-                                <div>
-                                    <h6 class="fw-bold mb-1 small pb-ts-label">AI Resume Builder Web App</h6>
-                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill me-1 extra-small fw-bold">React</span>
-                                    <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle rounded-pill extra-small fw-bold">Tailwind</span>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center gap-2 ms-auto">
-                                <button type="button" class="btn btn-sm rounded-3 px-3 fw-semibold pb-ts-btn-outline">Edit</button>
-                                <button type="button" class="btn btn-sm rounded-3 px-2 pb-ts-btn-danger-outline">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Item 3 -->
-                        <div class="p-3 rounded-4 border pb-ts-subcard pb-ts-border-subtle d-flex align-items-center justify-content-between flex-wrap gap-3">
-                            <div class="d-flex align-items-center gap-3">
-                                <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=200&auto=format&fit=crop" class="rounded-3 object-fit-cover border" width="60" height="60" alt="Project Thumbnail">
-                                <div>
-                                    <h6 class="fw-bold mb-1 small pb-ts-label">E-Commerce Brand Redesign</h6>
-                                    <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill me-1 extra-small fw-bold">Figma</span>
-                                    <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle rounded-pill extra-small fw-bold">Bootstrap 5</span>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center gap-2 ms-auto">
-                                <button type="button" class="btn btn-sm rounded-3 px-3 fw-semibold pb-ts-btn-outline">Edit</button>
-                                <button type="button" class="btn btn-sm rounded-3 px-2 pb-ts-btn-danger-outline">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-                                </button>
-                            </div>
-                        </div>
+                        @foreach($portfolios as $port)
+    <!-- Item -->
+    <div class="p-3 rounded-4 border pb-ts-subcard pb-ts-border-subtle d-flex align-items-center justify-content-between flex-wrap gap-3">
+        <div class="d-flex align-items-center gap-3">
+            <!-- Dynamic Thumbnail / Profile Photo -->
+            <img src="{{ $port->profile_photo ? asset('storage/' . $port->profile_photo) : 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=200&auto=format&fit=crop' }}" 
+                 class="rounded-3 object-fit-cover border" width="60" height="60" alt="Project Thumbnail">
+            
+            <div>
+                <!-- Dynamic Project Name -->
+                <h6 class="fw-bold mb-1 small pb-ts-label">{{ $port->project_name ?? 'Untitled Project' }}</h6>
+                
+                <!-- Display Role/Title or Target Type as Context -->
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill me-1 extra-small fw-bold">
+                    {{ $port->title_role ?? 'Developer' }}
+                </span>
+                
+                <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle rounded-pill extra-small fw-bold">
+                    {{ ucfirst($port->visibility ?? 'public') }}
+                </span>
+            </div>
+        </div>
+        
+        <div class="d-flex align-items-center gap-2 ms-auto">
+            <!-- Edit Button linking to an edit route (optional) -->
+   <!-- EDIT BUTTON WRAPPED IN A FORM -->
+<form action="{{ route('portfolio.edit', $port->id) }}" method="GET" class="d-inline">
+    <button type="submit" class="btn btn-sm rounded-3 px-3 fw-semibold pb-ts-btn-outline">Edit</button>
+</form>
+            <!-- Delete Button Form -->
+            <form action="{{route('portfolios.delete', $port->id)}}" method="POST" class="d-inline">
+                @csrf
+            
+                <button type="submit" class="btn btn-sm rounded-3 px-2 pb-ts-btn-danger-outline" onclick="return confirm('Are you sure?')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                </button>
+            </form>
+        </div>
+    </div>
+@endforeach
+                      
 
                     </div>
                 </div>
