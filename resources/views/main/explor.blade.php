@@ -22,14 +22,17 @@
 
             <!-- Right Utilities -->
             <div class="d-flex align-items-center gap-3">
-                <button type="button" class="btn btn-link text-muted p-0 border-0" title="Help">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                </button>
-                <button type="button" class="btn btn-link text-muted p-0 border-0" title="Notifications">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                </button>
+             <a href="{{ url('/profile') }}" class="btn btn-link text-muted p-0 border-0 text-decoration-none" title="Profile">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+    </svg>
+</a>
+              
                 <a href="/create_project" class="btn btn-primary btn-sm rounded-pill px-3 py-2 fw-bold text-white shadow-sm">+ Create Project</a>
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=120&auto=format&fit=crop" class="rounded-circle border" width="36" height="36" alt="User Avatar">
+                <img src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop' }}" 
+        class="rounded-circle border" width="36" height="36" alt="User Avatar" >
             </div>
         </div>
 
