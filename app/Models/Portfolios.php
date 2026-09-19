@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Portfolios;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Portfolios extends Model
 {
     use HasFactory;
@@ -11,7 +12,7 @@ class Portfolios extends Model
     protected $table = 'portfolios';
 
 
-    // Define all fillable columns to protect against mass-assignment vulnerabilities
+
     protected $fillable = [
         'user_id',
         'project_name',
@@ -49,7 +50,7 @@ class Portfolios extends Model
         'achievements' => 'array',
     ];
 
-    // Relationship: A portfolio belongs to a user
+
     public function user()
     {
         return $this->belongsTo(User::class);
