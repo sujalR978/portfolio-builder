@@ -5,7 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\PortfoliosController;
-use Illuminate\Foundation\Auth\User;
+use App\Models\Portfolios;
+use Illuminate\Support\Facades\Auth;
 
 // ==========================================
 // PUBLIC PAGES
@@ -14,7 +15,6 @@ use Illuminate\Foundation\Auth\User;
 Route::get('/', function () {
     return view('landing_page.home');
 });
-
 
 Route::get('/home', function () {
     return view('landing_page.home');
@@ -83,55 +83,54 @@ Route::post('/home', [AuthController::class, 'log_out'])
 
 
 // ==========================================
-// USER PAGES
-// ==========================================
-
-Route::get('/dashboard', function () {
-    return view('main.dashboard');
-})->middleware('auth')->name('dashboard');
-
-Route::get('/profile', function () {
-    return view('main.profile');
-})->middleware('auth');
-
-Route::get('/create_project', function () {
-    return view('main.create_project');
-})->middleware('auth');
-
-Route::get('/explor', function () {
-    return view('main.explor');
-})->middleware('auth');
-
-Route::get('/feedback', function () {
-    return view('main.feedback');
-})->middleware('auth');
-
-Route::get('/feedback', function () {
-    return view('main.feedback');
-})->name('feedback.form');
-
-Route::post('/feedback', [FeedbackController::class, 'feedback'])
-    ->name('feedback');
-
-
-
-
-
-// ==========================================
-// update methods
+// USER PAGES (AUTH GUARDED)
 // ==========================================
 
 
+    
+    Route::get('/dashboard', function () {
+        $portfolios = Portfolios::where('user_id', Auth::id())->get();
+        return view('main.dashboard', compact('portfolios'));
+    })->name('dashboard');
 
+    Route::get('/profile', function () {
+         $portfolios = Portfolios::where('user_id', Auth::id())->get();
+        return view('main.profile', compact('portfolios'));
 
-Route::post('/profile/update/{id}', [AuthController::class, 'updateName'])->name('profile.update');
+    })->name('profile');
 
-Route::post('/profile/delete/{id}', [AuthController::class, 'deleteAccount'])->name('profile.delete');
+    // Use PortfoliosController create method for a clean blank wizard
+    Route::get('/create_project', [PortfoliosController::class, 'create'])
+        ->name('portfolio.create');
 
+Route::get('/explor', [PortfoliosController::class, 'index'])->middleware('auth')->name('explor');
 
+    Route::get('/feedback', function () {
+        return view('main.feedback');
+    })->name('feedback.form');
 
+    Route::post('/feedback', [FeedbackController::class, 'feedback'])
+        ->name('feedback');
 
+    // Profile Actions
+    Route::post('/profile/update/{id}', [AuthController::class, 'updateName'])
+        ->name('profile.update');
 
+    Route::post('/profile/delete/{id}', [AuthController::class, 'deleteAccount'])
+        ->name('profile.delete');
+
+    // Portfolio Management (Create, Edit, Update, Delete)
+    Route::post('/portfolios', [PortfoliosController::class, 'storeOrUpdate'])
+        ->name('portfolio.store');
+
+    Route::get('/portfolios/{id}/edit', [PortfoliosController::class, 'edit'])
+        ->name('portfolio.edit');
+
+    Route::post('/portfolios/{id}/update', [PortfoliosController::class, 'storeOrUpdate'])
+        ->name('portfolio.update');
+
+    Route::post('/dashboard/delete/{id}', [PortfoliosController::class, 'deletePortfolios'])
+        ->name('portfolios.delete');
 
 
 
@@ -139,29 +138,13 @@ Route::post('/profile/delete/{id}', [AuthController::class, 'deleteAccount'])->n
 // ==========================================
 // ADMIN PAGES
 // ==========================================
+
 Route::get('/admin_dashboard', [AuthController::class, 'adminDashboard']);
-
-Route::get('/admin_inquiry',[ContactController::class, 'adminInquiry']);
-
-
-Route::get('/admin_feedback',[FeedbackController::class, 'adminFeedback']);
-
-
-
-
+Route::get('/admin_inquiry', [ContactController::class, 'adminInquiry']);
+Route::get('/admin_feedback', [FeedbackController::class, 'adminFeedback']);
 
 Route::delete('/admin/user/{user}', [AuthController::class, 'deleteUser'])
     ->name('admin.user.delete');
 
-Route::delete('/admin/contact/{contact}',[ContactController::class,'deleteContact'])
+Route::delete('/admin/contact/{contact}', [ContactController::class, 'deleteContact'])
     ->name('admin.contect.delete');
-
-
-
-
-    // user wizerd
-
-
-Route::post('/portfolios', [PortfoliosController::class, 'storeOrUpdate'])
-    ->name('portfolio.store');
-   

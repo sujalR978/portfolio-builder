@@ -29,7 +29,7 @@
                         <span>View Portfolio</span>
                     </a>
 
-                    <a href="/dashboard" class="btn btn-outline-secondary rounded-3 px-4 py-2.5 fw-semibold bg-white pb-ts-btn-outline d-inline-flex align-items-center gap-2">
+                    <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary rounded-3 px-4 py-2.5 fw-semibold bg-white pb-ts-btn-outline d-inline-flex align-items-center gap-2">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="3" y="3" width="7" height="7"></rect>
                             <rect x="14" y="3" width="7" height="7"></rect>
@@ -69,7 +69,7 @@
             <!-- Bottom Secondary Link -->
             <div class="text-center">
                 <span class="text-muted small">Need to change something? </span>
-                <a href="#" class="text-primary fw-bold small text-decoration-none" onclick="changeSlide(-1); return false;">
+                <a href="#" class="text-primary fw-bold small text-decoration-none" onclick="changeSlide(-9); return false;">
                     Edit Configuration
                 </a>
             </div>
