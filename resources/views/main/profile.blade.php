@@ -36,19 +36,19 @@
                     <div class="row g-3">
                         <div class="col-sm-4 col-6">
                             <div class="pb-profile-stat-box p-3 rounded-4 border text-center bg-light">
-                                <h3 class="fw-bold text-primary mb-0 display-6">08</h3>
+                                <h3 class="fw-bold text-primary mb-0 display-6">{{ $portfolios->count() }}</h3>
                                 <p class="text-muted small mb-0 fw-semibold">Projects Created</p>
                             </div>
                         </div>
                         <div class="col-sm-4 col-6">
                             <div class="pb-profile-stat-box p-3 rounded-4 border text-center bg-light">
-                                <h3 class="fw-bold text-primary mb-0 display-6">02</h3>
+                                <h3 class="fw-bold text-primary mb-0 display-6">{{ $portfolios->count() }}</h3>
                                 <p class="text-muted small mb-0 fw-semibold">Published Sites</p>
                             </div>
                         </div>
                         <div class="col-sm-4 col-12">
                             <div class="pb-profile-stat-box p-3 rounded-4 border text-center bg-light">
-                                <h3 class="fw-bold text-primary mb-0 display-6">1.4K</h3>
+                                <h3 class="fw-bold text-primary mb-0 display-6">0</h3>
                                 <p class="text-muted small mb-0 fw-semibold">Total Profile Views</p>
                             </div>
                         </div>
