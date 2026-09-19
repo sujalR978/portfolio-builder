@@ -11,7 +11,7 @@ class PortfoliosController extends Controller
     public function storeOrUpdate(Request $request, $id = null)
     {
 
-    dd($request->all());
+
         // 1. Validate incoming fields across all wizard steps
         $validatedData = $request->validate([
             // Step 1: Project Basics[cite: 1]
